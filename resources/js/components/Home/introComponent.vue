@@ -1,0 +1,185 @@
+<template>
+    <section>
+        <div class="intro">
+            <h1>{{ $t('გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით') }}</h1>
+            <div class="package-from">
+                <div class="form-inputs">
+                    <div class="select-from">
+                        <p>{{ $t('გამგზავნი ქვეყანა') }}</p>
+                        <select>
+                            <option>{{ $t('აირჩიე ქვეყანა') }}</option>
+                        </select>
+                        <input type="text" :placeholder="$t('ქალაქი, სოფელი ან ZIP კოდი')">
+                    </div>
+                    <div class="select-to">
+                        <p>{{ $t('მიმღები ქვეყანა') }}</p>
+                        <select>
+                            <option>{{ $t('აირჩიე ქვეყანა') }}</option>
+                        </select>
+                        <input type="text" :placeholder="$t('ქალაქი, სოფელი ან ZIP კოდი')">
+                    </div>
+                    <div class="select-when">
+                        <p>{{ $t('თარიღი') }}</p>
+                        <input type="text" :placeholder="$t('აირჩიე')">
+                    </div>
+                    <div class="select-details">
+                        <p>{{ $t('შეფუთვის დეტალები') }}</p>
+                        <div class="details-info">
+                            <input type="text" :placeholder="$t('წონა')">
+                            <input type="text" :placeholder="$t('სიგა.')">
+                            <input type="text" :placeholder="$t('სიმა.')">
+                            <input type="text" :placeholder="$t('სიგრ.')">
+                        </div>
+                    </div>
+                    <div class="submit">
+                        <span>{{ $t('ანგარიშის შექმნა  და შეკვეთა') }}</span>
+                    </div>
+                </div>
+                <div class="intro-video">
+                    <img src="/images/intro-logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script>
+export default {
+    name: 'IntroComponent'
+}
+</script>
+
+<style scoped lang="scss">
+section {
+    width: 100%;
+
+    .intro {
+        max-width: 1290px;
+        padding: 50px 10px 40px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-areas:
+        "title video"
+        "form form";
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 220px 1fr;
+
+        h1 {
+            grid-area: title;
+            font-size: 48px;
+            line-height: 60px;
+            color: #000000;
+            font-weight: 500;
+        }
+
+        .package-from {
+            grid-area: form;
+            width: 100%;
+            padding: 46px 53px;
+            background: #FFFFFF;
+            box-shadow: 0 22px 70px #C9E6ED;
+            border-radius: 30px;
+            display: grid;
+            grid-template-areas:"form-inputs intro-video";
+            grid-template-columns: 6fr 4fr;
+
+            .form-inputs {
+                grid-area: form-inputs;
+                display: grid;
+                grid-column-gap: 32px;
+                grid-row-gap: 36px;
+                grid-template-areas:
+                "from from to to"
+                "when details details details"
+                "submit submit submit submit";
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+
+                .select-from {
+                    grid-area: from;
+                }
+
+                .select-to {
+                    grid-area: to;
+                }
+
+                .select-when {
+                    grid-area: when;
+                }
+
+                .select-details {
+                    grid-area: details;
+
+                    .details-info {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr 1fr;
+                        grid-column-gap: 10px;
+                    }
+                }
+
+                .submit {
+                    grid-area: submit;
+                    border: 1px solid #1D519A;
+                    box-sizing: border-box;
+                    border-radius: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 50px;
+                    width: 100%;
+                    cursor: pointer;
+
+                    span {
+                        font-weight: bold;
+                        font-size: 16px;
+                        color: #1D519A;
+                    }
+                }
+            }
+
+            .intro-video {
+                grid-area: intro-video;
+
+                img {
+                    display: block;
+                    margin: -240px -70px 0 auto;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .form-inputs {
+        p {
+            font-weight: 500;
+            font-size: 16px;
+            color: #000000;
+            margin: 0 0 18px;
+        }
+
+        input, select {
+            height: 40px;
+            width: 100%;
+            background: #FAFDFE;
+            border: 1px solid #D1EAF1;
+            box-sizing: border-box;
+            box-shadow: 0 2px 1px rgba(209, 234, 241, 0.25);
+            border-radius: 40px;
+            margin: 0 0 10px;
+            padding: 2px 18px;
+            font-weight: 500;
+            font-size: 16px;
+            color: #889CB9;
+        }
+
+        input:focus, select:focus, input:focus-visible, select:focus-visible {
+            border-color: #1D519A;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #889CB9;
+            font-size: 16px;
+        }
+    }
+}
+</style>

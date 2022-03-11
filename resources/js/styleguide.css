@@ -1,0 +1,593 @@
+:root {
+  --amethyst: #5d5d8c;
+  --bali-hai: #879cb8;
+  --bali-hai-2: #889cb9;
+  --black: #000000;
+  --botticelli: #c2dde4;
+  --botticelli-2: #c5dde2;
+  --botticelli-3: #c5dce2;
+  --carousel-pink: #f8e7ea;
+  --cinnabar: #e1473d;
+  --coconut: #fafdfe;
+  --concrete: #f2f2f2;
+  --cyan--aqua: #00d0ff;
+  --cyan--aqua-2: #00d0ff1a;
+  --ebony: #0d0d25;
+  --ebony-2: #0d0d25b2;
+  --gothic: #6c97a1;
+  --green: #1eaa56;
+  --haiti: #1d1d36;
+  --heavy-metal: #2c2c2c;
+  --iceberg: #daeef3;
+  --jungle-mist: #afd3db;
+  --lily-white: #e8f7fa;
+  --link-water: #d1eaf1;
+  --loblolly: #bac8db;
+  --martinique: #2f2f59;
+  --mid-gray: #5f636b;
+  --mountain-mist: #999999;
+  --mystic: #e0e6f0;
+  --regent-gray: #819499;
+  --scooter: #36c9f1;
+  --shadow-green: #95bec8;
+  --smalt-blue: #55838f;
+  --solitude: #ebfafe;
+  --st-tropaz: #1d519a;
+  --swans-down: #ddeff3;
+  --swans-down-2: #ddeef3;
+  --swans-down-3: #d5e7eb;
+  --waikawa-gray: #5675a2;
+  --waterloo-: #7c7ca2;
+  --white: #ffffff;
+  --ziggurat: #c5d7dd;
+
+  --font-size-l: 18px;
+  --font-size-m: 16px;
+  --font-size-s: 14px;
+  --font-size-xl: 20px;
+  --font-size-xxl: 24px;
+  --font-size-xxxl: 36px;
+  --font-size-xxxxl: 48px;
+
+  --font-family-myriad_geo-bold: "Myriad GEO-Bold", Helvetica;
+  --font-family-myriad_geo-medium: "Myriad GEO-Medium", Helvetica;
+  --font-family-myriad_geo-regular: "Myriad GEO-Regular", Helvetica;
+}
+.myriadgeo-bold-st-tropaz-16px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-black-16px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-st-tropaz-16px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-waterloo--18px {
+  color: var(--waterloo-);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-st-tropaz-18px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-bali-hai-16px {
+  color: var(--bali-hai);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-cinnabar-16px {
+  color: var(--cinnabar);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-regular-normal-white-20px {
+  color: var(--white);
+  font-family: var(--font-family-myriad_geo-regular);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.myriadgeo-regular-normal-amethyst-16px {
+  color: var(--amethyst);
+  font-family: var(--font-family-myriad_geo-regular);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.myriadgeo-medium-black-18px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-white-16px {
+  color: var(--white);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-bold-green-36px {
+  color: var(--green);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-mid-gray-14px {
+  color: var(--mid-gray);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-loblolly-16px {
+  color: var(--loblolly);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-green-16px {
+  color: var(--green);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-st-tropaz-18px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-st-tropaz-24px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-black-14px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-white-18px {
+  color: var(--white);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-white-14px {
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-white-14px-2 {
+  color: var(--white);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-black-16px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-regular-normal-black-18px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-regular);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.myriadgeo-medium-mountain-mist-14px {
+  color: var(--mountain-mist);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-bali-hai-24px {
+  color: var(--bali-hai);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-gothic-14px {
+  color: var(--gothic);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-bali-hai-14px {
+  color: var(--bali-hai-2);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-black-24px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-white-36px {
+  color: var(--white);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-heavy-metal-24px {
+  color: var(--heavy-metal);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-black-24px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-black-48px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-xxxxl);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-smalt-blue-14px {
+  color: var(--smalt-blue);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-green-18px {
+  color: var(--green);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-bold-st-tropaz-48px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxxxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-green-18px {
+  color: var(--green);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-black-18px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-bold-black-36px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-bold-st-tropaz-20px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-cinnabar-16px {
+  color: var(--cinnabar);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-cyan--aqua-14px {
+  color: var(--cyan--aqua);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-bali-hai-14px-2 {
+  color: var(--bali-hai);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-cinnabar-18px {
+  color: var(--cinnabar);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-green-48px {
+  color: var(--green);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxxxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-st-tropaz-24px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-st-tropaz-30px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-waikawa-gray-24px {
+  color: var(--waikawa-gray);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-cyan--aqua-16px {
+  color: var(--cyan--aqua);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-black-26px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-shadow-green-24px {
+  color: var(--shadow-green);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-medium-st-tropaz-20px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-medium-st-tropaz-14px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-green-24px {
+  color: var(--green);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-bold-bali-hai-48px {
+  color: var(--bali-hai);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xxxxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-regular-normal-st-tropaz-16px {
+  color: var(--st-tropaz);
+  font-family: var(--font-family-myriad_geo-regular);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.myriadgeo-medium-black-21px {
+  color: var(--black);
+  font-family: var(--font-family-myriad_geo-medium);
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.myriadgeo-bold-cyan--aqua-16px {
+  color: var(--cyan--aqua);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-bold-cinnabar-20px {
+  color: var(--cinnabar);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriadgeo-bold-regent-gray-16px {
+  color: var(--regent-gray);
+  font-family: var(--font-family-myriad_geo-bold);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.border-1px-botticelli {
+  border: 1px solid var(--botticelli);
+}
+
+.border-1px-link-water {
+  border: 1px solid var(--link-water);
+}
+
+.border-1px-botticelli-2 {
+  border: 1px solid var(--botticelli-2);
+}
+
+.border-2px-botticelli {
+  border: 2px solid var(--botticelli);
+}
+
+.border-1px-martinique {
+  border: 1px solid var(--martinique);
+}
+
+.border-2px-cyan--aqua {
+  border: 2px solid var(--cyan--aqua);
+}
+
+.border-1px-st-tropaz {
+  border: 1px solid var(--st-tropaz);
+}
+
+.border-3px-st-tropaz {
+  border: 3px solid var(--st-tropaz);
+}
+
+.border-3px-bali-hai {
+  border: 3px solid var(--bali-hai);
+}
+
+.border-1px-swans-down {
+  border: 1px solid var(--swans-down);
+}
+
+.border-5px-cyan--aqua {
+  border: 5px solid var(--cyan--aqua);
+}
+
+.border-2px-mystic {
+  border: 2px solid var(--mystic);
+}
+
+.border-3px-white {
+  border: 3px solid var(--white);
+}
+
+.border-10px-white {
+  border: 10px solid var(--white);
+}
+
+.border-3px-cyan--aqua {
+  border: 3px solid var(--cyan--aqua);
+}
+
+.border-1px-ziggurat {
+  border: 1px solid var(--ziggurat);
+}
+
+.border-2px-st-tropaz {
+  border: 2px solid var(--st-tropaz);
+}

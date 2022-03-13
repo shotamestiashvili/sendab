@@ -36,7 +36,14 @@
                     </div>
                 </div>
                 <div class="intro-video">
-                    <img src="/images/intro-logo.png" alt="">
+                    <video controls>
+                        <source src="/images/placeholder-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                        <!--<div class="play-button">-->
+                        <!--    <img src="/images/video-play-button.png" alt="">-->
+                        <!--</div>-->
+                    </video>
+                    <!-- <img src="/images/intro-logo.png" alt="">-->
                 </div>
             </div>
         </div>
@@ -139,10 +146,29 @@ section {
             .intro-video {
                 grid-area: intro-video;
 
-                img {
+                video {
+                    position: relative;
                     display: block;
                     margin: -240px -70px 0 auto;
                     width: 100%;
+                    border-radius: 30px;
+
+                    .play-button {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 100px;
+                        height: 100px;
+                        background: #FFFFFF;
+                        border-radius: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        img {
+                            height: 36px;
+                        }
+                    }
                 }
             }
         }

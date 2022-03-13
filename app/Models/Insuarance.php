@@ -16,7 +16,7 @@ class Insuarance extends Model
     ];
 
 
-    public function orders(){
+    public function order(){
         return $this->belongsTo(Order::class);
     }
 }

@@ -27,8 +27,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/query', [\App\Http\Controllers\Api\Order\OrderController::class, 'getOrder']);
+Route::get('/client', [\App\Http\Controllers\PaymentController::class, 'processTransaction']);
+Route::get('/payout', [\App\Http\Controllers\PaymentController::class, 'payout']);
 
+Route::get('/showPayout', [\App\Http\Controllers\PaymentController::class, 'showPayout']);
+Route::get('/showOrder', [\App\Http\Controllers\PaymentController::class, 'showOrder']);
+
+
+Route::get('create-transaction', [\App\Http\Controllers\PaymentController::class, 'createTransaction'])->name('createTransaction');
+Route::get('process-transaction', [\App\Http\Controllers\PaymentController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [\App\Http\Controllers\PaymentController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [\App\Http\Controllers\PaymentController::class, 'cancelTransaction'])->name('cancelTransaction');
 
 
 

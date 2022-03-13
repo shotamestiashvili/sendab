@@ -208,4 +208,78 @@ section {
         }
     }
 }
+
+@media only screen and (max-width: 1000px) {
+
+    section {
+        .intro {
+            padding: 35px 15px;
+            grid-template-areas:
+                "title"
+                "form";
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+
+            h1 {
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 135%;
+                margin: 0 0 32px;
+                padding: 0 15px;
+            }
+
+            .package-from {
+                grid-template-areas:
+                    "form-inputs"
+                    "intro-video";
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto;
+                padding: 18px;
+
+                .form-inputs {
+                    margin: 0 0 32px;
+                    grid-template-areas:
+                        "from"
+                        "to"
+                        "when"
+                        "details"
+                        "submit";
+                    grid-template-columns: 1fr;
+                    grid-column-gap: 22px;
+                    grid-row-gap: 22px;
+
+                    p {
+                        font-size: 14px;
+                        line-height: 14px;
+                        margin: 0 0 14px;
+                    }
+
+                    input, select {
+                        height: 35px;
+                        font-size: 14px;
+                        line-height: 14px;
+                    }
+
+                    input::placeholder {
+                        font-size: 14px;
+                        line-height: 14px;
+                    }
+
+                    .submit {
+                        span {
+                            font-size: 14px;
+                            line-height: 14px;
+                        }
+                    }
+                }
+
+                .intro-video {
+                    video {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+}
 </style>

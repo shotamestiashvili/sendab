@@ -201,4 +201,21 @@ section {
         }
     }
 }
+
+@media only screen and (max-width: 1000px) {
+
+    section {
+        padding: 50px 0 32px;
+
+        h2 {
+            font-size: 24px;
+            line-height: 32px;
+            padding: 0 20%;
+        }
+
+        .scrollbar {
+            padding: 50px 0 0;
+        }
+    }
+}
 </style>

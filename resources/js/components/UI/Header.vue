@@ -272,7 +272,7 @@ header {
 
                 & > img {
                     height: 24px;
-                    margin: 0 -50px 0 0;
+                    margin: 0 -50px 0 26px;
                     z-index: 1;
                 }
 
@@ -285,7 +285,8 @@ header {
                     font-size: 16px;
                     line-height: 16px;
                     color: #1D519A;
-                    padding: 16px 64px;
+                    padding: 0 16px 0 64px;
+                    min-width: 0px;
 
                     &::placeholder {
                         font-weight: 500;
@@ -382,6 +383,33 @@ header {
                     img {
                         left: 13px;
                         top: 8px;
+                    }
+                }
+            }
+        }
+
+        .package-search {
+            .search-input-wrapper {
+                padding: 16px;
+
+                .search-input {
+                    padding: 0;
+
+                    input {
+                        height: 40px;
+                    }
+
+                    .controls-button {
+                        height: 40px;
+                        width: 50px;
+                        color: transparent;
+                        overflow: hidden;
+                        padding: 0;
+
+                        img {
+                            left: 13px;
+                            top: 8px;
+                        }
                     }
                 }
             }

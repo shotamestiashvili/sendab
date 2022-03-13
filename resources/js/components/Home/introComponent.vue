@@ -36,7 +36,14 @@
                     </div>
                 </div>
                 <div class="intro-video">
-                    <img src="/images/intro-logo.png" alt="">
+                    <video controls>
+                        <source src="/images/placeholder-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                        <!--<div class="play-button">-->
+                        <!--    <img src="/images/video-play-button.png" alt="">-->
+                        <!--</div>-->
+                    </video>
+                    <!-- <img src="/images/intro-logo.png" alt="">-->
                 </div>
             </div>
         </div>
@@ -139,10 +146,29 @@ section {
             .intro-video {
                 grid-area: intro-video;
 
-                img {
+                video {
+                    position: relative;
                     display: block;
                     margin: -240px -70px 0 auto;
                     width: 100%;
+                    border-radius: 30px;
+
+                    .play-button {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 100px;
+                        height: 100px;
+                        background: #FFFFFF;
+                        border-radius: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        img {
+                            height: 36px;
+                        }
+                    }
                 }
             }
         }
@@ -179,6 +205,80 @@ section {
         input::placeholder {
             color: #889CB9;
             font-size: 16px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+
+    section {
+        .intro {
+            padding: 35px 15px;
+            grid-template-areas:
+                "title"
+                "form";
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+
+            h1 {
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 135%;
+                margin: 0 0 32px;
+                padding: 0 15px;
+            }
+
+            .package-from {
+                grid-template-areas:
+                    "form-inputs"
+                    "intro-video";
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto;
+                padding: 18px;
+
+                .form-inputs {
+                    margin: 0 0 32px;
+                    grid-template-areas:
+                        "from"
+                        "to"
+                        "when"
+                        "details"
+                        "submit";
+                    grid-template-columns: 1fr;
+                    grid-column-gap: 22px;
+                    grid-row-gap: 22px;
+
+                    p {
+                        font-size: 14px;
+                        line-height: 14px;
+                        margin: 0 0 14px;
+                    }
+
+                    input, select {
+                        height: 35px;
+                        font-size: 14px;
+                        line-height: 14px;
+                    }
+
+                    input::placeholder {
+                        font-size: 14px;
+                        line-height: 14px;
+                    }
+
+                    .submit {
+                        span {
+                            font-size: 14px;
+                            line-height: 14px;
+                        }
+                    }
+                }
+
+                .intro-video {
+                    video {
+                        margin: 0;
+                    }
+                }
+            }
         }
     }
 }

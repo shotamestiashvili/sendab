@@ -157,7 +157,7 @@ section {
                 }
             }
 
-            img {
+            & > img {
                 width: 20px;
                 margin: 0 20px;
             }
@@ -202,6 +202,92 @@ section {
 
                         img {
                             width: 17px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    section {
+        padding: 0 15px;
+
+        .popular-roads {
+            padding: 18px;
+
+            .head {
+                flex-direction: column;
+                align-items: initial;
+                justify-content: initial;
+
+                h2 {
+                    font-size: 18px;
+                    line-height: 140%;
+                    padding: 0 30% 0 0;
+                    margin: 0 0 12px;
+                }
+
+                a {
+                    span {
+                        font-size: 14px;
+                        line-height: 100%;
+                    }
+
+                    img {
+                        margin: 0 0 0 10px;
+                    }
+                }
+            }
+
+            .road-list {
+                padding: 18px;
+                height: 90px;
+                align-items: flex-start;
+
+                p {
+                    padding: 5px 7px;
+                    font-size: 12px;
+                    line-height: 12px;
+                }
+
+                & > img {
+                    width: 11px;
+                    margin: 7px 6px 0;
+                }
+
+                .navigation {
+                    left: 0;
+                    width: 100%;
+
+                    .fade-component {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    }
+
+                    a {
+                        position: absolute;
+                        padding: 0;
+                        left: 18px;
+                        bottom: 18px;
+                        width: 100%;
+                        height: auto;
+
+                        span {
+                            font-weight: 700;
+                            font-size: 14px;
+                            line-height: 14px;
+                        }
+
+                        .icon {
+                            width: 20px;
+                            height: 20px;
+
+                            img {
+                                width: 10px;
+                            }
                         }
                     }
                 }

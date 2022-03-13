@@ -28,4 +28,11 @@ main {
     padding: 0 0 330px;
     background-color: #DDEFF3;
 }
+
+@media only screen and (max-width: 1000px) {
+
+    main {
+        padding: 0 0 510px;
+    }
+}
 </style>

@@ -121,7 +121,6 @@ footer {
             .line {
                 background: #1D1D36;
                 height: 1px;
-                width: 100%;
                 flex-grow: 1;
             }
 
@@ -135,6 +134,7 @@ footer {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                cursor: pointer;
 
                 img {
                     width: 13px;
@@ -161,6 +161,59 @@ footer {
 
                     &:last-child {
                         margin: 0 0 0 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    footer {
+        section {
+            padding: 40px 32px 46px;
+
+            .top-side {
+                flex-direction: column;
+                align-items: unset;
+                justify-content: unset;
+
+                nav {
+                    flex-direction: column;
+                    margin: 0 0 32px;
+
+                    a {
+                        margin: 0 0 20px;
+                    }
+                }
+
+                .support-info {
+                    flex-direction: column;
+
+                    .support-item {
+                        margin: 0 0 20px;
+
+                        img {
+                            height: 32px;
+                        }
+                    }
+                }
+            }
+
+            .divider {
+                margin: 20px 0;
+            }
+
+            .bot-side {
+                flex-direction: column;
+                align-items: unset;
+                justify-content: unset;
+
+                .terms-info {
+                    margin: 20px 0 0;
+
+                    a:first-child {
+                        margin: 0 10px 0 0;
                     }
                 }
             }

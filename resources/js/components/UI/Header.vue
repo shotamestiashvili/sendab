@@ -1,6 +1,9 @@
 <template>
     <header>
         <section>
+            <div class="mobile-navigation">
+                <img src="/images/header-navigation.png" alt="">
+            </div>
             <router-link class="main-logo" :to="{name: 'home'}">
                 <img src="/images/main-logo.png" alt="SendAb">
             </router-link>
@@ -26,7 +29,7 @@
                 <router-link :to="{name: 'sendab-offer'}">{{ $t('გახდით პარტნიორი') }}</router-link>
             </nav>
             <div class="controls">
-                <div class="controls-button">
+                <div class="controls-button" @click="packageSearch = !packageSearch">
                     <img src="/images/package-icon.png" alt="">
                     {{ $t('ამანათი') }}
                 </div>
@@ -36,6 +39,19 @@
                 </router-link>
             </div>
         </section>
+        <div class="package-search" v-if="packageSearch">
+            <div class="search-input-wrapper">
+                <div class="search-input">
+                    <img src="/images/package-icon-blue.png" alt="">
+                    <input type="text" placeholder="Enter your own reference number">
+                    <a class="controls-button">
+                        <img src="/images/search-icon-white.png" alt="">
+                        {{ $t('მოძებნე შეკვეთა') }}
+                    </a>
+                </div>
+            </div>
+            <div class="blur-effect" @click="packageSearch = !packageSearch"/>
+        </div>
     </header>
 
 </template>
@@ -59,7 +75,8 @@ export default {
                     lang: 'de'
                 }
             ],
-            openLanguageSelector: false
+            openLanguageSelector: false,
+            packageSearch: false
         }
     },
     computed: {
@@ -90,6 +107,10 @@ header {
         align-items: center;
         justify-content: space-between;
         height: 115px;
+
+        .mobile-navigation {
+            display: none;
+        }
 
         .main-logo {
             cursor: pointer;
@@ -218,6 +239,178 @@ header {
                     height: 24px;
                     left: 20px;
                     top: 13px;
+                }
+            }
+        }
+    }
+
+    .package-search {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+
+        .blur-effect {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .search-input-wrapper {
+            background: #FFFFFF;
+            padding: 0 10px;
+
+            .search-input {
+                max-width: 1290px;
+                margin: 0 auto;
+                padding: 32px 0;
+                display: flex;
+                align-items: center;
+                flex-wrap: nowrap;
+
+                & > img {
+                    height: 24px;
+                    margin: 0 -50px 0 26px;
+                    z-index: 1;
+                }
+
+                input {
+                    flex-grow: 1;
+                    background: #DDEFF3;
+                    border-radius: 40px;
+                    height: 50px;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 16px;
+                    color: #1D519A;
+                    padding: 0 16px 0 64px;
+                    min-width: 0px;
+
+                    &::placeholder {
+                        font-weight: 500;
+                        font-size: 16px;
+                        line-height: 16px;
+                        color: #1D519A;
+                    }
+
+                    &:focus, &:focus-visible {
+                        border-color: #1D519A;
+                        outline: none;
+                    }
+                }
+
+                .controls-button {
+                    cursor: pointer;
+                    position: relative;
+                    height: 50px;
+                    background: #36C9F1;
+                    border-radius: 40px;
+                    padding: 18px 20px 18px 55px;
+                    font-weight: bold;
+                    font-size: 16px;
+                    color: #FFFFFF;
+                    text-decoration: none;
+                    white-space: nowrap;
+                    margin: 0 0 0 10px;
+
+                    img {
+                        position: absolute;
+                        height: 24px;
+                        left: 20px;
+                        top: 13px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 1000px) {
+    header {
+        background-color: #FFFFFF;
+
+        section {
+            height: auto;
+            padding: 16px;
+            justify-content: initial;
+
+            .mobile-navigation {
+                position: relative;
+                display: inline-block;
+                height: 40px;
+                width: 50px;
+                border-radius: 40px;
+                background: rgba(29, 81, 154, 0.1);
+                cursor: pointer;
+
+                img {
+                    position: absolute;
+                    height: 20px;
+                    left: 15px;
+                    top: 10px;
+                }
+            }
+
+            .main-logo {
+                margin: 0 0 0 10px;
+
+                img {
+                    height: 28px;
+                }
+            }
+
+            .language-selector {
+                display: none;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .controls {
+                margin: 0 0 0 auto;
+
+                .controls-button {
+                    height: 40px;
+                    width: 50px;
+                    color: transparent;
+                    overflow: hidden;
+                    padding: 0;
+
+                    img {
+                        left: 13px;
+                        top: 8px;
+                    }
+                }
+            }
+        }
+
+        .package-search {
+            .search-input-wrapper {
+                padding: 16px;
+
+                .search-input {
+                    padding: 0;
+
+                    input {
+                        height: 40px;
+                    }
+
+                    .controls-button {
+                        height: 40px;
+                        width: 50px;
+                        color: transparent;
+                        overflow: hidden;
+                        padding: 0;
+
+                        img {
+                            left: 13px;
+                            top: 8px;
+                        }
+                    }
                 }
             }
         }

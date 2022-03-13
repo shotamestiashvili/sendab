@@ -61,7 +61,6 @@ class Partner extends Resource
             Text::make('Laptop', 'laptop')->sortable(),
             Text::make('Smartphone', 'smartphone')->sortable(),
             Text::make('Clothes', 'clothes')->sortable(),
-
             Text::make('One Kg', 'oneKg')->sortable(),
             Text::make('Two Kg', 'twoKg')->sortable(),
             Text::make('Five Kg', 'fiveKg')->sortable(),

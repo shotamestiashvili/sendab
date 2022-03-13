@@ -3,18 +3,19 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Country extends Resource
+class Pickup extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Country::class;
+    public static $model = \App\Models\Pickup::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -42,7 +43,11 @@ class Country extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Country', 'country')->sortable(),
+            BelongsTo::make('Order', 'order', \App\Nova\Order::class),
+            Text::make('Pickup Type', 'pickup_type')->sortable(),
+            Text::make('Source City', 'source_city')->sortable(),
+            Text::make('Source Address1', 'source_address1')->sortable(),
+            Text::make('Source Address2', 'source_address2')->sortable(),
         ];
     }
 

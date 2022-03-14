@@ -18,10 +18,9 @@ class SaveAvatar
         $name = $request->file('avatar')->getClientOriginalName();
         $avatar_photo = new AvatarPhoto();
         $userId = Auth::user()->id;
+//        $userId = 1;
 
         $exists = $avatar_photo->where('uploaded_by', $userId);
-
-
 
         if ($exists->exists()){
             Storage::delete( $exists->value('file_url'));

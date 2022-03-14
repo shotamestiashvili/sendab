@@ -14,7 +14,9 @@ use Illuminate\Support\Str;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/image', function (){
+    return \Illuminate\Support\Facades\Storage::url('avatar/test.png');
+});
 
 
 Route::get('/payment/token', [\App\Http\Controllers\PaymentController::class, 'token']);

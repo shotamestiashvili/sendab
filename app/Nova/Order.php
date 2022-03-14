@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -42,10 +43,14 @@ class Order extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
+//            ID::make(__('ID'), 'id')->sortable(),
+            Text::make('Order Number', 'order')->sortable(),
             BelongsTo::make('user', 'user', \App\Nova\User::class),
             BelongsTo::make('offer', 'offer', \App\Nova\Offer::class),
-            Text::make('Order Number', 'order')->sortable(),
+            HasMany::make('Pickups', 'pickups', \App\Nova\Pickup::class),
+            HasMany::make('Person', 'people', \App\Nova\Person::class),
+            HasMany::make('Insuarance', 'insuarance', \App\Nova\Insuarance::class),
+            HasMany::make('Term', 'terms', \App\Nova\Term::class),
             Text::make('Amount', 'amount')->sortable(),
             Text::make('Status', 'status')->sortable(),
         ];

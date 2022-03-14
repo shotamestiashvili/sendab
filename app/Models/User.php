@@ -47,8 +47,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany( 'App\Models\AvatarPhoto', 'id', 'id' );
     }
 
+
     public function customers(){
         return $this->hasMany( Customer::class);
+    }
+
+    public function partniors(){
+        return $this->hasMany( Partnior::class );
+    }
+
+    public function orders(){
+        return $this->hasMany( Order::class );
+    }
+
+    public function documents(){
+        return $this->hasMany( Document::class);
     }
 
 

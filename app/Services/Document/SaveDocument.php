@@ -38,8 +38,8 @@ class SaveDocument
             $exists->update([
                 'user_id'   => $userId,
                 'front'     => '/document/'.$userId.'-front-'.$front,
-                'back'      => '/document/'.$userId.'-front-'.$back,
-                'selfie'    => '/document/'.$userId.'-front-'.$selfie,
+                'back'      => '/document/'.$userId.'-back-'.$back,
+                'selfie'    => '/document/'.$userId.'-selfie-'.$selfie,
             ]);
 
             return 'updated';

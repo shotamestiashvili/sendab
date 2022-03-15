@@ -2,24 +2,20 @@
 
 namespace App\Nova;
 
-use App\Nova\Actions\AvatarDownload;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class AvatarPhoto extends Resource
+class PartniorPrice extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\AvatarPhoto::class;
+    public static $model = \App\Models\PartniorPrice::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -46,18 +42,10 @@ class AvatarPhoto extends Resource
     public function fields(Request $request)
     {
         return [
-//            ID::make(__('ID'), 'id')->sortable(),
-            Image::make('Avatar')->preview(function () {
-                $path = \App\Models\AvatarPhoto::where('uploaded_by', $this->user->id)
-                    ->value('file_url');
-                return 'http://sendab'. $path;
-            }),
-            BelongsTo::make('User', 'user', \App\Nova\User::class),
-            Text::make('Uploaded by', 'uploaded_by')->sortable(),
-            Text::make('File Url', 'file_url')->sortable(),
-
-
-
+            ID::make(__('ID'), 'id')->sortable(),
+            BelongsTo::make('Partner', 'partnior', \App\Nova\Partnior::class),
+            Text::make('KG Price', 'price_kg')->sortable(),
+            Text::make('Summery Price', 'price_sum')->sortable(),
         ];
     }
 
@@ -69,9 +57,7 @@ class AvatarPhoto extends Resource
      */
     public function cards(Request $request)
     {
-        return [
-
-        ];
+        return [];
     }
 
     /**
@@ -104,8 +90,6 @@ class AvatarPhoto extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            new AvatarDownload
-        ];
+        return [];
     }
 }

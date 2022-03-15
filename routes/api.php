@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::post('/upload/avatar/save',  [\App\Http\Controllers\Api\Upload\AvatarController::class, 'save']);
+Route::get( '/upload/avatar/get',    [\App\Http\Controllers\Api\Upload\AvatarController::class, 'getAvatar']);
+Route::post('/upload/document/save',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'save']);
+Route::get('/upload/document/front',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentFront']);
+Route::get('/upload/document/back',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentBack']);
+Route::get('/upload/document/selfie',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentSelfie']);
+
+
 ##############  FAQ  ####################################################################################
 Route::get('/faq/get', [\App\Http\Controllers\Api\FAQ\FaqController::class, 'getFaq']);
 ##############  FAQ  END####################################################################################
@@ -56,15 +64,15 @@ Route::middleware('auth:sanctum')->group(function(){
 ##############  USER Profile  END####################################################################################
 
 
-##############  Upload  ####################################################################################
-    Route::post('/upload/avatar/save',  [\App\Http\Controllers\Api\Upload\AvatarController::class, 'save']);
-    Route::get( '/upload/avatar/get',    [\App\Http\Controllers\Api\Upload\AvatarController::class, 'getAvatar']);
-    Route::post('/upload/document/save',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'save']);
-    Route::get('/upload/document/front',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentFront']);
-    Route::get('/upload/document/back',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentBack']);
-    Route::get('/upload/document/selfie',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentSelfie']);
-##############  Upload EMD ####################################################################################
-
+//##############  Upload  ####################################################################################
+//    Route::post('/upload/avatar/save',  [\App\Http\Controllers\Api\Upload\AvatarController::class, 'save']);
+//    Route::get( '/upload/avatar/get',    [\App\Http\Controllers\Api\Upload\AvatarController::class, 'getAvatar']);
+//    Route::post('/upload/document/save',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'save']);
+//    Route::get('/upload/document/front',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentFront']);
+//    Route::get('/upload/document/back',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentBack']);
+//    Route::get('/upload/document/selfie',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentSelfie']);
+//##############  Upload EMD ####################################################################################
+//
 
 ##############  Order  ####################################################################################
     Route::post('/order/create',  [\App\Http\Controllers\Api\Order\OrderController::class, 'createORder']);

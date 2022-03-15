@@ -2,24 +2,21 @@
 
 namespace App\Nova;
 
-use App\Nova\Actions\AvatarDownload;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\File;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class AvatarPhoto extends Resource
+class Partnior extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\AvatarPhoto::class;
+    public static $model = \App\Models\Partnior::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -46,18 +43,16 @@ class AvatarPhoto extends Resource
     public function fields(Request $request)
     {
         return [
-//            ID::make(__('ID'), 'id')->sortable(),
-            Image::make('Avatar')->preview(function () {
-                $path = \App\Models\AvatarPhoto::where('uploaded_by', $this->user->id)
-                    ->value('file_url');
-                return 'http://sendab'. $path;
-            }),
+            ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make('User', 'user', \App\Nova\User::class),
-            Text::make('Uploaded by', 'uploaded_by')->sortable(),
-            Text::make('File Url', 'file_url')->sortable(),
-
-
-
+            Text::make('Status: Complete or Not?', 'status')->sortable(),
+            Text::make('Sendab Offer? True or False', 'sendab_offer')->sortable(),
+            HasMany::make('Routes', 'routes', \App\Nova\Route::class),
+            HasMany::make('Transports', 'transports', \App\Nova\Transport::class),
+            HasMany::make('Parcels', 'parcels', \App\Nova\Parcel::class),
+            HasMany::make('Pickup Type', 'pickupTypes', \App\Nova\PickupType::class),
+            HasMany::make('Partner Prices', 'partniorPrices', \App\Nova\PartniorPrice::class),
+            HasMany::make('Reoffer?', 'reoffers', \App\Nova\Reoffer::class),
         ];
     }
 
@@ -69,9 +64,7 @@ class AvatarPhoto extends Resource
      */
     public function cards(Request $request)
     {
-        return [
-
-        ];
+        return [];
     }
 
     /**
@@ -104,8 +97,6 @@ class AvatarPhoto extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            new AvatarDownload
-        ];
+        return [];
     }
 }

@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         login() {
-            this.$store.dispatch('login/LOGIN', this.loginData)
+            this.$store.dispatch('login/login', this.loginData)
         }
     }
 }

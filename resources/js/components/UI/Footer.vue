@@ -3,7 +3,7 @@
         <section>
             <div class="top-side">
                 <nav>
-                    <router-link to="#">{{ $t('შეკითხვები') }}</router-link>
+                    <router-link to="#">{{ $t('კითხვები') }}</router-link>
                     <router-link to="#">{{ $t('კომპანიის შესახებ') }}</router-link>
                     <router-link to="#">{{ $t('კონტაქტი') }}</router-link>
                     <router-link to="#">{{ $t('ამანათის გაგზავნა') }}</router-link>

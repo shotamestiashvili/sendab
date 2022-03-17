@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store/store"
+import store from "./store"
 import "./styleguide.css"
 import "./globals.css"
 import vuetify from './vuetify';

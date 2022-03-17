@@ -7,8 +7,8 @@
             <router-link class="main-logo" :to="{name: 'home'}">
                 <img src="/images/main-logo.png" alt="SendAb">
             </router-link>
-            <div class="language-selector" :class="{'open': openLanguageSelector}">
-                <h3 @click="openLanguageSelector = !openLanguageSelector">{{ $t(selectedLanguage.name) }}
+            <div ref="languageSelector" class="language-selector" :class="{'open': openLanguageSelector}">
+                <h3 @click="openLanguage">{{ $t(selectedLanguage.name) }}
                     <img src="/images/arrow-up.png" alt="">
                 </h3>
                 <div class="options">
@@ -33,10 +33,64 @@
                     <img src="/images/package-icon.png" alt="">
                     {{ $t('ამანათი') }}
                 </div>
-                <router-link :to="{name: 'login'}" class="controls-button login-button">
+                <router-link v-if="!userLogin" :to="{name: 'login'}" class="controls-button login-button">
                     <img src="/images/user-default-icon.png" alt="">
                     {{ $t('ავტორიზაცია') }}
                 </router-link>
+                <div v-else class="user-component" ref="userProfile">
+                    <div class="user-profile" :class="{'open': openUserProfile}"
+                         @click="openUser">
+                        <img class="avatar" src="/images/placeholder-user-image.png" alt="">
+                        <span>{{ $t('ანგარიში') }}</span>
+                        <img class="arrow-up" src="/images/arrow-up.png" alt="">
+                    </div>
+                    <div class="user-profile-dropdown" v-if="openUserProfile">
+                        <div class="avatar-grid">
+                            <div class="user-avatar">
+                                <img src="/images/placeholder-user-image.png" alt="">
+                                <div class="verify-icon">
+                                    <img src="/images/verify-icon.png" alt=""/>
+                                </div>
+                            </div>
+                            <p>ირაკლი კურტანიძე</p>
+                            <div class="balance">
+                                {{ $t('ბალანსი') }}:
+                                <span>32.4<svg width="12" height="15" viewBox="0 0 12 15" fill="none"
+                                               xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M3.204 8.006C3.204 8.774 3.366 9.458 3.69 10.058C4.026 10.646 4.488 11.108 5.076 11.444C5.664 11.768 6.33 11.93 7.074 11.93H10.782V14H3.402C2.718 14 2.082 14.03 1.494 14.09V12.056L2.826 11.984V11.93C2.082 11.474 1.53 10.88 1.17 10.148C0.81 9.404 0.63 8.606 0.63 7.754C0.63 6.506 0.972 5.402 1.656 4.442C2.352 3.482 3.3 2.84 4.5 2.516V0.877999H5.724V2.318C5.82 2.306 5.964 2.3 6.156 2.3C6.36 2.3 6.51 2.306 6.606 2.318V0.877999H7.83V2.516C9.054 2.864 10.002 3.548 10.674 4.568C11.358 5.588 11.7 6.776 11.7 8.132H9.126C9.126 7.16 9.018 6.386 8.802 5.81C8.586 5.234 8.262 4.82 7.83 4.568V8.132H6.606V4.208C6.51 4.196 6.36 4.19 6.156 4.19C5.964 4.19 5.82 4.196 5.724 4.208V8.132H4.5V4.568C4.068 4.82 3.744 5.228 3.528 5.792C3.312 6.344 3.204 7.082 3.204 8.006Z"
+                                            fill="#1EAA56"/>
+                                    </svg>
+                                </span>
+                                <div class="add-balance">+</div>
+                            </div>
+                        </div>
+                        <div class="user-notifications">
+                            <div class="notification-item active">
+                                <img src="/images/message-icon.png" alt="">
+                                <span>4</span>
+                            </div>
+                            <div class="notification-item">
+                                <img src="/images/bell-icon.png" alt="">
+                            </div>
+                        </div>
+                        <router-link :to="{name: 'user-profile'}">
+                            <img src="/images/user-default-icon-blue.png" alt="">{{ $t('ჩემი პროფილი') }}
+                        </router-link>
+                        <router-link :to="{name: 'my-packages'}">
+                            <img src="/images/package-icon-blue.png" alt="">{{ $t('ჩემი შეკვეთები') }}
+                        </router-link>
+                        <router-link :to="{name: 'account-settings'}">
+                            <img src="/images/settings-icon.png" alt="">{{ $t('ანგარიშის პარამეტრები') }}
+                        </router-link>
+                        <router-link :to="{name: 'billing-info'}">
+                            <img src="/images/billing-icon.png" alt="">{{ $t('ბალანსის მართვა') }}
+                        </router-link>
+                        <hr>
+                        <button>{{ $t('ახალი შეკვეთა') }}</button>
+                        <button class="logout">{{ $t('ანგარიშიდან გამოსვლა') }}</button>
+                    </div>
+                </div>
             </div>
         </section>
         <div class="package-search" v-if="packageSearch">
@@ -76,7 +130,9 @@ export default {
                 }
             ],
             openLanguageSelector: false,
-            packageSearch: false
+            openUserProfile: false,
+            packageSearch: false,
+            userLogin: false,
         }
     },
     computed: {
@@ -89,6 +145,34 @@ export default {
             this.$i18n.locale = lang
             localStorage.setItem('lang', lang)
             this.openLanguageSelector = false
+        },
+        openLanguage() {
+            this.openLanguageSelector = !this.openLanguageSelector
+            if (this.openLanguageSelector) {
+                window.addEventListener('click', this.closeLanguage)
+            } else {
+                window.removeEventListener('click', this.closeLanguage)
+            }
+        },
+        closeLanguage(e) {
+            if (!e.path.includes(this.$refs.languageSelector)) {
+                this.openLanguageSelector = false
+                window.removeEventListener('click', this.closeLanguage)
+            }
+        },
+        openUser() {
+            this.openUserProfile = !this.openUserProfile
+            if (this.openUserProfile) {
+                window.addEventListener('click', this.closeUser)
+            } else {
+                window.removeEventListener('click', this.closeUser)
+            }
+        },
+        closeUser(e) {
+            if (!e.path.includes(this.$refs.userProfile)) {
+                this.openUserProfile = false
+                window.removeEventListener('click', this.closeUser)
+            }
         }
     }
 }
@@ -241,6 +325,234 @@ header {
                     top: 13px;
                 }
             }
+
+            .user-component {
+                position: relative;
+
+                .user-profile {
+                    background: #FFFFFF;
+                    border-radius: 40px;
+                    height: 50px;
+                    min-width: 180px;
+                    padding: 10px 12px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+
+                    .avatar {
+                        height: 30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        margin: 0 10px 0 0;
+                    }
+
+                    & > span {
+                        font-weight: 700;
+                        font-size: 16px;
+                        line-height: 16px;
+                        color: #1D519A;
+                        flex-grow: 1;
+                    }
+
+                    .arrow-up {
+                        margin: 0 10px;
+                        width: 9px;
+                        transform: rotateX(180deg);
+                        transition: all 0.3s ease-in-out;
+                    }
+
+                    &.open {
+
+                        .arrow-up {
+                            transform: rotateX(0deg);
+                        }
+                    }
+                }
+
+                .user-profile-dropdown {
+                    z-index: 1;
+                    position: absolute;
+                    right: 0;
+                    top: 70px;
+                    background: #FFFFFF;
+                    border: 5px solid #00D1FF;
+                    box-sizing: border-box;
+                    border-radius: 20px;
+                    width: 370px;
+                    padding: 30px 25px;
+
+                    .avatar-grid {
+                        display: grid;
+                        grid-template-areas:
+                            "avatar name"
+                            "avatar balance";
+                        grid-template-columns: 60px auto;
+                        grid-template-rows: 20px 40px;
+                        grid-column-gap: 18px;
+                        margin: 0 0 30px;
+
+                        .user-avatar {
+                            grid-area: avatar;
+                            position: relative;
+                            width: 60px;
+                            height: 60px;
+
+                            & > img {
+                                width: 60px;
+                                height: 60px;
+                                border-radius: 50%;
+                            }
+
+                            .verify-icon {
+                                width: 26px;
+                                height: 26px;
+                                border-radius: 50%;
+                                background: #1EAA56;
+                                border: 3px solid #FFFFFF;
+                                position: absolute;
+                                top: -3px;
+                                right: -3px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+
+                                img {
+                                    width: 10px;
+                                }
+                            }
+                        }
+
+                        p {
+                            grid-area: name;
+                            font-weight: 700;
+                            font-size: 12px;
+                            line-height: 12px;
+                            color: #000000;
+                            margin: 8px 0 0;
+                        }
+
+                        .balance {
+                            grid-area: balance;
+                            font-weight: 500;
+                            font-size: 20px;
+                            line-height: 20px;
+                            color: #000000;
+                            display: flex;
+                            flex-wrap: nowrap;
+                            align-items: center;
+
+                            span {
+                                color: #1EAA56;
+                                margin: 0 0 0 6px;
+                            }
+
+                            .add-balance {
+                                border: 1px solid #C6D8DD;
+                                box-sizing: border-box;
+                                width: 30px;
+                                height: 30px;
+                                margin: 0 0 0 12px;
+                                font-weight: 700;
+                                font-size: 20px;
+                                line-height: 30px;
+                                color: #1D519A;
+                                text-align: center;
+                                border-radius: 50%;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                    .user-notifications {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        grid-column-gap: 10px;
+                        margin: 14px 0;
+
+                        .notification-item {
+                            height: 65px;
+                            background: #E9F8FB;
+                            border-radius: 10px;
+                            border: 2px solid #E9F8FB;
+                            box-sizing: border-box;
+                            position: relative;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            &.active {
+                                border-color: #00D1FF;
+                            }
+
+                            img {
+                                width: 30px;
+                                height: 30px;
+                            }
+
+                            span {
+                                position: absolute;
+                                top: -2px;
+                                right: -2px;
+                                text-align: center;
+                                background: #00D1FF;
+                                border-radius: 0 10px;
+                                width: 30px;
+                                height: 30px;
+                                font-weight: 700;
+                                font-size: 18px;
+                                line-height: 30px;
+                                color: #FFFFFF;
+                            }
+                        }
+                    }
+
+                    a {
+                        background: #E9F8FB;
+                        border-radius: 10px;
+                        padding: 12px 20px;
+                        font-weight: 500;
+                        font-size: 16px;
+                        line-height: 16px;
+                        color: #1D519A;
+                        text-decoration: none;
+                        margin: 0 0 5px;
+                        display: flex;
+                        align-items: center;
+
+                        img {
+                            height: 26px;
+                            margin: 0 12px 0 0;
+                        }
+                    }
+
+                    hr {
+                        margin: 30px 0;
+                        border-color: #D5E6EB;
+                    }
+
+                    button {
+                        background: #1D519A;
+                        border-radius: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 50px;
+                        font-weight: 500;
+                        font-size: 16px;
+                        line-height: 16px;
+                        color: #FFFFFF;
+                        margin: 0 0 15px;
+                        width: 100%;
+                    }
+
+                    .logout {
+                        background: #F9E7EA;
+                        color: #E1473D;
+                        margin: 0;
+                    }
+                }
+            }
         }
     }
 
@@ -286,7 +598,7 @@ header {
                     line-height: 16px;
                     color: #1D519A;
                     padding: 0 16px 0 64px;
-                    min-width: 0px;
+                    min-width: 0;
 
                     &::placeholder {
                         font-weight: 500;

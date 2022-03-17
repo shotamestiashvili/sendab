@@ -2833,6 +2833,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Header',
   data: function data() {
@@ -2848,7 +2902,9 @@ __webpack_require__.r(__webpack_exports__);
         lang: 'de'
       }],
       openLanguageSelector: false,
-      packageSearch: false
+      openUserProfile: false,
+      packageSearch: false,
+      userLogin: false
     };
   },
   computed: {
@@ -2865,6 +2921,36 @@ __webpack_require__.r(__webpack_exports__);
       this.$i18n.locale = lang;
       localStorage.setItem('lang', lang);
       this.openLanguageSelector = false;
+    },
+    openLanguage: function openLanguage() {
+      this.openLanguageSelector = !this.openLanguageSelector;
+
+      if (this.openLanguageSelector) {
+        window.addEventListener('click', this.closeLanguage);
+      } else {
+        window.removeEventListener('click', this.closeLanguage);
+      }
+    },
+    closeLanguage: function closeLanguage(e) {
+      if (!e.path.includes(this.$refs.languageSelector)) {
+        this.openLanguageSelector = false;
+        window.removeEventListener('click', this.closeLanguage);
+      }
+    },
+    openUser: function openUser() {
+      this.openUserProfile = !this.openUserProfile;
+
+      if (this.openUserProfile) {
+        window.addEventListener('click', this.closeUser);
+      } else {
+        window.removeEventListener('click', this.closeUser);
+      }
+    },
+    closeUser: function closeUser(e) {
+      if (!e.path.includes(this.$refs.userProfile)) {
+        this.openUserProfile = false;
+        window.removeEventListener('click', this.closeUser);
+      }
     }
   }
 });
@@ -5015,7 +5101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "header[data-v-b81b6666] {\n  width: 100%;\n  border-bottom: 1px solid #DDEFF3;\n}\nheader section[data-v-b81b6666] {\n  margin: 0 auto;\n  max-width: 1290px;\n  padding: 0 10px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  height: 115px;\n}\nheader section .mobile-navigation[data-v-b81b6666] {\n  display: none;\n}\nheader section .main-logo[data-v-b81b6666] {\n  cursor: pointer;\n}\nheader section .main-logo img[data-v-b81b6666] {\n  height: 42px;\n}\nheader section .language-selector h3[data-v-b81b6666] {\n  cursor: pointer;\n  position: relative;\n  font-weight: 500;\n  font-size: 14px;\n  color: #5F636B;\n  background: #FFFFFF;\n  border-radius: 40px;\n  padding: 10px 36px 10px 24px;\n  border: 1px solid #DDEFF3;\n  min-width: 130px;\n}\nheader section .language-selector h3 img[data-v-b81b6666] {\n  position: absolute;\n  right: 15px;\n  top: 15px;\n  width: 10px;\n  transform: rotateX(180deg);\n  transition: all 0.3s ease-in-out;\n}\nheader section .language-selector .options[data-v-b81b6666] {\n  display: none;\n  position: relative;\n}\nheader section .language-selector .options ul[data-v-b81b6666] {\n  position: absolute;\n  z-index: 1;\n  left: 0;\n  top: 15px;\n  width: 200px;\n  background: #FFFFFF;\n  border: 5px solid #00D1FF;\n  box-sizing: border-box;\n  border-radius: 20px;\n  padding: 12px 24px;\n}\nheader section .language-selector .options ul li[data-v-b81b6666] {\n  cursor: pointer;\n  font-size: 16px;\n  color: rgba(29, 81, 154, 0.5);\n  padding: 12px 0;\n  border-bottom: 1px solid #1D519A;\n}\nheader section .language-selector .options ul li.active[data-v-b81b6666] {\n  color: #1D519A;\n}\nheader section .language-selector .options ul li[data-v-b81b6666]:last-child {\n  border-bottom: none;\n}\nheader section .language-selector.open h3 img[data-v-b81b6666] {\n  transform: rotateX(0deg);\n}\nheader section .language-selector.open .options[data-v-b81b6666] {\n  display: block;\n}\nheader section nav[data-v-b81b6666] {\n  display: flex;\n}\nheader section nav a[data-v-b81b6666] {\n  font-weight: bold;\n  font-size: 16px;\n  text-decoration: none;\n  color: #1D519A;\n  padding: 15px 0 13px;\n  margin: 0 15px;\n  white-space: nowrap;\n  border-bottom: 2px solid transparent;\n}\nheader section nav a.router-link-exact-active[data-v-b81b6666] {\n  border-bottom-color: #1D519A;\n}\nheader section .controls[data-v-b81b6666] {\n  display: flex;\n  flex-wrap: nowrap;\n}\nheader section .controls .controls-button[data-v-b81b6666] {\n  cursor: pointer;\n  position: relative;\n  height: 50px;\n  background: #1D519A;\n  border-radius: 40px;\n  padding: 18px 20px 18px 55px;\n  font-weight: bold;\n  font-size: 16px;\n  color: #FFFFFF;\n  text-decoration: none;\n  white-space: nowrap;\n  margin: 0 10px 0 0;\n}\nheader section .controls .controls-button.login-button[data-v-b81b6666] {\n  margin: 0;\n  background: #36C9F1;\n}\nheader section .controls .controls-button img[data-v-b81b6666] {\n  position: absolute;\n  height: 24px;\n  left: 20px;\n  top: 13px;\n}\nheader .package-search[data-v-b81b6666] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 99;\n}\nheader .package-search .blur-effect[data-v-b81b6666] {\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.5);\n}\nheader .package-search .search-input-wrapper[data-v-b81b6666] {\n  background: #FFFFFF;\n  padding: 0 10px;\n}\nheader .package-search .search-input-wrapper .search-input[data-v-b81b6666] {\n  max-width: 1290px;\n  margin: 0 auto;\n  padding: 32px 0;\n  display: flex;\n  align-items: center;\n  flex-wrap: nowrap;\n}\nheader .package-search .search-input-wrapper .search-input > img[data-v-b81b6666] {\n  height: 24px;\n  margin: 0 -50px 0 26px;\n  z-index: 1;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666] {\n  flex-grow: 1;\n  background: #DDEFF3;\n  border-radius: 40px;\n  height: 50px;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 16px;\n  color: #1D519A;\n  padding: 0 16px 0 64px;\n  min-width: 0px;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666]::-moz-placeholder {\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 16px;\n  color: #1D519A;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666]:-ms-input-placeholder {\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 16px;\n  color: #1D519A;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666]::placeholder {\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 16px;\n  color: #1D519A;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666]:focus, header .package-search .search-input-wrapper .search-input input[data-v-b81b6666]:focus-visible {\n  border-color: #1D519A;\n  outline: none;\n}\nheader .package-search .search-input-wrapper .search-input .controls-button[data-v-b81b6666] {\n  cursor: pointer;\n  position: relative;\n  height: 50px;\n  background: #36C9F1;\n  border-radius: 40px;\n  padding: 18px 20px 18px 55px;\n  font-weight: bold;\n  font-size: 16px;\n  color: #FFFFFF;\n  text-decoration: none;\n  white-space: nowrap;\n  margin: 0 0 0 10px;\n}\nheader .package-search .search-input-wrapper .search-input .controls-button img[data-v-b81b6666] {\n  position: absolute;\n  height: 24px;\n  left: 20px;\n  top: 13px;\n}\n@media only screen and (max-width: 1000px) {\nheader[data-v-b81b6666] {\n    background-color: #FFFFFF;\n}\nheader section[data-v-b81b6666] {\n    height: auto;\n    padding: 16px;\n    justify-content: initial;\n}\nheader section .mobile-navigation[data-v-b81b6666] {\n    position: relative;\n    display: inline-block;\n    height: 40px;\n    width: 50px;\n    border-radius: 40px;\n    background: rgba(29, 81, 154, 0.1);\n    cursor: pointer;\n}\nheader section .mobile-navigation img[data-v-b81b6666] {\n    position: absolute;\n    height: 20px;\n    left: 15px;\n    top: 10px;\n}\nheader section .main-logo[data-v-b81b6666] {\n    margin: 0 0 0 10px;\n}\nheader section .main-logo img[data-v-b81b6666] {\n    height: 28px;\n}\nheader section .language-selector[data-v-b81b6666] {\n    display: none;\n}\nheader section nav[data-v-b81b6666] {\n    display: none;\n}\nheader section .controls[data-v-b81b6666] {\n    margin: 0 0 0 auto;\n}\nheader section .controls .controls-button[data-v-b81b6666] {\n    height: 40px;\n    width: 50px;\n    color: transparent;\n    overflow: hidden;\n    padding: 0;\n}\nheader section .controls .controls-button img[data-v-b81b6666] {\n    left: 13px;\n    top: 8px;\n}\nheader .package-search .search-input-wrapper[data-v-b81b6666] {\n    padding: 16px;\n}\nheader .package-search .search-input-wrapper .search-input[data-v-b81b6666] {\n    padding: 0;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666] {\n    height: 40px;\n}\nheader .package-search .search-input-wrapper .search-input .controls-button[data-v-b81b6666] {\n    height: 40px;\n    width: 50px;\n    color: transparent;\n    overflow: hidden;\n    padding: 0;\n}\nheader .package-search .search-input-wrapper .search-input .controls-button img[data-v-b81b6666] {\n    left: 13px;\n    top: 8px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "header[data-v-b81b6666] {\n  width: 100%;\n  border-bottom: 1px solid #DDEFF3;\n}\nheader section[data-v-b81b6666] {\n  margin: 0 auto;\n  max-width: 1290px;\n  padding: 0 10px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  height: 115px;\n}\nheader section .mobile-navigation[data-v-b81b6666] {\n  display: none;\n}\nheader section .main-logo[data-v-b81b6666] {\n  cursor: pointer;\n}\nheader section .main-logo img[data-v-b81b6666] {\n  height: 42px;\n}\nheader section .language-selector h3[data-v-b81b6666] {\n  cursor: pointer;\n  position: relative;\n  font-weight: 500;\n  font-size: 14px;\n  color: #5F636B;\n  background: #FFFFFF;\n  border-radius: 40px;\n  padding: 10px 36px 10px 24px;\n  border: 1px solid #DDEFF3;\n  min-width: 130px;\n}\nheader section .language-selector h3 img[data-v-b81b6666] {\n  position: absolute;\n  right: 15px;\n  top: 15px;\n  width: 10px;\n  transform: rotateX(180deg);\n  transition: all 0.3s ease-in-out;\n}\nheader section .language-selector .options[data-v-b81b6666] {\n  display: none;\n  position: relative;\n}\nheader section .language-selector .options ul[data-v-b81b6666] {\n  position: absolute;\n  z-index: 1;\n  left: 0;\n  top: 15px;\n  width: 200px;\n  background: #FFFFFF;\n  border: 5px solid #00D1FF;\n  box-sizing: border-box;\n  border-radius: 20px;\n  padding: 12px 24px;\n}\nheader section .language-selector .options ul li[data-v-b81b6666] {\n  cursor: pointer;\n  font-size: 16px;\n  color: rgba(29, 81, 154, 0.5);\n  padding: 12px 0;\n  border-bottom: 1px solid #1D519A;\n}\nheader section .language-selector .options ul li.active[data-v-b81b6666] {\n  color: #1D519A;\n}\nheader section .language-selector .options ul li[data-v-b81b6666]:last-child {\n  border-bottom: none;\n}\nheader section .language-selector.open h3 img[data-v-b81b6666] {\n  transform: rotateX(0deg);\n}\nheader section .language-selector.open .options[data-v-b81b6666] {\n  display: block;\n}\nheader section nav[data-v-b81b6666] {\n  display: flex;\n}\nheader section nav a[data-v-b81b6666] {\n  font-weight: bold;\n  font-size: 16px;\n  text-decoration: none;\n  color: #1D519A;\n  padding: 15px 0 13px;\n  margin: 0 15px;\n  white-space: nowrap;\n  border-bottom: 2px solid transparent;\n}\nheader section nav a.router-link-exact-active[data-v-b81b6666] {\n  border-bottom-color: #1D519A;\n}\nheader section .controls[data-v-b81b6666] {\n  display: flex;\n  flex-wrap: nowrap;\n}\nheader section .controls .controls-button[data-v-b81b6666] {\n  cursor: pointer;\n  position: relative;\n  height: 50px;\n  background: #1D519A;\n  border-radius: 40px;\n  padding: 18px 20px 18px 55px;\n  font-weight: bold;\n  font-size: 16px;\n  color: #FFFFFF;\n  text-decoration: none;\n  white-space: nowrap;\n  margin: 0 10px 0 0;\n}\nheader section .controls .controls-button.login-button[data-v-b81b6666] {\n  margin: 0;\n  background: #36C9F1;\n}\nheader section .controls .controls-button img[data-v-b81b6666] {\n  position: absolute;\n  height: 24px;\n  left: 20px;\n  top: 13px;\n}\nheader section .controls .user-component[data-v-b81b6666] {\n  position: relative;\n}\nheader section .controls .user-component .user-profile[data-v-b81b6666] {\n  background: #FFFFFF;\n  border-radius: 40px;\n  height: 50px;\n  min-width: 180px;\n  padding: 10px 12px;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n}\nheader section .controls .user-component .user-profile .avatar[data-v-b81b6666] {\n  height: 30px;\n  width: 30px;\n  border-radius: 50%;\n  margin: 0 10px 0 0;\n}\nheader section .controls .user-component .user-profile > span[data-v-b81b6666] {\n  font-weight: 700;\n  font-size: 16px;\n  line-height: 16px;\n  color: #1D519A;\n  flex-grow: 1;\n}\nheader section .controls .user-component .user-profile .arrow-up[data-v-b81b6666] {\n  margin: 0 10px;\n  width: 9px;\n  transform: rotateX(180deg);\n  transition: all 0.3s ease-in-out;\n}\nheader section .controls .user-component .user-profile.open .arrow-up[data-v-b81b6666] {\n  transform: rotateX(0deg);\n}\nheader section .controls .user-component .user-profile-dropdown[data-v-b81b6666] {\n  z-index: 1;\n  position: absolute;\n  right: 0;\n  top: 70px;\n  background: #FFFFFF;\n  border: 5px solid #00D1FF;\n  box-sizing: border-box;\n  border-radius: 20px;\n  width: 370px;\n  padding: 30px 25px;\n}\nheader section .controls .user-component .user-profile-dropdown .avatar-grid[data-v-b81b6666] {\n  display: grid;\n  grid-template-areas: \"avatar name\" \"avatar balance\";\n  grid-template-columns: 60px auto;\n  grid-template-rows: 20px 40px;\n  grid-column-gap: 18px;\n  margin: 0 0 30px;\n}\nheader section .controls .user-component .user-profile-dropdown .avatar-grid .user-avatar[data-v-b81b6666] {\n  grid-area: avatar;\n  position: relative;\n  width: 60px;\n  height: 60px;\n}\nheader section .controls .user-component .user-profile-dropdown .avatar-grid .user-avatar > img[data-v-b81b6666] {\n  width: 60px;\n  height: 60px;\n  border-radius: 50%;\n}\nheader section .controls .user-component .user-profile-dropdown .avatar-grid .user-avatar .verify-icon[data-v-b81b6666] {\n  width: 26px;\n  height: 26px;\n  border-radius: 50%;\n  background: #1EAA56;\n  border: 3px solid #FFFFFF;\n  position: absolute;\n  top: -3px;\n  right: -3px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\nheader section .controls .user-component .user-profile-dropdown .avatar-grid .user-avatar .verify-icon img[data-v-b81b6666] {\n  width: 10px;\n}\nheader section .controls .user-component .user-profile-dropdown .avatar-grid p[data-v-b81b6666] {\n  grid-area: name;\n  font-weight: 700;\n  font-size: 12px;\n  line-height: 12px;\n  color: #000000;\n  margin: 8px 0 0;\n}\nheader section .controls .user-component .user-profile-dropdown .avatar-grid .balance[data-v-b81b6666] {\n  grid-area: balance;\n  font-weight: 500;\n  font-size: 20px;\n  line-height: 20px;\n  color: #000000;\n  display: flex;\n  flex-wrap: nowrap;\n  align-items: center;\n}\nheader section .controls .user-component .user-profile-dropdown .avatar-grid .balance span[data-v-b81b6666] {\n  color: #1EAA56;\n  margin: 0 0 0 6px;\n}\nheader section .controls .user-component .user-profile-dropdown .avatar-grid .balance .add-balance[data-v-b81b6666] {\n  border: 1px solid #C6D8DD;\n  box-sizing: border-box;\n  width: 30px;\n  height: 30px;\n  margin: 0 0 0 12px;\n  font-weight: 700;\n  font-size: 20px;\n  line-height: 30px;\n  color: #1D519A;\n  text-align: center;\n  border-radius: 50%;\n  cursor: pointer;\n}\nheader section .controls .user-component .user-profile-dropdown .user-notifications[data-v-b81b6666] {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-column-gap: 10px;\n  margin: 14px 0;\n}\nheader section .controls .user-component .user-profile-dropdown .user-notifications .notification-item[data-v-b81b6666] {\n  height: 65px;\n  background: #E9F8FB;\n  border-radius: 10px;\n  border: 2px solid #E9F8FB;\n  box-sizing: border-box;\n  position: relative;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\nheader section .controls .user-component .user-profile-dropdown .user-notifications .notification-item.active[data-v-b81b6666] {\n  border-color: #00D1FF;\n}\nheader section .controls .user-component .user-profile-dropdown .user-notifications .notification-item img[data-v-b81b6666] {\n  width: 30px;\n  height: 30px;\n}\nheader section .controls .user-component .user-profile-dropdown .user-notifications .notification-item span[data-v-b81b6666] {\n  position: absolute;\n  top: -2px;\n  right: -2px;\n  text-align: center;\n  background: #00D1FF;\n  border-radius: 0 10px;\n  width: 30px;\n  height: 30px;\n  font-weight: 700;\n  font-size: 18px;\n  line-height: 30px;\n  color: #FFFFFF;\n}\nheader section .controls .user-component .user-profile-dropdown a[data-v-b81b6666] {\n  background: #E9F8FB;\n  border-radius: 10px;\n  padding: 12px 20px;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 16px;\n  color: #1D519A;\n  text-decoration: none;\n  margin: 0 0 5px;\n  display: flex;\n  align-items: center;\n}\nheader section .controls .user-component .user-profile-dropdown a img[data-v-b81b6666] {\n  height: 26px;\n  margin: 0 12px 0 0;\n}\nheader section .controls .user-component .user-profile-dropdown hr[data-v-b81b6666] {\n  margin: 30px 0;\n  border-color: #D5E6EB;\n}\nheader section .controls .user-component .user-profile-dropdown button[data-v-b81b6666] {\n  background: #1D519A;\n  border-radius: 10px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 50px;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 16px;\n  color: #FFFFFF;\n  margin: 0 0 15px;\n  width: 100%;\n}\nheader section .controls .user-component .user-profile-dropdown .logout[data-v-b81b6666] {\n  background: #F9E7EA;\n  color: #E1473D;\n  margin: 0;\n}\nheader .package-search[data-v-b81b6666] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 99;\n}\nheader .package-search .blur-effect[data-v-b81b6666] {\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.5);\n}\nheader .package-search .search-input-wrapper[data-v-b81b6666] {\n  background: #FFFFFF;\n  padding: 0 10px;\n}\nheader .package-search .search-input-wrapper .search-input[data-v-b81b6666] {\n  max-width: 1290px;\n  margin: 0 auto;\n  padding: 32px 0;\n  display: flex;\n  align-items: center;\n  flex-wrap: nowrap;\n}\nheader .package-search .search-input-wrapper .search-input > img[data-v-b81b6666] {\n  height: 24px;\n  margin: 0 -50px 0 26px;\n  z-index: 1;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666] {\n  flex-grow: 1;\n  background: #DDEFF3;\n  border-radius: 40px;\n  height: 50px;\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 16px;\n  color: #1D519A;\n  padding: 0 16px 0 64px;\n  min-width: 0;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666]::-moz-placeholder {\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 16px;\n  color: #1D519A;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666]:-ms-input-placeholder {\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 16px;\n  color: #1D519A;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666]::placeholder {\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 16px;\n  color: #1D519A;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666]:focus, header .package-search .search-input-wrapper .search-input input[data-v-b81b6666]:focus-visible {\n  border-color: #1D519A;\n  outline: none;\n}\nheader .package-search .search-input-wrapper .search-input .controls-button[data-v-b81b6666] {\n  cursor: pointer;\n  position: relative;\n  height: 50px;\n  background: #36C9F1;\n  border-radius: 40px;\n  padding: 18px 20px 18px 55px;\n  font-weight: bold;\n  font-size: 16px;\n  color: #FFFFFF;\n  text-decoration: none;\n  white-space: nowrap;\n  margin: 0 0 0 10px;\n}\nheader .package-search .search-input-wrapper .search-input .controls-button img[data-v-b81b6666] {\n  position: absolute;\n  height: 24px;\n  left: 20px;\n  top: 13px;\n}\n@media only screen and (max-width: 1000px) {\nheader[data-v-b81b6666] {\n    background-color: #FFFFFF;\n}\nheader section[data-v-b81b6666] {\n    height: auto;\n    padding: 16px;\n    justify-content: initial;\n}\nheader section .mobile-navigation[data-v-b81b6666] {\n    position: relative;\n    display: inline-block;\n    height: 40px;\n    width: 50px;\n    border-radius: 40px;\n    background: rgba(29, 81, 154, 0.1);\n    cursor: pointer;\n}\nheader section .mobile-navigation img[data-v-b81b6666] {\n    position: absolute;\n    height: 20px;\n    left: 15px;\n    top: 10px;\n}\nheader section .main-logo[data-v-b81b6666] {\n    margin: 0 0 0 10px;\n}\nheader section .main-logo img[data-v-b81b6666] {\n    height: 28px;\n}\nheader section .language-selector[data-v-b81b6666] {\n    display: none;\n}\nheader section nav[data-v-b81b6666] {\n    display: none;\n}\nheader section .controls[data-v-b81b6666] {\n    margin: 0 0 0 auto;\n}\nheader section .controls .controls-button[data-v-b81b6666] {\n    height: 40px;\n    width: 50px;\n    color: transparent;\n    overflow: hidden;\n    padding: 0;\n}\nheader section .controls .controls-button img[data-v-b81b6666] {\n    left: 13px;\n    top: 8px;\n}\nheader .package-search .search-input-wrapper[data-v-b81b6666] {\n    padding: 16px;\n}\nheader .package-search .search-input-wrapper .search-input[data-v-b81b6666] {\n    padding: 0;\n}\nheader .package-search .search-input-wrapper .search-input input[data-v-b81b6666] {\n    height: 40px;\n}\nheader .package-search .search-input-wrapper .search-input .controls-button[data-v-b81b6666] {\n    height: 40px;\n    width: 50px;\n    color: transparent;\n    overflow: hidden;\n    padding: 0;\n}\nheader .package-search .search-input-wrapper .search-input .controls-button img[data-v-b81b6666] {\n    left: 13px;\n    top: 8px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15471,27 +15557,17 @@ var render = function () {
         _c(
           "div",
           {
+            ref: "languageSelector",
             staticClass: "language-selector",
             class: { open: _vm.openLanguageSelector },
           },
           [
-            _c(
-              "h3",
-              {
-                on: {
-                  click: function ($event) {
-                    _vm.openLanguageSelector = !_vm.openLanguageSelector
-                  },
-                },
-              },
-              [
-                _vm._v(
-                  _vm._s(_vm.$t(_vm.selectedLanguage.name)) +
-                    "\n                "
-                ),
-                _c("img", { attrs: { src: "/images/arrow-up.png", alt: "" } }),
-              ]
-            ),
+            _c("h3", { on: { click: _vm.openLanguage } }, [
+              _vm._v(
+                _vm._s(_vm.$t(_vm.selectedLanguage.name)) + "\n                "
+              ),
+              _c("img", { attrs: { src: "/images/arrow-up.png", alt: "" } }),
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "options" }, [
               _c(
@@ -15569,23 +15645,224 @@ var render = function () {
               ]
             ),
             _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                staticClass: "controls-button login-button",
-                attrs: { to: { name: "login" } },
-              },
-              [
-                _c("img", {
-                  attrs: { src: "/images/user-default-icon.png", alt: "" },
-                }),
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.$t("ავტორიზაცია")) +
-                    "\n            "
+            !_vm.userLogin
+              ? _c(
+                  "router-link",
+                  {
+                    staticClass: "controls-button login-button",
+                    attrs: { to: { name: "login" } },
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "/images/user-default-icon.png", alt: "" },
+                    }),
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(_vm.$t("ავტორიზაცია")) +
+                        "\n            "
+                    ),
+                  ]
+                )
+              : _c(
+                  "div",
+                  { ref: "userProfile", staticClass: "user-component" },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "user-profile",
+                        class: { open: _vm.openUserProfile },
+                        on: { click: _vm.openUser },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "avatar",
+                          attrs: {
+                            src: "/images/placeholder-user-image.png",
+                            alt: "",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v(_vm._s(_vm.$t("ანგარიში")))]),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass: "arrow-up",
+                          attrs: { src: "/images/arrow-up.png", alt: "" },
+                        }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.openUserProfile
+                      ? _c(
+                          "div",
+                          { staticClass: "user-profile-dropdown" },
+                          [
+                            _c("div", { staticClass: "avatar-grid" }, [
+                              _c("div", { staticClass: "user-avatar" }, [
+                                _c("img", {
+                                  attrs: {
+                                    src: "/images/placeholder-user-image.png",
+                                    alt: "",
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "verify-icon" }, [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "/images/verify-icon.png",
+                                      alt: "",
+                                    },
+                                  }),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("ირაკლი კურტანიძე")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "balance" }, [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(_vm.$t("ბალანსი")) +
+                                    ":\n                            "
+                                ),
+                                _c("span", [
+                                  _vm._v("32.4"),
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        width: "12",
+                                        height: "15",
+                                        viewBox: "0 0 12 15",
+                                        fill: "none",
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                      },
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d: "M3.204 8.006C3.204 8.774 3.366 9.458 3.69 10.058C4.026 10.646 4.488 11.108 5.076 11.444C5.664 11.768 6.33 11.93 7.074 11.93H10.782V14H3.402C2.718 14 2.082 14.03 1.494 14.09V12.056L2.826 11.984V11.93C2.082 11.474 1.53 10.88 1.17 10.148C0.81 9.404 0.63 8.606 0.63 7.754C0.63 6.506 0.972 5.402 1.656 4.442C2.352 3.482 3.3 2.84 4.5 2.516V0.877999H5.724V2.318C5.82 2.306 5.964 2.3 6.156 2.3C6.36 2.3 6.51 2.306 6.606 2.318V0.877999H7.83V2.516C9.054 2.864 10.002 3.548 10.674 4.568C11.358 5.588 11.7 6.776 11.7 8.132H9.126C9.126 7.16 9.018 6.386 8.802 5.81C8.586 5.234 8.262 4.82 7.83 4.568V8.132H6.606V4.208C6.51 4.196 6.36 4.19 6.156 4.19C5.964 4.19 5.82 4.196 5.724 4.208V8.132H4.5V4.568C4.068 4.82 3.744 5.228 3.528 5.792C3.312 6.344 3.204 7.082 3.204 8.006Z",
+                                          fill: "#1EAA56",
+                                        },
+                                      }),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "add-balance" }, [
+                                  _vm._v("+"),
+                                ]),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "user-notifications" }, [
+                              _c(
+                                "div",
+                                { staticClass: "notification-item active" },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "/images/message-icon.png",
+                                      alt: "",
+                                    },
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v("4")]),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "notification-item" }, [
+                                _c("img", {
+                                  attrs: {
+                                    src: "/images/bell-icon.png",
+                                    alt: "",
+                                  },
+                                }),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              { attrs: { to: { name: "user-profile" } } },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src: "/images/user-default-icon-blue.png",
+                                    alt: "",
+                                  },
+                                }),
+                                _vm._v(
+                                  _vm._s(_vm.$t("ჩემი პროფილი")) +
+                                    "\n                    "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              { attrs: { to: { name: "my-packages" } } },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src: "/images/package-icon-blue.png",
+                                    alt: "",
+                                  },
+                                }),
+                                _vm._v(
+                                  _vm._s(_vm.$t("ჩემი შეკვეთები")) +
+                                    "\n                    "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              { attrs: { to: { name: "account-settings" } } },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src: "/images/settings-icon.png",
+                                    alt: "",
+                                  },
+                                }),
+                                _vm._v(
+                                  _vm._s(_vm.$t("ანგარიშის პარამეტრები")) +
+                                    "\n                    "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              { attrs: { to: { name: "billing-info" } } },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src: "/images/billing-icon.png",
+                                    alt: "",
+                                  },
+                                }),
+                                _vm._v(
+                                  _vm._s(_vm.$t("ბალანსის მართვა")) +
+                                    "\n                    "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _c("button", [
+                              _vm._v(_vm._s(_vm.$t("ახალი შეკვეთა"))),
+                            ]),
+                            _vm._v(" "),
+                            _c("button", { staticClass: "logout" }, [
+                              _vm._v(_vm._s(_vm.$t("ანგარიშიდან გამოსვლა"))),
+                            ]),
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                  ]
                 ),
-              ]
-            ),
           ],
           1
         ),
@@ -80953,7 +81230,7 @@ webpackContext.id = "./resources/js/locales sync recursive [A-Za-z0-9-_,\\s]+\\.
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_from":"axios@^0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21.4","name":"axios","escapedName":"axios","rawSpec":"^0.21.4","saveSpec":null,"fetchSpec":"^0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21.4","_where":"/home/giorgi/PycharmProjects/sendab","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"_args":[["axios@0.21.4","/home/giorgi/PycharmProjects/sendab"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"/home/giorgi/PycharmProjects/sendab","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ }),
 

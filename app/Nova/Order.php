@@ -43,7 +43,7 @@ class Order extends Resource
     public function fields(Request $request)
     {
         return [
-//            ID::make(__('ID'), 'id')->sortable(),
+            ID::make(__('ID'), 'id')->sortable(),
             Text::make('Order Number', 'order')->sortable(),
             BelongsTo::make('user', 'user', \App\Nova\User::class),
             BelongsTo::make('offer', 'offer', \App\Nova\Offer::class),

@@ -49,7 +49,7 @@ class User extends Resource
     public function fields(Request $request)
     {
         return [
-//            ID::make()->sortable(),
+            ID::make()->sortable(),
 
             Gravatar::make()->maxWidth(50),
             Image::make('Avatar')->preview(function () {
@@ -58,6 +58,9 @@ class User extends Resource
                 return 'http://sendab'. $path;
             }),
 
+//            Text::make('Name')
+//                ->sortable()
+//                ->rules('required', 'max:255'),
             Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),

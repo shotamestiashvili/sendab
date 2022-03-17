@@ -20,15 +20,27 @@
                     </div>
                     <div class="select-when">
                         <p>{{ $t('თარიღი') }}</p>
-                        <input type="text" :placeholder="$t('აირჩიე')">
+                        <Datepicker :disabled-dates="disabledDates" class="date-picker" :placeholder="$t('აირჩიე')"/>
                     </div>
                     <div class="select-details">
                         <p>{{ $t('შეფუთვის დეტალები') }}</p>
                         <div class="details-info">
-                            <input type="text" :placeholder="$t('წონა')">
-                            <input type="text" :placeholder="$t('სიგა.')">
-                            <input type="text" :placeholder="$t('სიმა.')">
-                            <input type="text" :placeholder="$t('სიგრ.')">
+                            <div class="input-wrapper">
+                                <input type="text" :placeholder="$t('წონა')">
+                                <span>kg</span>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" :placeholder="$t('სიგა.')">
+                                <span>cm</span>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" :placeholder="$t('სიმა.')">
+                                <span>cm</span>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" :placeholder="$t('სიგრ.')">
+                                <span>cm</span>
+                            </div>
                         </div>
                     </div>
                     <div class="submit">
@@ -51,10 +63,90 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker';
+
 export default {
-    name: 'IntroComponent'
+    name: 'IntroComponent',
+    components: {
+        Datepicker
+    },
+    data() {
+        return {
+            disabledDates: {
+                customPredictor(date) {
+                    const nowDate = new Date();
+                    const firstDay = new Date(nowDate.setDate(nowDate.getDate() - 1));
+                    const lastDay = new Date(nowDate.setDate(nowDate.getDate() + 90));
+
+                    if (date < firstDay || date > lastDay) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
 }
 </script>
+<style lang="scss">
+.date-picker {
+
+    input {
+        height: 40px;
+        width: 100%;
+        background: #FAFDFE;
+        border: 1px solid #D1EAF1;
+        box-sizing: border-box;
+        box-shadow: 0 2px 1px rgba(209, 234, 241, 0.25);
+        border-radius: 40px;
+        margin: 0 0 10px;
+        padding: 2px 18px;
+        font-weight: 500;
+        font-size: 16px;
+        color: #889CB9;
+    }
+
+    input:focus, input:focus-visible {
+        border-color: #1D519A;
+        outline: none;
+    }
+
+    .vdp-datepicker__calendar {
+        border: 5px solid #00D1FF;
+        box-sizing: border-box;
+        border-radius: 20px;
+        padding: 10px;
+        color: #1D519A;
+
+        header {
+
+            span {
+                border-bottom: 1px solid #DDEFF3 !important;
+                margin-bottom: 5px;
+            }
+        }
+
+        .prev:after {
+            content: '';
+            background-image: url("/images/date-picker-arrow-left.png");
+            background-size: cover;
+            width: 34px;
+            height: 24px;
+            border: none;
+            border-left: 10px solid transparent;
+        }
+
+        .next:after {
+            content: '';
+            background-image: url("/images/date-picker-arrow-right.png");
+            background-size: cover;
+            width: 34px;
+            height: 24px;
+            border: none;
+            border-right: 10px solid transparent;
+        }
+    }
+}
+</style>
 
 <style scoped lang="scss">
 section {
@@ -120,6 +212,29 @@ section {
                         display: grid;
                         grid-template-columns: 1fr 1fr 1fr 1fr;
                         grid-column-gap: 10px;
+
+                        .input-wrapper {
+                            position: relative;
+
+                            input {
+                                padding-right: 40px;
+                            }
+
+                            span {
+                                width: 35px;
+                                height: 34px;
+                                background: #00D1FF;
+                                border-radius: 40px;
+                                font-weight: 500;
+                                font-size: 14px;
+                                line-height: 34px;
+                                text-align: center;
+                                color: #FFFFFF;
+                                position: absolute;
+                                top: 3px;
+                                right: 3px;
+                            }
+                        }
                     }
                 }
 

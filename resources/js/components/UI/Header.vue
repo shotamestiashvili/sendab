@@ -26,7 +26,7 @@
             <nav>
                 <router-link :to="{name: 'send-package'}">{{ $t('ამანათის გაგზავნა') }}</router-link>
                 <router-link :to="{name: 'help'}">{{ $t('დახმარება') }}</router-link>
-                <router-link :to="{name: 'sendab-offer'}">{{ $t('გახდით პარტნიორი') }}</router-link>
+                <router-link :to="{name: 'sendab-offer'}">{{ $t('სენდაბის შემოთავაზება') }}</router-link>
             </nav>
             <div class="controls">
                 <div class="controls-button" @click="packageSearch = !packageSearch">

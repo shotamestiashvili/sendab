@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFaqsTable extends Migration
+class CreatePartniorPricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateFaqsTable extends Migration
      */
     public function up()
     {
-        Schema::create('faqs', function (Blueprint $table) {
+        Schema::create('partnior_prices', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
-            $table->string('answer');
-            $table->string('language');
+            $table->foreignId('partnior_id')->constrained();
+            $table->integer('price_kg')->default(0);
+            $table->integer('price_sum')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateFaqsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faqs');
+        Schema::dropIfExists('partnior_prices');
     }
 }

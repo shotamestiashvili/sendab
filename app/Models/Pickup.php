@@ -19,7 +19,7 @@ class Pickup extends Model
         'source_address2',
     ];
 
-    public function orders(){
+    public function order(){
         return $this->belongsTo(Order::class);
     }
 }

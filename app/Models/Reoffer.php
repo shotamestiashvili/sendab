@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Insuarance extends Model
+class Reoffer extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'order_id',
-        'order_value',
-        'content',
+      'partnior_id',
+      'reoffer',
     ];
 
-
-    public function order(){
-        return $this->belongsTo(Order::class);
+    public function partnior(){
+        return $this->belongsTo(Partnior::class);
     }
 }

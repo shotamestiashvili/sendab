@@ -14,7 +14,7 @@ class Term extends Model
         'term',
     ];
 
-    public function orders(){
+    public function order(){
         return $this->belongsTo(Order::class);
     }
 }

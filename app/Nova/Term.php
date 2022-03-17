@@ -3,18 +3,19 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Country extends Resource
+class Term extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Country::class;
+    public static $model = \App\Models\Term::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -42,7 +43,8 @@ class Country extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Country', 'country')->sortable(),
+            BelongsTo::make('Order', 'order', \App\Nova\Order::class),
+            Text::make('Term', 'term')->sortable(),
         ];
     }
 

@@ -3,18 +3,20 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Country extends Resource
+class Order extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Country::class;
+    public static $model = \App\Models\Order::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -41,8 +43,16 @@ class Country extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Country', 'country')->sortable(),
+//            ID::make(__('ID'), 'id')->sortable(),
+            Text::make('Order Number', 'order')->sortable(),
+            BelongsTo::make('user', 'user', \App\Nova\User::class),
+            BelongsTo::make('offer', 'offer', \App\Nova\Offer::class),
+            HasMany::make('Pickups', 'pickups', \App\Nova\Pickup::class),
+            HasMany::make('Person', 'people', \App\Nova\Person::class),
+            HasMany::make('Insuarance', 'insuarance', \App\Nova\Insuarance::class),
+            HasMany::make('Term', 'terms', \App\Nova\Term::class),
+            Text::make('Amount', 'amount')->sortable(),
+            Text::make('Status', 'status')->sortable(),
         ];
     }
 

@@ -3,18 +3,20 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Country extends Resource
+class Partnior extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Country::class;
+    public static $model = \App\Models\Partnior::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -42,7 +44,15 @@ class Country extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Country', 'country')->sortable(),
+            BelongsTo::make('User', 'user', \App\Nova\User::class),
+            Text::make('Status: Complete or Not?', 'status')->sortable(),
+            Text::make('Sendab Offer? True or False', 'sendab_offer')->sortable(),
+            HasMany::make('Routes', 'routes', \App\Nova\Route::class),
+            HasMany::make('Transports', 'transports', \App\Nova\Transport::class),
+            HasMany::make('Parcels', 'parcels', \App\Nova\Parcel::class),
+            HasMany::make('Pickup Type', 'pickupTypes', \App\Nova\PickupType::class),
+            HasMany::make('Partner Prices', 'partniorPrices', \App\Nova\PartniorPrice::class),
+            HasMany::make('Reoffer?', 'reoffers', \App\Nova\Reoffer::class),
         ];
     }
 

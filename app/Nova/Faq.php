@@ -7,14 +7,14 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Country extends Resource
+class Faq extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Country::class;
+    public static $model = \App\Models\Faq::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -42,7 +42,9 @@ class Country extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Country', 'country')->sortable(),
+            Text::make('Question', 'country')->sortable(),
+            Text::make('Answer', 'country')->sortable(),
+            Text::make('Language', 'language')->sortable(),
         ];
     }
 

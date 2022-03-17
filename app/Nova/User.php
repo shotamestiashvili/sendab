@@ -3,8 +3,15 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Fields\Avatar;
+use Laravel\Nova\Fields\Downloadable;
+use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 
@@ -42,9 +49,14 @@ class User extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
+//            ID::make()->sortable(),
 
             Gravatar::make()->maxWidth(50),
+            Image::make('Avatar')->preview(function () {
+                $path = \App\Models\AvatarPhoto::where('uploaded_by', $this->id)
+                    ->value('file_url');
+                return 'http://sendab'. $path;
+            }),
 
             Text::make('Name')
                 ->sortable()
@@ -60,6 +72,11 @@ class User extends Resource
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
+
+            Text::make('Remember Token', 'remember_token')->sortable(),
+            HasMany::make('Customer Info', 'customers', \App\Nova\Customer::class),
+            HasMany::make('Partnior', 'partniors', \App\Nova\Partnior::class),
+            HasMany::make('Order', 'orders', \App\Nova\Order::class),
         ];
     }
 
@@ -104,6 +121,8 @@ class User extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+
+        ];
     }
 }

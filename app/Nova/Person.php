@@ -44,17 +44,17 @@ class Person extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make('order', 'order', \App\Nova\Order::class),
-            Text::make('Order Value', 'firstname')->sortable(),
-            Text::make('Order Value', 'lastname')->sortable(),
-            Text::make('Order Value', 'phone')->sortable(),
-            Text::make('Order Value', 'email')->sortable(),
-            Text::make('Order Value', 'company_name')->sortable(),
-            Text::make('Order Value', 'country')->sortable(),
-            Text::make('Order Value', 'city')->sortable(),
-            Text::make('Order Value', 'address1')->sortable(),
-            Text::make('Order Value', 'address2')->sortable(),
-            Text::make('Order Value', 'postal')->sortable(),
-            Text::make('Order Value', 'comment')->sortable(),
+            Text::make('Firstname', 'firstname')->sortable(),
+            Text::make('Lastname', 'lastname')->sortable(),
+            Text::make('Phone', 'phone')->sortable(),
+            Text::make('Email', 'email')->sortable(),
+            Text::make('Company Name', 'company_name')->sortable(),
+            Text::make('Country', 'country')->sortable(),
+            Text::make('City', 'city')->sortable(),
+            Text::make('Address 1', 'address1')->sortable(),
+            Text::make('Address 2', 'address2')->sortable(),
+            Text::make('Postal Code', 'postal')->sortable(),
+            Text::make('Comment', 'comment')->sortable(),
         ];
     }
 

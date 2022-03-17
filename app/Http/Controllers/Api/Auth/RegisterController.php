@@ -45,7 +45,7 @@ class RegisterController extends Controller
                 'verified'=> false,
             ]);
 
-            $token = $user->createToken('Sendab')->accessToken;
+            $token = $user->createToken('Sendab')->plainTextToken;
 
             $response = ['token' => $token];
             \Illuminate\Support\Facades\Mail::to($request->email)->send(new EmailVerification($user->id, $remember_token));

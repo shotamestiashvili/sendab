@@ -3499,7 +3499,7 @@ export const group5728Data = {
     group501Props: group5062Data,
     group502Props: group5063Data,
 };
-import store from './store/store';
+import store from './oldStore/store';
 
 export const onboardingRegistration2Data = {
     logo: "https://anima-uploads.s3.amazonaws.com/projects/61e1e09328216c88160db713/releases/61ee79e780522405aeddf24c/img/logo@2x.png",

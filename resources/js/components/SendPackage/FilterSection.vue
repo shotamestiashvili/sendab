@@ -8,8 +8,8 @@
                     <img class="arrow-right" src="/images/arrow-right-lightblue.png" alt="">
                     <p>{{ direction.end }}</p>
                 </template>
-                <div class="add-location">
-                    <img src="/images/add-location.png" alt="" @click="openLocationForm = !openLocationForm">
+                <div class="add-location" ref="locationForm">
+                    <img src="/images/add-location.png" alt="" @click="openLocation">
                     <div class="location-form" v-if="openLocationForm">
                         <div class="input-form">
                             <p>{{ $t('გამგზავნი ქვეყანა') }}</p>
@@ -70,6 +70,22 @@ export default {
                 },
             ],
             selectedTransportFilter: null,
+        }
+    },
+    methods: {
+        openLocation() {
+            this.openLocationForm = !this.openLocationForm
+            if (this.openLocationForm) {
+                window.addEventListener('click', this.closeLocation)
+            } else {
+                window.removeEventListener('click', this.closeLocation)
+            }
+        },
+        closeLocation(e) {
+            if (!e.path.includes(this.$refs.locationForm)) {
+                this.openLocationForm = false
+                window.removeEventListener('click', this.closeLocation)
+            }
         }
     }
 }

@@ -2065,18 +2065,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _store_urls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store/urls */ "./resources/js/store/urls.js");
+/* harmony import */ var _utils_tokens__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/tokens */ "./resources/js/utils/tokens.js");
 //
 //
 //
 //
 //
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App",
   mounted: function mounted() {
+    var _this = this;
+
     var meta = document.createElement('meta');
     meta.name = "viewport";
     meta.content = "width=device-width, initial-scale=1";
     document.head.appendChild(meta);
+    _store_urls__WEBPACK_IMPORTED_MODULE_0__.ajax.get(_store_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.sanctumToken)["catch"](function () {})["finally"](function () {
+      if (_utils_tokens__WEBPACK_IMPORTED_MODULE_1__["default"].isAuthorized) {
+        _this.$store.dispatch('login/getUserData');
+      }
+    });
     this.$i18n.locale = ['ge', 'en', 'de'].includes(localStorage.getItem('lang')) ? localStorage.getItem('lang') : 'ge';
   }
 });
@@ -2642,6 +2653,23 @@ __webpack_require__.r(__webpack_exports__);
       }],
       selectedTransportFilter: null
     };
+  },
+  methods: {
+    openLocation: function openLocation() {
+      this.openLocationForm = !this.openLocationForm;
+
+      if (this.openLocationForm) {
+        window.addEventListener('click', this.closeLocation);
+      } else {
+        window.removeEventListener('click', this.closeLocation);
+      }
+    },
+    closeLocation: function closeLocation(e) {
+      if (!e.path.includes(this.$refs.locationForm)) {
+        this.openLocationForm = false;
+        window.removeEventListener('click', this.closeLocation);
+      }
+    }
   }
 });
 
@@ -3519,7 +3547,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     login: function login() {
-      this.$store.dispatch('backend/LOGIN', this.loginData);
+      this.$store.dispatch('login/LOGIN', this.loginData);
     }
   }
 });
@@ -3639,7 +3667,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     register: function register() {
       this.registrationData.name = "".concat(this.registrationData.firstname, " ").concat(this.registrationData.lastname);
-      this.$store.dispatch('backend/REGISTER', this.registrationData);
+      this.$store.dispatch('login/REGISTER', this.registrationData);
     }
   }
 });
@@ -4073,7 +4101,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./resources/js/store/store.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /* harmony import */ var _styleguide_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styleguide.css */ "./resources/js/styleguide.css");
 /* harmony import */ var _globals_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./globals.css */ "./resources/js/globals.css");
 /* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
@@ -4103,94 +4131,9 @@ new vue__WEBPACK_IMPORTED_MODULE_9__["default"]({
   },
   i18n: _i18n__WEBPACK_IMPORTED_MODULE_7__["default"],
   router: _router__WEBPACK_IMPORTED_MODULE_1__["default"],
-  store: _store_store__WEBPACK_IMPORTED_MODULE_2__["default"],
+  store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_5__["default"]
 }).$mount("#app");
-
-/***/ }),
-
-/***/ "./resources/js/helpers/avatar.js":
-/*!****************************************!*\
-  !*** ./resources/js/helpers/avatar.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  postAvatar: function postAvatar(avatar) {
-    var formData = new FormData();
-    formData.append('avatar', avatar);
-    return axios__WEBPACK_IMPORTED_MODULE_0___default()({
-      method: 'post',
-      url: '/api/avatars',
-      data: formData,
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    });
-  },
-  fetchAvatar: function fetchAvatar() {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default()({
-      method: 'get',
-      url: '/api/getAvatar',
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    });
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/helpers/document.js":
-/*!******************************************!*\
-  !*** ./resources/js/helpers/document.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  postDocument: function postDocument(form) {
-    var formData = new FormData();
-    formData.append('front', form.frontId);
-    formData.append('back', form.backId);
-    formData.append('selfie', form.selfie);
-    return axios__WEBPACK_IMPORTED_MODULE_0___default()({
-      method: 'post',
-      url: '/api/documents',
-      data: formData,
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    }).then(function (response) {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Documents Uploaded');
-    })["catch"](function (e) {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Could not upload documents, please try again or call to support team',
-        footer: e.data
-      });
-    });
-  }
-});
 
 /***/ }),
 
@@ -4376,60 +4319,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/store/modules/avatar.js":
-/*!**********************************************!*\
-  !*** ./resources/js/store/modules/avatar.js ***!
-  \**********************************************/
+/***/ "./resources/js/store/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/index.js ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "actions": () => (/* binding */ actions),
-/* harmony export */   "getters": () => (/* binding */ getters),
-/* harmony export */   "mutations": () => (/* binding */ mutations),
-/* harmony export */   "state": () => (/* binding */ state)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _helpers_avatar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/avatar */ "./resources/js/helpers/avatar.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./login */ "./resources/js/store/login.js");
 
-var state = {
-  avatarAdded: {},
-  avatarAddedStatus: 0,
-  avatar: null
-};
-var mutations = {
-  setAvatarAddedStatus: function setAvatarAddedStatus(state, value) {
-    state.avatarAddedStatus = value;
+
+
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
+  modules: {
+    login: _login__WEBPACK_IMPORTED_MODULE_0__
   }
-};
-var actions = {
-  ADD_AVATAR: function ADD_AVATAR(_ref, data) {
-    var commit = _ref.commit,
-        state = _ref.state,
-        dispatch = _ref.dispatch;
-    commit('setAvatarAddedStatus', 1);
-    _helpers_avatar__WEBPACK_IMPORTED_MODULE_0__["default"].postAvatar(data).then(function (response) {
-      commit('setAvatarAddedStatus', 2);
-      console.log(response); // dispatch( 'loadAvatar' );
-    })["catch"](function () {
-      commit('setAvatarAddedStatus', 3);
-    });
-  },
-  GET_AVATAR: function GET_AVATAR(context) {
-    _helpers_avatar__WEBPACK_IMPORTED_MODULE_0__["default"].fetchAvatar().then(function (response) {
-      state.avatar = response.data.data;
-      console.log(response.data.data);
-    });
-  }
-};
-var getters = {};
+}));
 
 /***/ }),
 
-/***/ "./resources/js/store/modules/backend.js":
-/*!***********************************************!*\
-  !*** ./resources/js/store/modules/backend.js ***!
-  \***********************************************/
+/***/ "./resources/js/store/login.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/login.js ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4441,12 +4360,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "namespaced": () => (/* binding */ namespaced),
 /* harmony export */   "state": () => (/* binding */ state)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _static_apiCredentials__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../static/apiCredentials */ "./resources/js/store/static/apiCredentials.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
-
+/* harmony import */ var _urls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./urls */ "./resources/js/store/urls.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
@@ -4481,7 +4399,7 @@ var mutations = {
   SET_USERDATA: function SET_USERDATA(state, userData) {
     state.user = userData;
     localStorage.setItem('user', JSON.stringify('userData'));
-    (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.common.authorization) = 'Bearer ${ userData.token}';
+    (axios__WEBPACK_IMPORTED_MODULE_2___default().defaults.headers.common.authorization) = 'Bearer ${ userData.token}';
   },
   SET_USERID: function SET_USERID(state, userid) {
     state.userID = userid;
@@ -4496,7 +4414,7 @@ var mutations = {
 };
 var actions = {
   USER_NAME: function USER_NAME(context) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/userName', {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/userName', {
       headers: {
         "Content-Type": 'application/json',
         "Accept": 'application/json',
@@ -4509,7 +4427,7 @@ var actions = {
     });
   },
   SANCTUM_CSRF: function SANCTUM_CSRF(context) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default()({
+    axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'get',
       url: '/sanctum/csrf-cookie'
     }).then(function (response) {})["catch"](function (e) {
@@ -4518,7 +4436,7 @@ var actions = {
   },
   REGISTER: function REGISTER(context, value) {
     context.dispatch('SANCTUM_CSRF');
-    axios__WEBPACK_IMPORTED_MODULE_0___default()({
+    axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'post',
       url: '/register',
       data: {
@@ -4544,9 +4462,9 @@ var actions = {
       }
     }).then(function (response) {
       context.commit('SET_USERDATA', response.data);
-      sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Account Registered');
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Account Registered');
     })["catch"](function (e) {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
         icon: 'error',
         title: 'Oops...',
         text: 'The given data was invalid or The email has already been taken.!',
@@ -4557,7 +4475,7 @@ var actions = {
   },
   LOGIN: function LOGIN(context, value) {
     context.dispatch('SANCTUM_CSRF');
-    axios__WEBPACK_IMPORTED_MODULE_0___default()({
+    axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'post',
       url: '/login',
       data: {
@@ -4573,7 +4491,7 @@ var actions = {
       context.commit('SET_TOKEN', response.data.token);
       context.commit('SET_USERDATA', response.data);
       context.dispatch('USER_NAME');
-      sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Login Sucessfully');
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Login Sucessfully');
     })["catch"](function (error) {// Swal.fire({
       //     icon: 'error',
       //     title: 'Oops...',
@@ -4583,7 +4501,7 @@ var actions = {
     });
   },
   LOGOUT: function LOGOUT(context) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default()({
+    axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'post',
       url: '/api/logout',
       data: {
@@ -4596,7 +4514,7 @@ var actions = {
       }
     }).then(function (response) {
       context.commit('SET_TOKEN', response.data.token);
-      sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Logout');
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Logout');
       context.commit('LOGOUT');
     })["catch"](function (e) {
       console.log(e);
@@ -4605,7 +4523,7 @@ var actions = {
   FORGOT_PASSWORD: function FORGOT_PASSWORD(context, email) {
     context.commit('SET_EMAIL', email);
     context.dispatch('SANCTUM_CSRF');
-    axios__WEBPACK_IMPORTED_MODULE_0___default()({
+    axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'post',
       url: '/forgot-password',
       data: {
@@ -4623,7 +4541,7 @@ var actions = {
     });
   },
   GET_STATUS: function GET_STATUS(context) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default()({
+    axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'post',
       url: '/api/check',
       headers: {
@@ -4635,6 +4553,12 @@ var actions = {
       context.commit('SET_AUTHORIZED', response.data.data.status);
     })["catch"](function (e) {
       console.log(e);
+    });
+  },
+  getUserData: function getUserData(_ref) {
+    var commit = _ref.commit;
+    return (0,_urls__WEBPACK_IMPORTED_MODULE_0__.authAjax)().get(_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.getUserData).then(function (response) {
+      console.log(response);
     });
   }
 };
@@ -4661,289 +4585,55 @@ var getters = {
 
 /***/ }),
 
-/***/ "./resources/js/store/modules/customer.js":
-/*!************************************************!*\
-  !*** ./resources/js/store/modules/customer.js ***!
-  \************************************************/
+/***/ "./resources/js/store/urls.js":
+/*!************************************!*\
+  !*** ./resources/js/store/urls.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "actions": () => (/* binding */ actions),
-/* harmony export */   "getters": () => (/* binding */ getters),
-/* harmony export */   "mutations": () => (/* binding */ mutations),
-/* harmony export */   "state": () => (/* binding */ state)
-/* harmony export */ });
-var state = {
-  customer: 777
-};
-var mutations = {};
-var actions = {};
-var getters = {};
-
-/***/ }),
-
-/***/ "./resources/js/store/modules/document.js":
-/*!************************************************!*\
-  !*** ./resources/js/store/modules/document.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "actions": () => (/* binding */ actions),
-/* harmony export */   "getters": () => (/* binding */ getters),
-/* harmony export */   "mutations": () => (/* binding */ mutations),
-/* harmony export */   "state": () => (/* binding */ state)
-/* harmony export */ });
-/* harmony import */ var _helpers_document__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/document */ "./resources/js/helpers/document.js");
-
-var state = {
-  documentAdded: {},
-  documentAddedStatus: 0
-};
-var mutations = {
-  setDocumentAddedStatus: function setDocumentAddedStatus(state, value) {
-    state.documentAddedStatus = value;
-  }
-};
-var actions = {
-  ADD_DOCUMENT: function ADD_DOCUMENT(_ref, form) {
-    var commit = _ref.commit,
-        state = _ref.state,
-        dispatch = _ref.dispatch;
-    commit('setDocumentAddedStatus', 1);
-    _helpers_document__WEBPACK_IMPORTED_MODULE_0__["default"].postDocument(form).then(function (response) {
-      commit('setDocumentAddedStatus', 2);
-    })["catch"](function () {
-      commit('setDocumentAddedStatus', 3);
-    });
-  }
-};
-var getters = {};
-
-/***/ }),
-
-/***/ "./resources/js/store/modules/location.js":
-/*!************************************************!*\
-  !*** ./resources/js/store/modules/location.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "actions": () => (/* binding */ actions),
-/* harmony export */   "getters": () => (/* binding */ getters),
-/* harmony export */   "mutations": () => (/* binding */ mutations),
-/* harmony export */   "namespaced": () => (/* binding */ namespaced),
-/* harmony export */   "state": () => (/* binding */ state)
+/* harmony export */   "ajax": () => (/* binding */ ajax),
+/* harmony export */   "apiUrls": () => (/* binding */ apiUrls),
+/* harmony export */   "authAjax": () => (/* binding */ authAjax)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_tokens__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/tokens */ "./resources/js/utils/tokens.js");
 
-var namespaced = true;
-var state = {
-  country: [],
-  city: []
-};
-var mutations = {
-  SET_COUNTRY: function SET_COUNTRY(state, value) {
-    state.country = value;
-  },
-  SET_CITY: function SET_CITY(state, value) {
-    state.city = value;
+
+var ajax = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
+  headers: {
+    "Content-Type": 'application/json',
+    "Accept": 'application/json',
+    "Access-Control-Allow-Origin": "*"
   }
-};
-var actions = {
-  FETCH_COUNTRY: function FETCH_COUNTRY(context) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default()({
-      method: 'post',
-      url: '/country',
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json',
-        "Access-Control-Allow-Origin": "*"
-      }
-    }).then(function (response) {
-      context.commit('SET_COUNTRY', response.data.data.country);
-      console.log(response.data.data.country);
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  },
-  FETCH_CITY: function FETCH_CITY(context, value) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/country', {
-      data: {
-        country: state.country,
-        city: value
-      },
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json',
-        "Access-Control-Allow-Origin": "*"
-      }
-    }).then(function (response) {
-      context.commit('SET_CITY', response.data.data.city);
-    })["catch"](function (error) {
-      console.log(error);
-    });
+});
+var authAjax = function authAjax() {
+  if (_utils_tokens__WEBPACK_IMPORTED_MODULE_1__["default"].userToken) {
+    ajax.defaults.headers.common['authorization'] = "Bearer ".concat(_utils_tokens__WEBPACK_IMPORTED_MODULE_1__["default"].userToken);
   }
+
+  return ajax;
 };
-var getters = {
-  GET_COUNTRY: function GET_COUNTRY(state) {
-    return state.country;
-  },
-  GET_CITY: function GET_CITY(state) {
-    return state.city;
-  }
+var apiUrls = {
+  register: '/register',
+  login: '/login',
+  logout: '/api/logout',
+  forgotPassword: '/forgot-password',
+  getStatus: '/api/check',
+  sanctumToken: '/sanctum/csrf-cookie',
+  userName: '/api/userName',
+  getUserData: '/api/profile/get'
 };
 
 /***/ }),
 
-/***/ "./resources/js/store/modules/order.js":
-/*!*********************************************!*\
-  !*** ./resources/js/store/modules/order.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "actions": () => (/* binding */ actions),
-/* harmony export */   "getters": () => (/* binding */ getters),
-/* harmony export */   "mutations": () => (/* binding */ mutations),
-/* harmony export */   "namespaced": () => (/* binding */ namespaced),
-/* harmony export */   "state": () => (/* binding */ state)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
-var namespaced = true;
-var state = {
-  order: {
-    date: '',
-    sourceCountry: '',
-    destinationCountry: '',
-    sourceCity: '',
-    destinationCity: '',
-    parcelWeight: '',
-    parcelLength: '',
-    parcelHeight: '',
-    parcelWidth: ''
-  }
-};
-var mutations = {
-  SAVE_FIRST_PAGE: function SAVE_FIRST_PAGE(state, value) {
-    state.order.date = value.date, state.order.sourceCountry = value.sourceCountry, state.order.destinationCountry = value.destinationCountry, state.order.sourceCity = value.sourceCity, state.order.destinationCity = value.destinationCity, state.order.parcelWeight = value.parcelWeight, state.order.parcelLength = value.parcelLength, state.order.parcelHeight = value.parcelHeight, state.order.parcelWidth = value.parcelWidth;
-  }
-};
-var actions = {
-  FIRST: function FIRST(_ref, data) {
-    var commit = _ref.commit,
-        state = _ref.state,
-        dispatch = _ref.dispatch;
-    commit("SAVE_FIRST_PAGE", data);
-  }
-};
-var getters = {
-  GET_ORDER: function GET_ORDER(state) {
-    return state.order;
-  }
-};
-
-/***/ }),
-
-/***/ "./resources/js/store/modules/partner.js":
-/*!***********************************************!*\
-  !*** ./resources/js/store/modules/partner.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "actions": () => (/* binding */ actions),
-/* harmony export */   "getters": () => (/* binding */ getters),
-/* harmony export */   "mutations": () => (/* binding */ mutations),
-/* harmony export */   "namespaced": () => (/* binding */ namespaced),
-/* harmony export */   "state": () => (/* binding */ state)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
-var namespaced = true;
-var state = {
-  partner: {}
-};
-var mutations = {
-  SAVE_FIRST_STEP: function SAVE_FIRST_STEP(state, value) {}
-};
-var actions = {};
-var getters = {
-  GET_PARTNER: function GET_PARTNER(state) {
-    return state.order;
-  }
-};
-
-/***/ }),
-
-/***/ "./resources/js/store/modules/user.js":
-/*!********************************************!*\
-  !*** ./resources/js/store/modules/user.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "actions": () => (/* binding */ actions),
-/* harmony export */   "getters": () => (/* binding */ getters),
-/* harmony export */   "mutations": () => (/* binding */ mutations),
-/* harmony export */   "namespaced": () => (/* binding */ namespaced),
-/* harmony export */   "state": () => (/* binding */ state)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
-var namespaced = true;
-var state = {
-  userData: ''
-};
-var mutations = {
-  SET_USER_NAME: function SET_USER_NAME(state, value) {
-    state.userName = value;
-  }
-};
-var actions = {
-  USER_NAME: function USER_NAME(context) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/user', {
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json',
-        "Access-Control-Allow-Origin": "*"
-      }
-    }).then(function (response) {
-      context.commit('SET_USER', response.data.data);
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
-};
-var getters = {
-  GET_USER: function GET_USER(state) {
-    return state.userData;
-  }
-};
-
-/***/ }),
-
-/***/ "./resources/js/store/static/apiCredentials.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/store/static/apiCredentials.js ***!
-  \*****************************************************/
+/***/ "./resources/js/utils/tokens.js":
+/*!**************************************!*\
+  !*** ./resources/js/utils/tokens.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4952,57 +4642,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  CLIENT_ID: 5,
-  CLIENT_SECRET: 'Yp5a5fcLzqVlbt0i8TyZF0M8b2Urfrqxzi2lBpHx',
-  CLIENT_CREDENTIALS: 'client_credentials'
-});
+  clearUserToken: function clearUserToken() {
+    if (localStorage.userToken) {
+      localStorage.removeItem("userToken");
+    } else if (sessionStorage.userToken) {
+      sessionStorage.removeItem("userToken");
+    }
+  },
 
-/***/ }),
+  get userToken() {
+    return localStorage.userToken || sessionStorage.userToken;
+  },
 
-/***/ "./resources/js/store/store.js":
-/*!*************************************!*\
-  !*** ./resources/js/store/store.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _modules_customer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/customer */ "./resources/js/store/modules/customer.js");
-/* harmony import */ var _modules_user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/user */ "./resources/js/store/modules/user.js");
-/* harmony import */ var _modules_backend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/backend */ "./resources/js/store/modules/backend.js");
-/* harmony import */ var _modules_avatar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/avatar */ "./resources/js/store/modules/avatar.js");
-/* harmony import */ var _modules_document__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/document */ "./resources/js/store/modules/document.js");
-/* harmony import */ var _modules_location__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/location */ "./resources/js/store/modules/location.js");
-/* harmony import */ var _modules_order__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/order */ "./resources/js/store/modules/order.js");
-/* harmony import */ var _modules_partner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/partner */ "./resources/js/store/modules/partner.js");
-
-
-
-
-
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_8__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_9__["default"]);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_9__["default"].Store({
-  modules: {
-    customer: _modules_customer__WEBPACK_IMPORTED_MODULE_0__,
-    user: _modules_user__WEBPACK_IMPORTED_MODULE_1__,
-    backend: _modules_backend__WEBPACK_IMPORTED_MODULE_2__,
-    avatar: _modules_avatar__WEBPACK_IMPORTED_MODULE_3__,
-    document: _modules_document__WEBPACK_IMPORTED_MODULE_4__,
-    location: _modules_location__WEBPACK_IMPORTED_MODULE_5__,
-    order: _modules_order__WEBPACK_IMPORTED_MODULE_6__,
-    partner: _modules_partner__WEBPACK_IMPORTED_MODULE_7__
+  get isAuthorized() {
+    return Boolean(this.userToken);
   }
-}));
+
+});
 
 /***/ }),
 
@@ -15459,14 +15115,10 @@ var render = function () {
               ]
             : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "add-location" }, [
+          _c("div", { ref: "locationForm", staticClass: "add-location" }, [
             _c("img", {
               attrs: { src: "/images/add-location.png", alt: "" },
-              on: {
-                click: function ($event) {
-                  _vm.openLocationForm = !_vm.openLocationForm
-                },
-              },
+              on: { click: _vm.openLocation },
             }),
             _vm._v(" "),
             _vm.openLocationForm
@@ -15793,7 +15445,7 @@ var render = function () {
           "nav",
           [
             _c("router-link", { attrs: { to: "#" } }, [
-              _vm._v(_vm._s(_vm.$t("შეკითხვები"))),
+              _vm._v(_vm._s(_vm.$t("კითხვები"))),
             ]),
             _vm._v(" "),
             _c("router-link", { attrs: { to: "#" } }, [
@@ -84140,7 +83792,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","/home/giorgi/PycharmProj
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"ქართული":"Georgisch","ინგლისური":"Englisch","გერმანული":"Deutsch","ამანათის გაგზავნა":"ამანათის გაგზავნა","დახმარება":"დახმარება","სენდაბის შემოთავაზება":"სენდაბის შემოთავაზება","ამანათი":"ამანათი","ავტორიზაცია":"ავტორიზაცია","შეკითხვები":"შეკითხვები","კომპანიის შესახებ":"კომპანიის შესახებ","კონტაქტი":"კონტაქტი","გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით":"გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით","გამგზავნი ქვეყანა":"გამგზავნი ქვეყანა","აირჩიე ქვეყანა":"აირჩიე ქვეყანა","ქალაქი, სოფელი ან ZIP კოდი":"ქალაქი, სოფელი ან ZIP კოდი","მიმღები ქვეყანა":"მიმღები ქვეყანა","თარიღი":"თარიღი","აირჩიე":"აირჩიე","შეფუთვის დეტალები":"შეფუთვის დეტალები","წონა":"წონა","სიგა.":"სიგა.","სიმა.":"სიმა.","სიგრ.":"სიგრ.","ანგარიშის შექმნა  და შეკვეთა":"ანგარიშის შექმნა  და შეკვეთა","ყველაზე პოპულარული მარშრუტები":"ყველაზე პოპულარული მარშრუტები","მარშრუტის ჩვენება":"მარშრუტის ჩვენება","ამანათის გაგზავნა ":"ამანათის გაგზავნა ","$ -დან":"$ -დან","მიიღე ან გააგზავნე ნებისმიერი ნივთი მცირე დროში":"მიიღე ან გააგზავნე ნებისმიერი ნივთი მცირე დროში","როგორ მუშაობს სენდაბის სერვისი":"როგორ მუშაობს სენდაბის სერვისი","დააზუსტე ამანათის მონაცემები და სასურველი მარშრუტი":"დააზუსტე ამანათის მონაცემები და სასურველი მარშრუტი","შეათანხმე ამანათის ღირებულება":"შეათანხმე ამანათის ღირებულება","მიიღე კოდი და თვალი ადევნე ამანათის ადგილმდებარეობას":"მიიღე კოდი და თვალი ადევნე ამანათის ადგილმდებარეობას","მომხმარებელთა შეფასებებები":"მომხმარებელთა შეფასებებები","მონაცემების განახლება":"მონაცემების განახლება","სატრასპორტო საშუალებები":"სატრასპორტო საშუალებები","თვითმფრინავი":"თვითმფრინავი","ავტომობილი":"ავტომობილი","ხშირად დასმული კითხვები":"ხშირად დასმული კითხვები","მოძებნე შეკითხვა":"მოძებნე შეკითხვა","შენი ამანათი":"შენი ამანათი","ამანათის ღირებულება":"ამანათის ღირებულება","შეფუთვა და ეტიკეტირება":"შეფუთვა და ეტიკეტირება","რისი გაგზავნა შემიძლია?":"რისი გაგზავნა შემიძლია?","შეზღუდულია თუ არა ამანათის ზომა და წონა და როგორ უნდა განისაზღვროს იგი?":"შეზღუდულია თუ არა ამანათის ზომა და წონა და როგორ უნდა განისაზღვროს იგი?","როგორ უნდა გავზომო ამანათის ზომა და წონა?":"როგორ უნდა გავზომო ამანათის ზომა და წონა?","როგორ უნდა მოვიქცე იმ შემთხვევაში თუ კი ამანათის წონა იმაზე მეტია, ვიდრე შეკვეთაშია მითითებული?":"როგორ უნდა მოვიქცე იმ შემთხვევაში თუ კი ამანათის წონა იმაზე მეტია, ვიდრე შეკვეთაშია მითითებული?","როგორ უნდა გავიგო გადაზიდვის ფასი?":"როგორ უნდა გავიგო გადაზიდვის ფასი?","რა განსაზღვრავს ამანათის ღირებულებას?":"რა განსაზღვრავს ამანათის ღირებულებას?","რას ითვალისწინებს გადმოზიდვის ფასი?":"რას ითვალისწინებს გადმოზიდვის ფასი?","რა განაპირობებს Sendab-ის ასეთ მინიმალურ ღირებულებას?":"რა განაპირობებს Sendab-ის ასეთ მინიმალურ ღირებულებას?","როგორ უნდა შევფუთო ამანათი?":"როგორ უნდა შევფუთო ამანათი?","რა სახით უნდა მოხდეს ამანათის მარკირება?":"რა სახით უნდა მოხდეს ამანათის მარკირება?","კითხვების შემთხვევაში შეავსეთ ქვემოთ მოცემული ველი":"კითხვების შემთხვევაში შეავსეთ ქვემოთ მოცემული ველი","თემა":"თემა","რა საკითხზე გვწერთ":"რა საკითხზე გვწერთ","სახელი, გვარი":"სახელი, გვარი","თქვენი სახელი და გვარი":"თქვენი სახელი და გვარი","ელ. ფოსტა":"ელ. ფოსტა","თქვენი ელ. ფოსტა":"თქვენი ელ. ფოსტა","ამანათის საიდენთიფიკაციო კოდი":"ამანათის საიდენთიფიკაციო კოდი","საიდენთიფიკაციო კოდი":"საიდენთიფიკაციო კოდი","შეტყობინება":"შეტყობინება","მოგვწერე შეტყობინება":"მოგვწერე შეტყობინება","შეტყობინების გაგზავნა":"შეტყობინების გაგზავნა","თქვენი ელექტრონული ფოსტა":"თქვენი ელექტრონული ფოსტა","პაროლი":"პაროლი","თქვენი პაროლი":"თქვენი პაროლი","პაროლის აღდგენა":"პაროლის აღდგენა","არ გაქვს ანგარიში?":"არ გაქვს ანგარიში?","გაიარე რეგისტრაცია":"გაიარე რეგისტრაცია","გამოიმუშავე დამატებითი შემოსავალი მოგზაურობისას":"გამოიმუშავე დამატებითი შემოსავალი მოგზაურობისას","ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს":"ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს","ვიდეო ინსტრუქცია":"ვიდეო ინსტრუქცია","ანგარიშის შექმნა":"ანგარიშის შექმნა","სახელი":"სახელი","თქვენი სახელი":"თქვენი სახელი","გვარი":"გვარი","თქვენი გვარი":"თქვენი გვარი","საკონტაქტო ტელეფონი":"საკონტაქტო ტელეფონი","თქვენი საკონტაქტო ტელეფონი":"თქვენი საკონტაქტო ტელეფონი","ქვეყანა":"ქვეყანა","ქალაქი":"ქალაქი","აირჩიე ქალაქი":"აირჩიე ქალაქი","მისამართი":"მისამართი","საფოსტო ინდექსი":"საფოსტო ინდექსი","შეიყვანე ფოსტა, ქალაქი ან სოფელი":"შეიყვანე ფოსტა, ქალაქი ან სოფელი","გაიმეორე პაროლი":"გაიმეორე პაროლი","გავეცანი და ვეთანხმები":"გავეცანი და ვეთანხმები","წესებსა და პირობებს":"წესებსა და პირობებს"}');
+module.exports = JSON.parse('{"ქართული":"Georgisch","ინგლისური":"Englisch","გერმანული":"Deutsch","ამანათის გაგზავნა":"ამანათის გაგზავნა","დახმარება":"დახმარება","სენდაბის შემოთავაზება":"სენდაბის შემოთავაზება","ამანათი":"ამანათი","ავტორიზაცია":"ავტორიზაცია","კითხვები":"კითხვები","კომპანიის შესახებ":"კომპანიის შესახებ","კონტაქტი":"კონტაქტი","გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით":"გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით","გამგზავნი ქვეყანა":"გამგზავნი ქვეყანა","აირჩიე ქვეყანა":"აირჩიე ქვეყანა","ქალაქი, სოფელი ან ZIP კოდი":"ქალაქი, სოფელი ან ZIP კოდი","მიმღები ქვეყანა":"მიმღები ქვეყანა","თარიღი":"თარიღი","აირჩიე":"აირჩიე","შეფუთვის დეტალები":"შეფუთვის დეტალები","წონა":"წონა","სიგა.":"სიგა.","სიმა.":"სიმა.","სიგრ.":"სიგრ.","ანგარიშის შექმნა  და შეკვეთა":"ანგარიშის შექმნა  და შეკვეთა","ყველაზე პოპულარული მარშრუტები":"ყველაზე პოპულარული მარშრუტები","მარშრუტის ჩვენება":"მარშრუტის ჩვენება","ამანათის გაგზავნა ":"ამანათის გაგზავნა ","$ -დან":"$ -დან","მიიღე ან გააგზავნე ნებისმიერი ნივთი მცირე დროში":"მიიღე ან გააგზავნე ნებისმიერი ნივთი მცირე დროში","როგორ მუშაობს სენდაბის სერვისი":"როგორ მუშაობს სენდაბის სერვისი","დააზუსტე ამანათის მონაცემები და სასურველი მარშრუტი":"დააზუსტე ამანათის მონაცემები და სასურველი მარშრუტი","შეათანხმე ამანათის ღირებულება":"შეათანხმე ამანათის ღირებულება","მიიღე კოდი და თვალი ადევნე ამანათის ადგილმდებარეობას":"მიიღე კოდი და თვალი ადევნე ამანათის ადგილმდებარეობას","მომხმარებელთა შეფასებებები":"მომხმარებელთა შეფასებებები","მონაცემების განახლება":"მონაცემების განახლება","სატრასპორტო საშუალებები":"სატრასპორტო საშუალებები","თვითმფრინავი":"თვითმფრინავი","ავტომობილი":"ავტომობილი","ხშირად დასმული კითხვები":"ხშირად დასმული კითხვები","მოძებნე შეკითხვა":"მოძებნე შეკითხვა","შენი ამანათი":"შენი ამანათი","ამანათის ღირებულება":"ამანათის ღირებულება","შეფუთვა და ეტიკეტირება":"შეფუთვა და ეტიკეტირება","რისი გაგზავნა შემიძლია?":"რისი გაგზავნა შემიძლია?","შეზღუდულია თუ არა ამანათის ზომა და წონა და როგორ უნდა განისაზღვროს იგი?":"შეზღუდულია თუ არა ამანათის ზომა და წონა და როგორ უნდა განისაზღვროს იგი?","როგორ უნდა გავზომო ამანათის ზომა და წონა?":"როგორ უნდა გავზომო ამანათის ზომა და წონა?","როგორ უნდა მოვიქცე იმ შემთხვევაში თუ კი ამანათის წონა იმაზე მეტია, ვიდრე შეკვეთაშია მითითებული?":"როგორ უნდა მოვიქცე იმ შემთხვევაში თუ კი ამანათის წონა იმაზე მეტია, ვიდრე შეკვეთაშია მითითებული?","როგორ უნდა გავიგო გადაზიდვის ფასი?":"როგორ უნდა გავიგო გადაზიდვის ფასი?","რა განსაზღვრავს ამანათის ღირებულებას?":"რა განსაზღვრავს ამანათის ღირებულებას?","რას ითვალისწინებს გადმოზიდვის ფასი?":"რას ითვალისწინებს გადმოზიდვის ფასი?","რა განაპირობებს Sendab-ის ასეთ მინიმალურ ღირებულებას?":"რა განაპირობებს Sendab-ის ასეთ მინიმალურ ღირებულებას?","როგორ უნდა შევფუთო ამანათი?":"როგორ უნდა შევფუთო ამანათი?","რა სახით უნდა მოხდეს ამანათის მარკირება?":"რა სახით უნდა მოხდეს ამანათის მარკირება?","კითხვების შემთხვევაში შეავსეთ ქვემოთ მოცემული ველი":"კითხვების შემთხვევაში შეავსეთ ქვემოთ მოცემული ველი","თემა":"თემა","რა საკითხზე გვწერთ":"რა საკითხზე გვწერთ","სახელი, გვარი":"სახელი, გვარი","თქვენი სახელი და გვარი":"თქვენი სახელი და გვარი","ელ. ფოსტა":"ელ. ფოსტა","თქვენი ელ. ფოსტა":"თქვენი ელ. ფოსტა","ამანათის საიდენთიფიკაციო კოდი":"ამანათის საიდენთიფიკაციო კოდი","საიდენთიფიკაციო კოდი":"საიდენთიფიკაციო კოდი","შეტყობინება":"შეტყობინება","მოგვწერე შეტყობინება":"მოგვწერე შეტყობინება","შეტყობინების გაგზავნა":"შეტყობინების გაგზავნა","თქვენი ელექტრონული ფოსტა":"თქვენი ელექტრონული ფოსტა","პაროლი":"პაროლი","თქვენი პაროლი":"თქვენი პაროლი","პაროლის აღდგენა":"პაროლის აღდგენა","არ გაქვს ანგარიში?":"არ გაქვს ანგარიში?","გაიარე რეგისტრაცია":"გაიარე რეგისტრაცია","გამოიმუშავე დამატებითი შემოსავალი მოგზაურობისას":"გამოიმუშავე დამატებითი შემოსავალი მოგზაურობისას","ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს":"ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს","ვიდეო ინსტრუქცია":"ვიდეო ინსტრუქცია","ანგარიშის შექმნა":"ანგარიშის შექმნა","სახელი":"სახელი","თქვენი სახელი":"თქვენი სახელი","გვარი":"გვარი","თქვენი გვარი":"თქვენი გვარი","საკონტაქტო ტელეფონი":"საკონტაქტო ტელეფონი","თქვენი საკონტაქტო ტელეფონი":"თქვენი საკონტაქტო ტელეფონი","ქვეყანა":"ქვეყანა","ქალაქი":"ქალაქი","აირჩიე ქალაქი":"აირჩიე ქალაქი","მისამართი":"მისამართი","საფოსტო ინდექსი":"საფოსტო ინდექსი","შეიყვანე ფოსტა, ქალაქი ან სოფელი":"შეიყვანე ფოსტა, ქალაქი ან სოფელი","გაიმეორე პაროლი":"გაიმეორე პაროლი","გავეცანი და ვეთანხმები":"გავეცანი და ვეთანხმები","წესებსა და პირობებს":"წესებსა და პირობებს"}');
 
 /***/ }),
 
@@ -84151,7 +83803,7 @@ module.exports = JSON.parse('{"ქართული":"Georgisch","ინგლ�
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"ქართული":"Georgian","ინგლისური":"English","გერმანული":"German","ამანათის გაგზავნა":"Sending a parcel","დახმარება":"Help","სენდაბის შემოთავაზება":"Sendab offer","ამანათი":"Parcel","ავტორიზაცია":"Authorization","შეკითხვები":"Questions","კომპანიის შესახებ":"About company","კონტაქტი":"Contact us","გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით":"Send parcels anywhere in the world with timely delivery service","გამგზავნი ქვეყანა":"Country of dispatch","აირჩიე ქვეყანა":"choose country","ქალაქი, სოფელი ან ZIP კოდი":"Town, village or zip code","მიმღები ქვეყანა":"Country of destination","თარიღი":"Date","აირჩიე":"Select","შეფუთვის დეტალები":"Packaging details","წონა":"Weight","სიგა.":"Width","სიმა.":"Height","სიგრ.":"Length","ანგარიშის შექმნა  და შეკვეთა":"Create an account and order","ყველაზე პოპულარული მარშრუტები":"The most popular routes","მარშრუტის ჩვენება":"Show route","ამანათის გაგზავნა ":"Sending a parcel from $ ","$ -დან":"","მიიღე ან გააგზავნე ნებისმიერი ნივთი მცირე დროში":"Receive or send any item in a short time","როგორ მუშაობს სენდაბის სერვისი":"How service works","დააზუსტე ამანათის მონაცემები და სასურველი მარშრუტი":"Specify the parcel data and the desired route","შეათანხმე ამანათის ღირებულება":"Agree on the value of the parcel","მიიღე კოდი და თვალი ადევნე ამანათის ადგილმდებარეობას":"Get the code and keep tracking on the place of the parcel","მომხმარებელთა შეფასებებები":"Customer Reviews","მონაცემების განახლება":"Update data","სატრასპორტო საშუალებები":"All vehicles","თვითმფრინავი":"Plane","ავტომობილი":"Car","ხშირად დასმული კითხვები":"Frequently Asked Questions","მოძებნე შეკითხვა":"Search the question","შენი ამანათი":"Your parcel","ამანათის ღირებულება":"The cost of the parcel","შეფუთვა და ეტიკეტირება":"Packaging and labeling","რისი გაგზავნა შემიძლია?":"What can i send?","შეზღუდულია თუ არა ამანათის ზომა და წონა და როგორ უნდა განისაზღვროს იგი?":"Is the size and weight of the parcel limited and how should it be determined?","როგორ უნდა გავზომო ამანათის ზომა და წონა?":"როგორ უნდა გავზომო ამანათის ზომა და წონა?","როგორ უნდა მოვიქცე იმ შემთხვევაში თუ კი ამანათის წონა იმაზე მეტია, ვიდრე შეკვეთაშია მითითებული?":"What should  i do if there is more to the parcel than it\'s indicated in  order?","როგორ უნდა გავიგო გადაზიდვის ფასი?":"How to find out the shipping cost?","რა განსაზღვრავს ამანათის ღირებულებას?":"What determines the value of the parcel?","რას ითვალისწინებს გადმოზიდვის ფასი?":"What is included in the shipping cost?","რა განაპირობებს Sendab-ის ასეთ მინიმალურ ღირებულებას?":"Why does Sendab have such minimum cost?","როგორ უნდა შევფუთო ამანათი?":"How shouId i pack a parcel?","რა სახით უნდა მოხდეს ამანათის მარკირება?":"How can I mark the parcel?","კითხვების შემთხვევაში შეავსეთ ქვემოთ მოცემული ველი":"In case of questions, fill in the field below","თემა":"თემა","რა საკითხზე გვწერთ":"რა საკითხზე გვწერთ","სახელი, გვარი":"სახელი, გვარი","თქვენი სახელი და გვარი":"თქვენი სახელი და გვარი","ელ. ფოსტა":"ელ. ფოსტა","თქვენი ელ. ფოსტა":"თქვენი ელ. ფოსტა","ამანათის საიდენთიფიკაციო კოდი":"ამანათის საიდენთიფიკაციო კოდი","საიდენთიფიკაციო კოდი":"საიდენთიფიკაციო კოდი","შეტყობინება":"შეტყობინება","მოგვწერე შეტყობინება":"Send us a message","შეტყობინების გაგზავნა":"Send a message","თქვენი ელექტრონული ფოსტა":"თქვენი ელექტრონული ფოსტა","პაროლი":"პაროლი","თქვენი პაროლი":"თქვენი პაროლი","პაროლის აღდგენა":"პაროლის აღდგენა","არ გაქვს ანგარიში?":"არ გაქვს ანგარიში?","გაიარე რეგისტრაცია":"გაიარე რეგისტრაცია","გამოიმუშავე დამატებითი შემოსავალი მოგზაურობისას":"Earn extra income while traveling","ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს":"ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს","ვიდეო ინსტრუქცია":"Video instruction","ანგარიშის შექმნა":"ანგარიშის შექმნა","სახელი":"სახელი","თქვენი სახელი":"თქვენი სახელი","გვარი":"გვარი","თქვენი გვარი":"თქვენი გვარი","საკონტაქტო ტელეფონი":"საკონტაქტო ტელეფონი","თქვენი საკონტაქტო ტელეფონი":"თქვენი საკონტაქტო ტელეფონი","ქვეყანა":"ქვეყანა","ქალაქი":"ქალაქი","აირჩიე ქალაქი":"აირჩიე ქალაქი","მისამართი":"მისამართი","საფოსტო ინდექსი":"საფოსტო ინდექსი","შეიყვანე ფოსტა, ქალაქი ან სოფელი":"შეიყვანე ფოსტა, ქალაქი ან სოფელი","გაიმეორე პაროლი":"გაიმეორე პაროლი","გავეცანი და ვეთანხმები":"გავეცანი და ვეთანხმები","წესებსა და პირობებს":"წესებსა და პირობებს"}');
+module.exports = JSON.parse('{"ქართული":"Georgian","ინგლისური":"English","გერმანული":"German","ამანათის გაგზავნა":"Sending a parcel","დახმარება":"Help","სენდაბის შემოთავაზება":"Sendab offer","ამანათი":"Parcel","ავტორიზაცია":"Authorization","კითხვები":"Questions","კომპანიის შესახებ":"About company","კონტაქტი":"Contact us","გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით":"Send parcels anywhere in the world with timely delivery service","გამგზავნი ქვეყანა":"Country of dispatch","აირჩიე ქვეყანა":"choose country","ქალაქი, სოფელი ან ZIP კოდი":"Town, village or zip code","მიმღები ქვეყანა":"Country of destination","თარიღი":"Date","აირჩიე":"Select","შეფუთვის დეტალები":"Packaging details","წონა":"Weight","სიგა.":"Width","სიმა.":"Height","სიგრ.":"Length","ანგარიშის შექმნა  და შეკვეთა":"Create an account and order","ყველაზე პოპულარული მარშრუტები":"The most popular routes","მარშრუტის ჩვენება":"Show route","ამანათის გაგზავნა ":"Sending a parcel from $ ","$ -დან":"","მიიღე ან გააგზავნე ნებისმიერი ნივთი მცირე დროში":"Receive or send any item in a short time","როგორ მუშაობს სენდაბის სერვისი":"How service works","დააზუსტე ამანათის მონაცემები და სასურველი მარშრუტი":"Specify the parcel data and the desired route","შეათანხმე ამანათის ღირებულება":"Agree on the value of the parcel","მიიღე კოდი და თვალი ადევნე ამანათის ადგილმდებარეობას":"Get the code and keep tracking on the place of the parcel","მომხმარებელთა შეფასებებები":"Customer Reviews","მონაცემების განახლება":"Update data","სატრასპორტო საშუალებები":"All vehicles","თვითმფრინავი":"Plane","ავტომობილი":"Car","ხშირად დასმული კითხვები":"Frequently Asked Questions","მოძებნე შეკითხვა":"Search the question","შენი ამანათი":"Your parcel","ამანათის ღირებულება":"The cost of the parcel","შეფუთვა და ეტიკეტირება":"Packaging and labeling","რისი გაგზავნა შემიძლია?":"What can i send?","შეზღუდულია თუ არა ამანათის ზომა და წონა და როგორ უნდა განისაზღვროს იგი?":"Is the size and weight of the parcel limited and how should it be determined?","როგორ უნდა გავზომო ამანათის ზომა და წონა?":"როგორ უნდა გავზომო ამანათის ზომა და წონა?","როგორ უნდა მოვიქცე იმ შემთხვევაში თუ კი ამანათის წონა იმაზე მეტია, ვიდრე შეკვეთაშია მითითებული?":"What should  i do if there is more to the parcel than it\'s indicated in  order?","როგორ უნდა გავიგო გადაზიდვის ფასი?":"How to find out the shipping cost?","რა განსაზღვრავს ამანათის ღირებულებას?":"What determines the value of the parcel?","რას ითვალისწინებს გადმოზიდვის ფასი?":"What is included in the shipping cost?","რა განაპირობებს Sendab-ის ასეთ მინიმალურ ღირებულებას?":"Why does Sendab have such minimum cost?","როგორ უნდა შევფუთო ამანათი?":"How shouId i pack a parcel?","რა სახით უნდა მოხდეს ამანათის მარკირება?":"How can I mark the parcel?","კითხვების შემთხვევაში შეავსეთ ქვემოთ მოცემული ველი":"In case of questions, fill in the field below","თემა":"თემა","რა საკითხზე გვწერთ":"რა საკითხზე გვწერთ","სახელი, გვარი":"სახელი, გვარი","თქვენი სახელი და გვარი":"თქვენი სახელი და გვარი","ელ. ფოსტა":"ელ. ფოსტა","თქვენი ელ. ფოსტა":"თქვენი ელ. ფოსტა","ამანათის საიდენთიფიკაციო კოდი":"ამანათის საიდენთიფიკაციო კოდი","საიდენთიფიკაციო კოდი":"საიდენთიფიკაციო კოდი","შეტყობინება":"შეტყობინება","მოგვწერე შეტყობინება":"Send us a message","შეტყობინების გაგზავნა":"Send a message","თქვენი ელექტრონული ფოსტა":"თქვენი ელექტრონული ფოსტა","პაროლი":"პაროლი","თქვენი პაროლი":"თქვენი პაროლი","პაროლის აღდგენა":"პაროლის აღდგენა","არ გაქვს ანგარიში?":"არ გაქვს ანგარიში?","გაიარე რეგისტრაცია":"გაიარე რეგისტრაცია","გამოიმუშავე დამატებითი შემოსავალი მოგზაურობისას":"Earn extra income while traveling","ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს":"ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს","ვიდეო ინსტრუქცია":"Video instruction","ანგარიშის შექმნა":"ანგარიშის შექმნა","სახელი":"სახელი","თქვენი სახელი":"თქვენი სახელი","გვარი":"გვარი","თქვენი გვარი":"თქვენი გვარი","საკონტაქტო ტელეფონი":"საკონტაქტო ტელეფონი","თქვენი საკონტაქტო ტელეფონი":"თქვენი საკონტაქტო ტელეფონი","ქვეყანა":"ქვეყანა","ქალაქი":"ქალაქი","აირჩიე ქალაქი":"აირჩიე ქალაქი","მისამართი":"მისამართი","საფოსტო ინდექსი":"საფოსტო ინდექსი","შეიყვანე ფოსტა, ქალაქი ან სოფელი":"შეიყვანე ფოსტა, ქალაქი ან სოფელი","გაიმეორე პაროლი":"გაიმეორე პაროლი","გავეცანი და ვეთანხმები":"გავეცანი და ვეთანხმები","წესებსა და პირობებს":"წესებსა და პირობებს"}');
 
 /***/ }),
 
@@ -84162,7 +83814,7 @@ module.exports = JSON.parse('{"ქართული":"Georgian","ინგლ�
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"ქართული":"ქართული","ინგლისური":"ინგლისური","გერმანული":"გერმანული","ამანათის გაგზავნა":"ამანათის გაგზავნა","დახმარება":"დახმარება","სენდაბის შემოთავაზება":"სენდაბის შემოთავაზება","ამანათი":"ამანათი","ავტორიზაცია":"ავტორიზაცია","შეკითხვები":"შეკითხვები","კომპანიის შესახებ":"კომპანიის შესახებ","კონტაქტი":"კონტაქტი","გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით":"გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით","გამგზავნი ქვეყანა":"გამგზავნი ქვეყანა","აირჩიე ქვეყანა":"აირჩიე ქვეყანა","ქალაქი, სოფელი ან ZIP კოდი":"ქალაქი, სოფელი ან ZIP კოდი","მიმღები ქვეყანა":"მიმღები ქვეყანა","თარიღი":"თარიღი","აირჩიე":"აირჩიე","შეფუთვის დეტალები":"შეფუთვის დეტალები","წონა":"წონა","სიგა.":"სიგა.","სიმა.":"სიმა.","სიგრ.":"სიგრ.","ანგარიშის შექმნა  და შეკვეთა":"ანგარიშის შექმნა  და შეკვეთა","ყველაზე პოპულარული მარშრუტები":"ყველაზე პოპულარული მარშრუტები","მარშრუტის ჩვენება":"მარშრუტის ჩვენება","ამანათის გაგზავნა ":"ამანათის გაგზავნა ","$ -დან":"$ -დან","მიიღე ან გააგზავნე ნებისმიერი ნივთი მცირე დროში":"მიიღე ან გააგზავნე ნებისმიერი ნივთი მცირე დროში","როგორ მუშაობს სენდაბის სერვისი":"როგორ მუშაობს სენდაბის სერვისი","დააზუსტე ამანათის მონაცემები და სასურველი მარშრუტი":"დააზუსტე ამანათის მონაცემები და სასურველი მარშრუტი","შეათანხმე ამანათის ღირებულება":"შეათანხმე ამანათის ღირებულება","მიიღე კოდი და თვალი ადევნე ამანათის ადგილმდებარეობას":"მიიღე კოდი და თვალი ადევნე ამანათის ადგილმდებარეობას","მომხმარებელთა შეფასებებები":"მომხმარებელთა შეფასებებები","მონაცემების განახლება":"მონაცემების განახლება","სატრასპორტო საშუალებები":"სატრასპორტო საშუალებები","თვითმფრინავი":"თვითმფრინავი","ავტომობილი":"ავტომობილი","ხშირად დასმული კითხვები":"ხშირად დასმული კითხვები","მოძებნე შეკითხვა":"მოძებნე შეკითხვა","შენი ამანათი":"შენი ამანათი","ამანათის ღირებულება":"ამანათის ღირებულება","შეფუთვა და ეტიკეტირება":"შეფუთვა და ეტიკეტირება","რისი გაგზავნა შემიძლია?":"რისი გაგზავნა შემიძლია?","შეზღუდულია თუ არა ამანათის ზომა და წონა და როგორ უნდა განისაზღვროს იგი?":"შეზღუდულია თუ არა ამანათის ზომა და წონა და როგორ უნდა განისაზღვროს იგი?","როგორ უნდა გავზომო ამანათის ზომა და წონა?":"როგორ უნდა გავზომო ამანათის ზომა და წონა?","როგორ უნდა მოვიქცე იმ შემთხვევაში თუ კი ამანათის წონა იმაზე მეტია, ვიდრე შეკვეთაშია მითითებული?":"როგორ უნდა მოვიქცე იმ შემთხვევაში თუ კი ამანათის წონა იმაზე მეტია, ვიდრე შეკვეთაშია მითითებული?","როგორ უნდა გავიგო გადაზიდვის ფასი?":"როგორ უნდა გავიგო გადაზიდვის ფასი?","რა განსაზღვრავს ამანათის ღირებულებას?":"რა განსაზღვრავს ამანათის ღირებულებას?","რას ითვალისწინებს გადმოზიდვის ფასი?":"რას ითვალისწინებს გადმოზიდვის ფასი?","რა განაპირობებს Sendab-ის ასეთ მინიმალურ ღირებულებას?":"რა განაპირობებს Sendab-ის ასეთ მინიმალურ ღირებულებას?","როგორ უნდა შევფუთო ამანათი?":"როგორ უნდა შევფუთო ამანათი?","რა სახით უნდა მოხდეს ამანათის მარკირება?":"რა სახით უნდა მოხდეს ამანათის მარკირება?","კითხვების შემთხვევაში შეავსეთ ქვემოთ მოცემული ველი":"კითხვების შემთხვევაში შეავსეთ ქვემოთ მოცემული ველი","თემა":"თემა","რა საკითხზე გვწერთ":"რა საკითხზე გვწერთ","სახელი, გვარი":"სახელი, გვარი","თქვენი სახელი და გვარი":"თქვენი სახელი და გვარი","ელ. ფოსტა":"ელ. ფოსტა","თქვენი ელ. ფოსტა":"თქვენი ელ. ფოსტა","ამანათის საიდენთიფიკაციო კოდი":"ამანათის საიდენთიფიკაციო კოდი","საიდენთიფიკაციო კოდი":"საიდენთიფიკაციო კოდი","შეტყობინება":"შეტყობინება","მოგვწერე შეტყობინება":"მოგვწერე შეტყობინება","შეტყობინების გაგზავნა":"შეტყობინების გაგზავნა","თქვენი ელექტრონული ფოსტა":"თქვენი ელექტრონული ფოსტა","პაროლი":"პაროლი","თქვენი პაროლი":"თქვენი პაროლი","პაროლის აღდგენა":"პაროლის აღდგენა","არ გაქვს ანგარიში?":"არ გაქვს ანგარიში?","გაიარე რეგისტრაცია":"გაიარე რეგისტრაცია","გამოიმუშავე დამატებითი შემოსავალი მოგზაურობისას":"გამოიმუშავე დამატებითი შემოსავალი მოგზაურობისას","ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს":"ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს","ვიდეო ინსტრუქცია":"ვიდეო ინსტრუქცია","ანგარიშის შექმნა":"ანგარიშის შექმნა","სახელი":"სახელი","თქვენი სახელი":"თქვენი სახელი","გვარი":"გვარი","თქვენი გვარი":"თქვენი გვარი","საკონტაქტო ტელეფონი":"საკონტაქტო ტელეფონი","თქვენი საკონტაქტო ტელეფონი":"თქვენი საკონტაქტო ტელეფონი","ქვეყანა":"ქვეყანა","ქალაქი":"ქალაქი","აირჩიე ქალაქი":"აირჩიე ქალაქი","მისამართი":"მისამართი","საფოსტო ინდექსი":"საფოსტო ინდექსი","შეიყვანე ფოსტა, ქალაქი ან სოფელი":"შეიყვანე ფოსტა, ქალაქი ან სოფელი","გაიმეორე პაროლი":"გაიმეორე პაროლი","გავეცანი და ვეთანხმები":"გავეცანი და ვეთანხმები","წესებსა და პირობებს":"წესებსა და პირობებს"}');
+module.exports = JSON.parse('{"ქართული":"ქართული","ინგლისური":"ინგლისური","გერმანული":"გერმანული","ამანათის გაგზავნა":"ამანათის გაგზავნა","დახმარება":"დახმარება","სენდაბის შემოთავაზება":"სენდაბის შემოთავაზება","ამანათი":"ამანათი","ავტორიზაცია":"ავტორიზაცია","კითხვები":"კითხვები","კომპანიის შესახებ":"კომპანიის შესახებ","კონტაქტი":"კონტაქტი","გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით":"გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით","გამგზავნი ქვეყანა":"გამგზავნი ქვეყანა","აირჩიე ქვეყანა":"აირჩიე ქვეყანა","ქალაქი, სოფელი ან ZIP კოდი":"ქალაქი, სოფელი ან ZIP კოდი","მიმღები ქვეყანა":"მიმღები ქვეყანა","თარიღი":"თარიღი","აირჩიე":"აირჩიე","შეფუთვის დეტალები":"შეფუთვის დეტალები","წონა":"წონა","სიგა.":"სიგა.","სიმა.":"სიმა.","სიგრ.":"სიგრ.","ანგარიშის შექმნა  და შეკვეთა":"ანგარიშის შექმნა  და შეკვეთა","ყველაზე პოპულარული მარშრუტები":"ყველაზე პოპულარული მარშრუტები","მარშრუტის ჩვენება":"მარშრუტის ჩვენება","ამანათის გაგზავნა ":"ამანათის გაგზავნა ","$ -დან":"$ -დან","მიიღე ან გააგზავნე ნებისმიერი ნივთი მცირე დროში":"მიიღე ან გააგზავნე ნებისმიერი ნივთი მცირე დროში","როგორ მუშაობს სენდაბის სერვისი":"როგორ მუშაობს სენდაბის სერვისი","დააზუსტე ამანათის მონაცემები და სასურველი მარშრუტი":"დააზუსტე ამანათის მონაცემები და სასურველი მარშრუტი","შეათანხმე ამანათის ღირებულება":"შეათანხმე ამანათის ღირებულება","მიიღე კოდი და თვალი ადევნე ამანათის ადგილმდებარეობას":"მიიღე კოდი და თვალი ადევნე ამანათის ადგილმდებარეობას","მომხმარებელთა შეფასებებები":"მომხმარებელთა შეფასებებები","მონაცემების განახლება":"მონაცემების განახლება","სატრასპორტო საშუალებები":"სატრასპორტო საშუალებები","თვითმფრინავი":"თვითმფრინავი","ავტომობილი":"ავტომობილი","ხშირად დასმული კითხვები":"ხშირად დასმული კითხვები","მოძებნე შეკითხვა":"მოძებნე შეკითხვა","შენი ამანათი":"შენი ამანათი","ამანათის ღირებულება":"ამანათის ღირებულება","შეფუთვა და ეტიკეტირება":"შეფუთვა და ეტიკეტირება","რისი გაგზავნა შემიძლია?":"რისი გაგზავნა შემიძლია?","შეზღუდულია თუ არა ამანათის ზომა და წონა და როგორ უნდა განისაზღვროს იგი?":"შეზღუდულია თუ არა ამანათის ზომა და წონა და როგორ უნდა განისაზღვროს იგი?","როგორ უნდა გავზომო ამანათის ზომა და წონა?":"როგორ უნდა გავზომო ამანათის ზომა და წონა?","როგორ უნდა მოვიქცე იმ შემთხვევაში თუ კი ამანათის წონა იმაზე მეტია, ვიდრე შეკვეთაშია მითითებული?":"როგორ უნდა მოვიქცე იმ შემთხვევაში თუ კი ამანათის წონა იმაზე მეტია, ვიდრე შეკვეთაშია მითითებული?","როგორ უნდა გავიგო გადაზიდვის ფასი?":"როგორ უნდა გავიგო გადაზიდვის ფასი?","რა განსაზღვრავს ამანათის ღირებულებას?":"რა განსაზღვრავს ამანათის ღირებულებას?","რას ითვალისწინებს გადმოზიდვის ფასი?":"რას ითვალისწინებს გადმოზიდვის ფასი?","რა განაპირობებს Sendab-ის ასეთ მინიმალურ ღირებულებას?":"რა განაპირობებს Sendab-ის ასეთ მინიმალურ ღირებულებას?","როგორ უნდა შევფუთო ამანათი?":"როგორ უნდა შევფუთო ამანათი?","რა სახით უნდა მოხდეს ამანათის მარკირება?":"რა სახით უნდა მოხდეს ამანათის მარკირება?","კითხვების შემთხვევაში შეავსეთ ქვემოთ მოცემული ველი":"კითხვების შემთხვევაში შეავსეთ ქვემოთ მოცემული ველი","თემა":"თემა","რა საკითხზე გვწერთ":"რა საკითხზე გვწერთ","სახელი, გვარი":"სახელი, გვარი","თქვენი სახელი და გვარი":"თქვენი სახელი და გვარი","ელ. ფოსტა":"ელ. ფოსტა","თქვენი ელ. ფოსტა":"თქვენი ელ. ფოსტა","ამანათის საიდენთიფიკაციო კოდი":"ამანათის საიდენთიფიკაციო კოდი","საიდენთიფიკაციო კოდი":"საიდენთიფიკაციო კოდი","შეტყობინება":"შეტყობინება","მოგვწერე შეტყობინება":"მოგვწერე შეტყობინება","შეტყობინების გაგზავნა":"შეტყობინების გაგზავნა","თქვენი ელექტრონული ფოსტა":"თქვენი ელექტრონული ფოსტა","პაროლი":"პაროლი","თქვენი პაროლი":"თქვენი პაროლი","პაროლის აღდგენა":"პაროლის აღდგენა","არ გაქვს ანგარიში?":"არ გაქვს ანგარიში?","გაიარე რეგისტრაცია":"გაიარე რეგისტრაცია","გამოიმუშავე დამატებითი შემოსავალი მოგზაურობისას":"გამოიმუშავე დამატებითი შემოსავალი მოგზაურობისას","ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს":"ცნობილი ფაქტია, რომ გვერდის წაკითხვად შიგთავსს შეუძლია მკითხველის ყურადღება მიიზიდოს და დიზაინის აღქმაში ხელი შეუშალოს","ვიდეო ინსტრუქცია":"ვიდეო ინსტრუქცია","ანგარიშის შექმნა":"ანგარიშის შექმნა","სახელი":"სახელი","თქვენი სახელი":"თქვენი სახელი","გვარი":"გვარი","თქვენი გვარი":"თქვენი გვარი","საკონტაქტო ტელეფონი":"საკონტაქტო ტელეფონი","თქვენი საკონტაქტო ტელეფონი":"თქვენი საკონტაქტო ტელეფონი","ქვეყანა":"ქვეყანა","ქალაქი":"ქალაქი","აირჩიე ქალაქი":"აირჩიე ქალაქი","მისამართი":"მისამართი","საფოსტო ინდექსი":"საფოსტო ინდექსი","შეიყვანე ფოსტა, ქალაქი ან სოფელი":"შეიყვანე ფოსტა, ქალაქი ან სოფელი","გაიმეორე პაროლი":"გაიმეორე პაროლი","გავეცანი და ვეთანხმები":"გავეცანი და ვეთანხმები","წესებსა და პირობებს":"წესებსა და პირობებს"}');
 
 /***/ })
 

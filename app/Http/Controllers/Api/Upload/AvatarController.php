@@ -22,7 +22,9 @@ class AvatarController extends Controller
     }
 
     public function getAvatar(Request $request){
-        if( AvatarPhoto::where('uploaded_by', Auth::user()->id)->exists()){
+
+        $userId = $request->user()->id;
+        if( AvatarPhoto::where('uploaded_by', $userId)->exists()){
             $avatar_path =  AvatarPhoto::where('uploaded_by', Auth::user()->id)->value('file_url');
             return Storage::get($avatar_path);
         }

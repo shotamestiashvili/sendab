@@ -4,19 +4,17 @@
             <h1>{{ $t('გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით') }}</h1>
             <div class="package-from">
                 <div class="form-inputs">
-                    <div class="select-from">
+                    <div class="select-from custom-location-input">
                         <p>{{ $t('გამგზავნი ქვეყანა') }}</p>
-                        <select>
-                            <option>{{ $t('აირჩიე ქვეყანა') }}</option>
-                        </select>
-                        <input type="text" :placeholder="$t('ქალაქი, სოფელი ან ZIP კოდი')">
+                        <Places
+                            :placeholder="$t('აირჩიე ქვეყანა')"
+                        />
                     </div>
-                    <div class="select-to">
+                    <div class="select-to custom-location-input">
                         <p>{{ $t('მიმღები ქვეყანა') }}</p>
-                        <select>
-                            <option>{{ $t('აირჩიე ქვეყანა') }}</option>
-                        </select>
-                        <input type="text" :placeholder="$t('ქალაქი, სოფელი ან ZIP კოდი')">
+                        <Places
+                            :placeholder="$t('აირჩიე ქვეყანა')"
+                        />
                     </div>
                     <div class="select-when">
                         <p>{{ $t('თარიღი') }}</p>
@@ -63,11 +61,13 @@
 </template>
 
 <script>
+import Places from 'vue-places';
 import Datepicker from 'vuejs-datepicker';
 
 export default {
     name: 'IntroComponent',
     components: {
+        Places,
         Datepicker
     },
     data() {
@@ -145,6 +145,16 @@ export default {
             border: none;
             border-right: 10px solid transparent;
         }
+    }
+}
+
+.custom-location-input {
+    input {
+        padding-right: 30px !important;
+    }
+
+    .ap-input-icon svg {
+        top: 42%
     }
 }
 </style>

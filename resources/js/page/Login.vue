@@ -33,7 +33,11 @@ export default {
     },
     methods: {
         login() {
-            this.$store.dispatch('login/login', this.loginData)
+            this.$store.dispatch('login/login', this.loginData).then(() => {
+                this.$store.dispatch('user/getUserData')
+                this.$store.dispatch('user/getUserAvatar')
+                this.$router.push({name: 'home'})
+            })
         }
     }
 }

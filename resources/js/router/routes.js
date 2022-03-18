@@ -58,6 +58,7 @@ export default [
                         name: 'user-profile',
                         component: MyProfile,
                         meta: {
+                            requiresAuth: true,
                             headerColor: 'white'
                         }
                     },
@@ -66,6 +67,7 @@ export default [
                         name: 'my-packages',
                         component: MyPackages,
                         meta: {
+                            requiresAuth: true,
                             headerColor: 'white'
                         }
                     },
@@ -74,6 +76,7 @@ export default [
                         name: 'account-settings',
                         component: AccountSettings,
                         meta: {
+                            requiresAuth: true,
                             headerColor: 'white'
                         }
                     },
@@ -82,6 +85,7 @@ export default [
                         name: 'billing-info',
                         component: BillingInfo,
                         meta: {
+                            requiresAuth: true,
                             headerColor: 'white'
                         }
                     }

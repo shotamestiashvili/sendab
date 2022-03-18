@@ -12,14 +12,11 @@
         </div>
         <div class="filter-section">
             <div class="filters">
-                <div class="select-to">
+                <div class="select-to custom-location-input">
                     <p>{{ $t('მიმღები ქვეყანა') }}</p>
-                    <div class="to-info">
-                        <select>
-                            <option>{{ $t('აირჩიე ქვეყანა') }}</option>
-                        </select>
-                        <input type="text" :placeholder="$t('ქალაქი, სოფელი ან ZIP კოდი')">
-                    </div>
+                    <Places
+                        :placeholder="$t('აირჩიე ქვეყანა')"
+                    />
                 </div>
                 <div class="select-when">
                     <p>{{ $t('თარიღი') }}</p>
@@ -59,6 +56,7 @@
 </template>
 
 <script>
+import Places from 'vue-places';
 import Datepicker from 'vuejs-datepicker';
 import PackageCard from "../components/SendPackage/PackageCard";
 import ContactForm from "../components/Help/ContactForm";
@@ -66,6 +64,7 @@ import ContactForm from "../components/Help/ContactForm";
 export default {
     name: 'sendABOffer',
     components: {
+        Places,
         Datepicker,
         PackageCard,
         ContactForm
@@ -227,6 +226,16 @@ export default {
         }
     }
 }
+
+.custom-location-input {
+    input {
+        padding-right: 30px !important;
+    }
+
+    .ap-input-icon svg {
+        top: 42%
+    }
+}
 </style>
 
 <style scoped lang="scss">
@@ -294,17 +303,11 @@ export default {
             display: grid;
             grid-column-gap: 32px;
             grid-template-areas: "to when details";
-            grid-template-columns: 2fr 1fr 2fr;
+            grid-template-columns: 2fr 1fr 3fr;
 
 
             .select-to {
                 grid-area: to;
-
-                .to-info {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    grid-column-gap: 10px;
-                }
             }
 
             .select-when {

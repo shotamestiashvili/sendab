@@ -27,7 +27,6 @@ export const actions = {
             )
             .then((response) => {
                 localStorage.setItem('userToken', response.data.token);
-                Swal.fire('Account Registered');
             })
             .catch((e) => {
                 Swal.fire({
@@ -46,7 +45,6 @@ export const actions = {
             })
             .then((response) => {
                 localStorage.setItem('userToken', response.data.token);
-                Swal.fire('Login Sucessfully');
             })
             .catch(() => {
             });
@@ -54,11 +52,6 @@ export const actions = {
     logout() {
         return authAjax()
             .post(apiUrls.logout, {token: tokens.userToken})
-            .then(() => {
-                localStorage.removeItem('userToken');
-                console.log(localStorage)
-                Swal.fire('Logout');
-            })
             .catch(() => {
             });
     }

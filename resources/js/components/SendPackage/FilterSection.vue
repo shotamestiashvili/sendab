@@ -11,19 +11,17 @@
                 <div class="add-location" ref="locationForm">
                     <img src="/images/add-location.png" alt="" @click="openLocation">
                     <div class="location-form" v-if="openLocationForm">
-                        <div class="input-form">
+                        <div class="input-form custom-location-input">
                             <p>{{ $t('გამგზავნი ქვეყანა') }}</p>
-                            <select>
-                                <option>{{ $t('აირჩიე ქვეყანა') }}</option>
-                            </select>
-                            <input type="text" :placeholder="$t('ქალაქი, სოფელი ან ZIP კოდი')">
+                            <Places
+                                :placeholder="$t('აირჩიე ქვეყანა')"
+                            />
                         </div>
-                        <div class="input-form">
+                        <div class="input-form custom-location-input">
                             <p>{{ $t('მიმღები ქვეყანა') }}</p>
-                            <select>
-                                <option>{{ $t('აირჩიე ქვეყანა') }}</option>
-                            </select>
-                            <input type="text" :placeholder="$t('ქალაქი, სოფელი ან ZIP კოდი')">
+                            <Places
+                                :placeholder="$t('აირჩიე ქვეყანა')"
+                            />
                         </div>
                         <div class="submit">
                             <span>{{ $t('მონაცემების განახლება') }}</span>
@@ -48,9 +46,13 @@
 </template>
 
 <script>
+import Places from 'vue-places';
 
 export default {
     name: 'FilterSection',
+    components: {
+        Places
+    },
     data() {
         return {
             direction: {
@@ -90,6 +92,18 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+.custom-location-input {
+    input {
+        padding-right: 30px !important;
+    }
+
+    .ap-input-icon svg {
+        top: 42%
+    }
+}
+</style>
 
 <style scoped lang="scss">
 section {

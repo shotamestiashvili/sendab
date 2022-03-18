@@ -40,14 +40,16 @@
                 <div v-else class="user-component" ref="userProfile">
                     <div class="user-profile" :class="{'open': openUserProfile}"
                          @click="openUser">
-                        <img class="avatar" src="/images/placeholder-user-image.png" alt="">
+                        <img class="avatar" v-if="!userAvatar" src="/images/user-default-icon-blue.png" alt="">
+                        <img class="avatar" v-else src="/images/placeholder-user-image.png" alt="">
                         <span>{{ $t('ანგარიში') }}</span>
                         <img class="arrow-up" src="/images/arrow-up.png" alt="">
                     </div>
                     <div class="user-profile-dropdown" v-if="openUserProfile">
                         <div class="avatar-grid">
                             <div class="user-avatar">
-                                <img src="/images/placeholder-user-image.png" alt="">
+                                <img v-if="!userAvatar" src="/images/user-default-icon-blue.png" alt="">
+                                <img v-else src="/images/placeholder-user-image.png" alt="">
                                 <div class="verify-icon">
                                     <img src="/images/verify-icon.png" alt=""/>
                                 </div>
@@ -138,7 +140,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            userData: 'user/userData'
+            userData: 'user/userData',
+            userAvatar: 'user/userAvatar'
         }),
         selectedLanguage() {
             return this.langs.find(el => el.lang === this.$i18n.locale) || {}
@@ -179,8 +182,10 @@ export default {
             }
         },
         logout() {
-            this.$store.dispatch('login/logout')
-            this.$router.go()
+            this.$store.dispatch('login/logout').then(() => {
+                localStorage.removeItem('userToken');
+                location.reload();
+            })
         }
     }
 }

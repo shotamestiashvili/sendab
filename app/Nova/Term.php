@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Term extends Resource
@@ -45,6 +46,7 @@ class Term extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make('Order', 'order', \App\Nova\Order::class),
             Text::make('Term', 'term')->sortable(),
+
         ];
     }
 

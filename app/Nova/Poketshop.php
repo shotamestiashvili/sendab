@@ -2,20 +2,19 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\Text;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Faq extends Resource
+class Poketshop extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Faq::class;
+    public static $model = \App\Models\Poketshop::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -43,9 +42,11 @@ class Faq extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Textarea::make('Question', 'question')->sortable(),
-            Textarea::make('Answer', 'answer')->sortable(),
-            Text::make('Language', 'language')->sortable(),
+            Text::make('PoketShop Name', 'name')->sortable(),
+            Text::make('Country', 'country')->sortable(),
+            Text::make('City', 'city')->sortable(),
+            Text::make('Address', 'address')->sortable(),
+            Text::make('Comment', 'comment')->sortable(),
         ];
     }
 

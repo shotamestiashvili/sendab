@@ -25,17 +25,28 @@ class DocumentController extends Controller
    }
 
    public function getDocumentFront(){
-       $documentFront  = Document::where('user_id', Auth::user()->id)->value('front');
-       return base64_encode(Storage::get($documentFront));
+       if(Document::where('user_id', Auth::user()->id)->exists()){
+
+           $documentFront  = Document::where('user_id', Auth::user()->id)
+                                     ->value('front');
+           return base64_encode(Storage::get($documentFront));
+       }
+
    }
 
     public function getDocumentBack(){
-        $documentBack  = Document::where('user_id', Auth::user()->id)->value('back');
-        return base64_encode(Storage::get($documentBack));
+        if(Document::where('user_id', Auth::user()->id)->exists()){
+            $documentBack  = Document::where('user_id', Auth::user()->id)
+                                     ->value('back');
+            return base64_encode(Storage::get($documentBack));
+        }
     }
 
     public function getDocumentSelfie(){
-        $documentSelfie  = Document::where('user_id', Auth::user()->id)->value('selfie');
-        return base64_encode(Storage::get($documentSelfie));
+        if( Document::where('user_id', Auth::user()->id)->exists()){
+            $documentSelfie  = Document::where('user_id', Auth::user()->id)
+                                       ->value('selfie');
+            return base64_encode(Storage::get($documentSelfie));
+        }
     }
 }

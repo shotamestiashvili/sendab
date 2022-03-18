@@ -10,25 +10,25 @@
             <div class="form-inputs">
                 <div>
                     <p>{{ $t('თემა') }}: *</p>
-                    <input type="text" :placeholder="$t('რა საკითხზე გვწერთ')">
+                    <input v-model="formData.subject" name="subject" type="text" :placeholder="$t('რა საკითხზე გვწერთ')">
                 </div>
                 <div>
                     <p>{{ $t('სახელი, გვარი') }}: *</p>
-                    <input type="text" :placeholder="$t('თქვენი სახელი და გვარი')">
+                    <input v-model="formData.name" name="name" type="text" :placeholder="$t('თქვენი სახელი და გვარი')">
                 </div>
                 <div>
                     <p>{{ $t('ელ. ფოსტა') }}: *</p>
-                    <input type="text" :placeholder="$t('თქვენი ელ. ფოსტა')">
+                    <input v-model="formData.email" name="email" type="email" :placeholder="$t('თქვენი ელ. ფოსტა')">
                 </div>
                 <div>
                     <p>{{ $t('ამანათის საიდენთიფიკაციო კოდი') }}:</p>
-                    <input type="text" :placeholder="$t('საიდენთიფიკაციო კოდი')">
+                    <input v-model="formData.parcel_code" name="parcel_code" type="text" :placeholder="$t('საიდენთიფიკაციო კოდი')">
                 </div>
                 <div style="grid-area: text">
                     <p>{{ $t('შეტყობინება') }}: *</p>
-                    <textarea type="text" :placeholder="$t('მოგვწერე შეტყობინება')"/>
+                    <textarea v-model="formData.comment" name="comment" type="text" :placeholder="$t('მოგვწერე შეტყობინება')"/>
                 </div>
-                <div class="submit">
+                <div class="submit" @click="submitForm">
                     <span>{{ $t('შეტყობინების გაგზავნა') }}</span>
                 </div>
             </div>
@@ -37,8 +37,40 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
+import {ajax, apiUrls} from "../../store/urls";
+
 export default {
     name: 'ContactForm',
+    data() {
+        return {
+            formData: {
+                subject: '',
+                name: '',
+                email: '',
+                parcel_code: '',
+                comment: '',
+            }
+        }
+    },
+    methods: {
+        submitForm() {
+            ajax
+                .post(apiUrls.submitMail, this.formData)
+                .then(() => {
+                    Swal.fire('Form Submitted');
+                    this.formData = {
+                        subject: '',
+                        name: '',
+                        email: '',
+                        parcel_code: '',
+                        comment: '',
+                    }
+                })
+                .catch(() => {
+                })
+        }
+    }
 }
 </script>
 

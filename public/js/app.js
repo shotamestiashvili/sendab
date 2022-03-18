@@ -8796,6 +8796,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store_urls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/urls */ "./resources/js/store/urls.js");
 //
 //
 //
@@ -8834,8 +8837,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'ContactForm'
+  name: 'ContactForm',
+  data: function data() {
+    return {
+      formData: {
+        subject: '',
+        name: '',
+        email: '',
+        parcel_code: '',
+        comment: ''
+      }
+    };
+  },
+  methods: {
+    submitForm: function submitForm() {
+      var _this = this;
+
+      _store_urls__WEBPACK_IMPORTED_MODULE_1__.ajax.post(_store_urls__WEBPACK_IMPORTED_MODULE_1__.apiUrls.submitMail, this.formData).then(function () {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Form Submitted');
+        _this.formData = {
+          subject: '',
+          name: '',
+          email: '',
+          parcel_code: '',
+          comment: ''
+        };
+      })["catch"](function () {});
+    }
+  }
 });
 
 /***/ }),
@@ -24908,7 +24940,28 @@ var render = function () {
           _c("p", [_vm._v(_vm._s(_vm.$t("თემა")) + ": *")]),
           _vm._v(" "),
           _c("input", {
-            attrs: { type: "text", placeholder: _vm.$t("რა საკითხზე გვწერთ") },
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.formData.subject,
+                expression: "formData.subject",
+              },
+            ],
+            attrs: {
+              name: "subject",
+              type: "text",
+              placeholder: _vm.$t("რა საკითხზე გვწერთ"),
+            },
+            domProps: { value: _vm.formData.subject },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.formData, "subject", $event.target.value)
+              },
+            },
           }),
         ]),
         _vm._v(" "),
@@ -24916,9 +24969,27 @@ var render = function () {
           _c("p", [_vm._v(_vm._s(_vm.$t("სახელი, გვარი")) + ": *")]),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.formData.name,
+                expression: "formData.name",
+              },
+            ],
             attrs: {
+              name: "name",
               type: "text",
               placeholder: _vm.$t("თქვენი სახელი და გვარი"),
+            },
+            domProps: { value: _vm.formData.name },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.formData, "name", $event.target.value)
+              },
             },
           }),
         ]),
@@ -24927,7 +24998,28 @@ var render = function () {
           _c("p", [_vm._v(_vm._s(_vm.$t("ელ. ფოსტა")) + ": *")]),
           _vm._v(" "),
           _c("input", {
-            attrs: { type: "text", placeholder: _vm.$t("თქვენი ელ. ფოსტა") },
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.formData.email,
+                expression: "formData.email",
+              },
+            ],
+            attrs: {
+              name: "email",
+              type: "email",
+              placeholder: _vm.$t("თქვენი ელ. ფოსტა"),
+            },
+            domProps: { value: _vm.formData.email },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.formData, "email", $event.target.value)
+              },
+            },
           }),
         ]),
         _vm._v(" "),
@@ -24937,9 +25029,27 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.formData.parcel_code,
+                expression: "formData.parcel_code",
+              },
+            ],
             attrs: {
+              name: "parcel_code",
               type: "text",
               placeholder: _vm.$t("საიდენთიფიკაციო კოდი"),
+            },
+            domProps: { value: _vm.formData.parcel_code },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.formData, "parcel_code", $event.target.value)
+              },
             },
           }),
         ]),
@@ -24948,14 +25058,32 @@ var render = function () {
           _c("p", [_vm._v(_vm._s(_vm.$t("შეტყობინება")) + ": *")]),
           _vm._v(" "),
           _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.formData.comment,
+                expression: "formData.comment",
+              },
+            ],
             attrs: {
+              name: "comment",
               type: "text",
               placeholder: _vm.$t("მოგვწერე შეტყობინება"),
+            },
+            domProps: { value: _vm.formData.comment },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.formData, "comment", $event.target.value)
+              },
             },
           }),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "submit" }, [
+        _c("div", { staticClass: "submit", on: { click: _vm.submitForm } }, [
           _c("span", [_vm._v(_vm._s(_vm.$t("შეტყობინების გაგზავნა")))]),
         ]),
       ]),

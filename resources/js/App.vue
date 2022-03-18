@@ -17,7 +17,7 @@ export default {
 
         ajax.get(apiUrls.sanctumToken).catch(() => {}).finally(() => {
             if (tokens.isAuthorized) {
-                this.$store.dispatch('login/getUserData')
+                this.$store.dispatch('user/getUserData')
             }
         })
 

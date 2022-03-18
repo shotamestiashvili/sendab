@@ -101,7 +101,7 @@ export default {
     methods: {
         register() {
             this.registrationData.name = `${this.registrationData.firstname} ${this.registrationData.lastname}`
-            this.$store.dispatch('login/REGISTER', this.registrationData)
+            this.$store.dispatch('login/register', this.registrationData)
         }
     }
 }

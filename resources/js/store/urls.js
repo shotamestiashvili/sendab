@@ -21,9 +21,28 @@ export const apiUrls = {
     register: '/register',
     login: '/login',
     logout: '/api/logout',
+
+    changePassword: '/api/password/change',
     forgotPassword: '/forgot-password',
-    getStatus: '/api/check',
-    sanctumToken: '/sanctum/csrf-cookie',
+    resetPassword: '/password/reset',
+
     userName: '/api/userName',
     getUserData: '/api/profile/get',
+    updateUserData: '/api/profile/update',
+    saveUserAvatar: '/api/upload/avatar/save',
+    getUserAvatar: '/api/upload/avatar/get',
+
+    verifyUser: (id, remember_token) => `/verify/${id}/${remember_token}`,
+    saveUserDocuments: '/api/upload/document/save',
+    getUserDocumentFront: '/api/upload/document/front',
+    getUserDocumentBack: '/api/upload/document/back',
+    getUserDocumentSelfie: '/api/upload/document/selfie',
+
+    createOrder: '/api/order/create',
+    getOrder: '/api/order/get',
+    getFAQ: '/api/faq/get',
+    submitMail: '/api/support/save',
+
+    getStatus: '/api/check',
+    sanctumToken: '/sanctum/csrf-cookie',
 }

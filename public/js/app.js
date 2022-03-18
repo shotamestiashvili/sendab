@@ -2085,7 +2085,7 @@ __webpack_require__.r(__webpack_exports__);
     document.head.appendChild(meta);
     _store_urls__WEBPACK_IMPORTED_MODULE_0__.ajax.get(_store_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.sanctumToken)["catch"](function () {})["finally"](function () {
       if (_utils_tokens__WEBPACK_IMPORTED_MODULE_1__["default"].isAuthorized) {
-        _this.$store.dispatch('login/getUserData');
+        _this.$store.dispatch('user/getUserData');
       }
     });
     this.$i18n.locale = ['ge', 'en', 'de'].includes(localStorage.getItem('lang')) ? localStorage.getItem('lang') : 'ge';
@@ -2835,6 +2835,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2947,6 +2954,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Header',
   data: function data() {
@@ -2963,11 +2971,12 @@ __webpack_require__.r(__webpack_exports__);
       }],
       openLanguageSelector: false,
       openUserProfile: false,
-      packageSearch: false,
-      userLogin: false
+      packageSearch: false
     };
   },
-  computed: {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
+    userData: 'user/userData'
+  })), {}, {
     selectedLanguage: function selectedLanguage() {
       var _this = this;
 
@@ -2975,7 +2984,7 @@ __webpack_require__.r(__webpack_exports__);
         return el.lang === _this.$i18n.locale;
       }) || {};
     }
-  },
+  }),
   methods: {
     changeLanguage: function changeLanguage(lang) {
       this.$i18n.locale = lang;
@@ -3011,6 +3020,10 @@ __webpack_require__.r(__webpack_exports__);
         this.openUserProfile = false;
         window.removeEventListener('click', this.closeUser);
       }
+    },
+    logout: function logout() {
+      this.$store.dispatch('login/logout');
+      this.$router.go();
     }
   }
 });
@@ -3547,7 +3560,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     login: function login() {
-      this.$store.dispatch('login/LOGIN', this.loginData);
+      this.$store.dispatch('login/login', this.loginData);
     }
   }
 });
@@ -3667,7 +3680,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     register: function register() {
       this.registrationData.name = "".concat(this.registrationData.firstname, " ").concat(this.registrationData.lastname);
-      this.$store.dispatch('login/REGISTER', this.registrationData);
+      this.$store.dispatch('login/register', this.registrationData);
     }
   }
 });
@@ -4330,16 +4343,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./login */ "./resources/js/store/login.js");
+/* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user */ "./resources/js/store/user.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
+
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3__["default"]);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
   modules: {
-    login: _login__WEBPACK_IMPORTED_MODULE_0__
+    login: _login__WEBPACK_IMPORTED_MODULE_0__,
+    user: _user__WEBPACK_IMPORTED_MODULE_1__
   }
 }));
 
@@ -4355,113 +4371,35 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2_
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "actions": () => (/* binding */ actions),
-/* harmony export */   "getters": () => (/* binding */ getters),
-/* harmony export */   "mutations": () => (/* binding */ mutations),
-/* harmony export */   "namespaced": () => (/* binding */ namespaced),
-/* harmony export */   "state": () => (/* binding */ state)
+/* harmony export */   "namespaced": () => (/* binding */ namespaced)
 /* harmony export */ });
 /* harmony import */ var _urls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./urls */ "./resources/js/store/urls.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils_tokens__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/tokens */ "./resources/js/utils/tokens.js");
 
 
 
 var namespaced = true;
-var state = {
-  sessionCSRF: '',
-  userToken: null,
-  emailSent: false,
-  email: '',
-  user: '',
-  userID: '',
-  authorized: null,
-  userName: '',
-  errors: ''
-};
-var mutations = {
-  SET_USER_NAME: function SET_USER_NAME(state, value) {
-    state.userName = value;
-  },
-  SET_CSRF: function SET_CSRF(state, value) {
-    state.sessionCSRF = value;
-  },
-  SET_TOKEN: function SET_TOKEN(state, value) {
-    state.userToken = value;
-  },
-  SET_EMAIL_STATE: function SET_EMAIL_STATE(state, value) {
-    state.emailSent = value;
-  },
-  SET_EMAIL: function SET_EMAIL(state, value) {
-    state.email = value;
-  },
-  SET_USERDATA: function SET_USERDATA(state, userData) {
-    state.user = userData;
-    localStorage.setItem('user', JSON.stringify('userData'));
-    (axios__WEBPACK_IMPORTED_MODULE_2___default().defaults.headers.common.authorization) = 'Bearer ${ userData.token}';
-  },
-  SET_USERID: function SET_USERID(state, userid) {
-    state.userID = userid;
-  },
-  SET_AUTHORIZED: function SET_AUTHORIZED(state, value) {
-    state.authorized = value;
-  },
-  LOGOUT: function LOGOUT() {
-    localStorage.removeItem('user');
-    location.reload();
-  }
-};
 var actions = {
-  USER_NAME: function USER_NAME(context) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/userName', {
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json',
-        "Access-Control-Allow-Origin": "*"
-      }
+  register: function register(_, data) {
+    return _urls__WEBPACK_IMPORTED_MODULE_0__.ajax.post(_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.register, {
+      name: data.firstname,
+      email: data.email,
+      password: data.password,
+      password_confirmation: data.password_confirmation,
+      firstname: data.name,
+      lastname: data.lastname,
+      phone: data.phone,
+      country: data.country,
+      city: data.city,
+      address1: data.address1,
+      address2: data.address2,
+      postal: data.postal,
+      terms: data.term,
+      verified: false
     }).then(function (response) {
-      context.commit('SET_USER_NAME', response.data.data.name);
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  },
-  SANCTUM_CSRF: function SANCTUM_CSRF(context) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default()({
-      method: 'get',
-      url: '/sanctum/csrf-cookie'
-    }).then(function (response) {})["catch"](function (e) {
-      console.log(e);
-    });
-  },
-  REGISTER: function REGISTER(context, value) {
-    context.dispatch('SANCTUM_CSRF');
-    axios__WEBPACK_IMPORTED_MODULE_2___default()({
-      method: 'post',
-      url: '/register',
-      data: {
-        name: value.firstname,
-        email: value.email,
-        password: value.password,
-        password_confirmation: value.password_confirmation,
-        firstname: value.name,
-        lastname: value.lastname,
-        phone: value.phone,
-        country: value.country,
-        city: value.city,
-        address1: value.address1,
-        address2: value.address2,
-        postal: value.postal,
-        terms: value.term,
-        verified: false
-      },
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json',
-        "Access-Control-Allow-Origin": "*"
-      }
-    }).then(function (response) {
-      context.commit('SET_USERDATA', response.data);
+      localStorage.setItem('userToken', response.data.token);
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Account Registered');
     })["catch"](function (e) {
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
@@ -4470,116 +4408,25 @@ var actions = {
         text: 'The given data was invalid or The email has already been taken.!',
         footer: e.data
       });
-      console.log(e);
     });
   },
-  LOGIN: function LOGIN(context, value) {
-    context.dispatch('SANCTUM_CSRF');
-    axios__WEBPACK_IMPORTED_MODULE_2___default()({
-      method: 'post',
-      url: '/login',
-      data: {
-        email: value.email,
-        password: value.password
-      },
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json',
-        "Access-Control-Allow-Origin": "*"
-      }
+  login: function login(_, data) {
+    return _urls__WEBPACK_IMPORTED_MODULE_0__.ajax.post(_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.login, {
+      email: data.email,
+      password: data.password
     }).then(function (response) {
-      context.commit('SET_TOKEN', response.data.token);
-      context.commit('SET_USERDATA', response.data);
-      context.dispatch('USER_NAME');
+      localStorage.setItem('userToken', response.data.token);
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Login Sucessfully');
-    })["catch"](function (error) {// Swal.fire({
-      //     icon: 'error',
-      //     title: 'Oops...',
-      //     text: 'Email or Password is incorrect',
-      //     footer: e.data
-      // })
-    });
+    })["catch"](function () {});
   },
-  LOGOUT: function LOGOUT(context) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default()({
-      method: 'post',
-      url: '/api/logout',
-      data: {
-        token: context.state.userToken
-      },
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json',
-        "Access-Control-Allow-Origin": "*"
-      }
-    }).then(function (response) {
-      context.commit('SET_TOKEN', response.data.token);
+  logout: function logout() {
+    return (0,_urls__WEBPACK_IMPORTED_MODULE_0__.authAjax)().post(_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.logout, {
+      token: _utils_tokens__WEBPACK_IMPORTED_MODULE_2__["default"].userToken
+    }).then(function () {
+      localStorage.removeItem('userToken');
+      console.log(localStorage);
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Logout');
-      context.commit('LOGOUT');
-    })["catch"](function (e) {
-      console.log(e);
-    });
-  },
-  FORGOT_PASSWORD: function FORGOT_PASSWORD(context, email) {
-    context.commit('SET_EMAIL', email);
-    context.dispatch('SANCTUM_CSRF');
-    axios__WEBPACK_IMPORTED_MODULE_2___default()({
-      method: 'post',
-      url: '/forgot-password',
-      data: {
-        email: email
-      },
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json',
-        "Access-Control-Allow-Origin": "*"
-      }
-    }).then(function (response) {
-      context.commit('SET_EMAIL_STATE', 'true');
-    })["catch"](function (e) {
-      console.log(e);
-    });
-  },
-  GET_STATUS: function GET_STATUS(context) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default()({
-      method: 'post',
-      url: '/api/check',
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json',
-        "Access-Control-Allow-Origin": "*"
-      }
-    }).then(function (response) {
-      context.commit('SET_AUTHORIZED', response.data.data.status);
-    })["catch"](function (e) {
-      console.log(e);
-    });
-  },
-  getUserData: function getUserData(_ref) {
-    var commit = _ref.commit;
-    return (0,_urls__WEBPACK_IMPORTED_MODULE_0__.authAjax)().get(_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.getUserData).then(function (response) {
-      console.log(response);
-    });
-  }
-};
-var getters = {
-  GET_TOKEN: function GET_TOKEN(state) {
-    return state.userToken;
-  },
-  GET_EMAIL: function GET_EMAIL(state) {
-    return state.email;
-  },
-  USER_ID: function USER_ID(state) {
-    return state.userID;
-  },
-  GET_STATUS: function GET_STATUS(state) {
-    return state.authorized;
-  },
-  LOGGED_IN: function LOGGED_IN(state) {
-    return !!state.user;
-  },
-  GET_USER_NAME: function GET_USER_NAME(state) {
-    return state.userName;
+    })["catch"](function () {});
   }
 };
 
@@ -4621,11 +4468,71 @@ var apiUrls = {
   register: '/register',
   login: '/login',
   logout: '/api/logout',
+  changePassword: '/api/password/change',
   forgotPassword: '/forgot-password',
-  getStatus: '/api/check',
-  sanctumToken: '/sanctum/csrf-cookie',
+  resetPassword: '/password/reset',
   userName: '/api/userName',
-  getUserData: '/api/profile/get'
+  getUserData: '/api/profile/get',
+  updateUserData: '/api/profile/update',
+  saveUserAvatar: '/api/upload/avatar/save',
+  getUserAvatar: '/api/upload/avatar/get',
+  verifyUser: function verifyUser(id, remember_token) {
+    return "/verify/".concat(id, "/").concat(remember_token);
+  },
+  saveUserDocuments: '/api/upload/document/save',
+  getUserDocumentFront: '/api/upload/document/front',
+  getUserDocumentBack: '/api/upload/document/back',
+  getUserDocumentSelfie: '/api/upload/document/selfie',
+  createOrder: '/api/order/create',
+  getOrder: '/api/order/get',
+  getFAQ: '/api/faq/get',
+  submitMail: '/api/support/save',
+  getStatus: '/api/check',
+  sanctumToken: '/sanctum/csrf-cookie'
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/user.js":
+/*!************************************!*\
+  !*** ./resources/js/store/user.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "actions": () => (/* binding */ actions),
+/* harmony export */   "getters": () => (/* binding */ getters),
+/* harmony export */   "mutations": () => (/* binding */ mutations),
+/* harmony export */   "namespaced": () => (/* binding */ namespaced),
+/* harmony export */   "state": () => (/* binding */ state)
+/* harmony export */ });
+/* harmony import */ var _urls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./urls */ "./resources/js/store/urls.js");
+
+var namespaced = true;
+var state = {
+  userData: null
+};
+var getters = {
+  userData: function userData(state) {
+    return state.userData;
+  }
+};
+var mutations = {
+  setUserData: function setUserData(state, data) {
+    console.log(data);
+    state.userData = Array.isArray(data) && data.length ? data[0] : data;
+    console.log(state.userData);
+  }
+};
+var actions = {
+  getUserData: function getUserData(_ref) {
+    var commit = _ref.commit;
+    return (0,_urls__WEBPACK_IMPORTED_MODULE_0__.authAjax)().get(_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.getUserData).then(function (response) {
+      commit('setUserData', response.data.data);
+    })["catch"](function () {});
+  }
 };
 
 /***/ }),
@@ -15656,7 +15563,7 @@ var render = function () {
               ]
             ),
             _vm._v(" "),
-            !_vm.userLogin
+            !_vm.userData
               ? _c(
                   "router-link",
                   {
@@ -15727,7 +15634,13 @@ var render = function () {
                                 ]),
                               ]),
                               _vm._v(" "),
-                              _c("p", [_vm._v("ირაკლი კურტანიძე")]),
+                              _c("p", [
+                                _vm._v(
+                                  _vm._s(_vm.userData.name) +
+                                    " " +
+                                    _vm._s(_vm.userData.lastname)
+                                ),
+                              ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "balance" }, [
                                 _vm._v(
@@ -15865,9 +15778,14 @@ var render = function () {
                               _vm._v(_vm._s(_vm.$t("ახალი შეკვეთა"))),
                             ]),
                             _vm._v(" "),
-                            _c("button", { staticClass: "logout" }, [
-                              _vm._v(_vm._s(_vm.$t("ანგარიშიდან გამოსვლა"))),
-                            ]),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "logout",
+                                on: { click: _vm.logout },
+                              },
+                              [_vm._v(_vm._s(_vm.$t("ანგარიშიდან გამოსვლა")))]
+                            ),
                           ],
                           1
                         )

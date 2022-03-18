@@ -33,7 +33,7 @@
                     <img src="/images/package-icon.png" alt="">
                     {{ $t('ამანათი') }}
                 </div>
-                <router-link v-if="!userLogin" :to="{name: 'login'}" class="controls-button login-button">
+                <router-link v-if="!userData" :to="{name: 'login'}" class="controls-button login-button">
                     <img src="/images/user-default-icon.png" alt="">
                     {{ $t('ავტორიზაცია') }}
                 </router-link>
@@ -52,7 +52,7 @@
                                     <img src="/images/verify-icon.png" alt=""/>
                                 </div>
                             </div>
-                            <p>ირაკლი კურტანიძე</p>
+                            <p>{{ userData.name }} {{ userData.lastname }}</p>
                             <div class="balance">
                                 {{ $t('ბალანსი') }}:
                                 <span>32.4<svg width="12" height="15" viewBox="0 0 12 15" fill="none"
@@ -88,7 +88,7 @@
                         </router-link>
                         <hr>
                         <button>{{ $t('ახალი შეკვეთა') }}</button>
-                        <button class="logout">{{ $t('ანგარიშიდან გამოსვლა') }}</button>
+                        <button class="logout" @click="logout">{{ $t('ანგარიშიდან გამოსვლა') }}</button>
                     </div>
                 </div>
             </div>
@@ -111,6 +111,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
     name: 'Header',
     data() {
@@ -132,10 +134,12 @@ export default {
             openLanguageSelector: false,
             openUserProfile: false,
             packageSearch: false,
-            userLogin: false,
         }
     },
     computed: {
+        ...mapGetters({
+            userData: 'user/userData'
+        }),
         selectedLanguage() {
             return this.langs.find(el => el.lang === this.$i18n.locale) || {}
         }
@@ -173,6 +177,10 @@ export default {
                 this.openUserProfile = false
                 window.removeEventListener('click', this.closeUser)
             }
+        },
+        logout() {
+            this.$store.dispatch('login/logout')
+            this.$router.go()
         }
     }
 }

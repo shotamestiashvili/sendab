@@ -15,6 +15,10 @@ export default {
         meta.content = "width=device-width, initial-scale=1";
         document.head.appendChild(meta);
 
+        // const script = document.createElement('script');
+        // script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCFdhprZky30BVC3iqhM3MLsADcBcKOoM4&libraries=places"
+        // document.head.appendChild(script);
+
         ajax.get(apiUrls.sanctumToken).catch(() => {}).finally(() => {
             if (tokens.isAuthorized) {
                 this.$store.dispatch('user/getUserData')

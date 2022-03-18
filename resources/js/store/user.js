@@ -14,9 +14,7 @@ export const getters = {
 
 export const mutations = {
     setUserData(state, data) {
-        console.log(data)
         state.userData = Array.isArray(data) && data.length ? data[0] : data
-        console.log(state.userData)
     }
 }
 

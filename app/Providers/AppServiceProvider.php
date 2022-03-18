@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\CustomerCommunication;
+use App\Observers\CustomerCommunicationObserver;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -27,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        CustomerCommunication::observe(CustomerCommunicationObserver::class);
+
          ResetPassword::createUrlUsing(
             function($notifable, $token){
                 return "http://sendapp/reset-password/{$token}?email={$notifable->getEmailForPasswordReset()}";

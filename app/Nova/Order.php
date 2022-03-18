@@ -4,8 +4,10 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -52,7 +54,15 @@ class Order extends Resource
             HasMany::make('Insuarance', 'insuarance', \App\Nova\Insuarance::class),
             HasMany::make('Term', 'terms', \App\Nova\Term::class),
             Text::make('Amount', 'amount')->sortable(),
-            Text::make('Status', 'status')->sortable(),
+            Select::make('Choose Currency', 'currency')->options([
+                'usd' => 'USD',
+                'euro'=> 'Euro',
+                'gel' => 'GEL'
+            ])->placeholder('Select your currency'),
+            Select::make('Status', 'status')->options([
+                 1 => 'Yes',
+                 0 => 'No',
+            ])
         ];
     }
 

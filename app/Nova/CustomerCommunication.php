@@ -8,14 +8,14 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Faq extends Resource
+class CustomerCommunication extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Faq::class;
+    public static $model = \App\Models\CustomerCommunication::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -43,9 +43,9 @@ class Faq extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Textarea::make('Question', 'question')->sortable(),
-            Textarea::make('Answer', 'answer')->sortable(),
-            Text::make('Language', 'language')->sortable(),
+            Text::make('Email', 'email')->sortable(),
+            Text::make('Subject', 'subject')->sortable(),
+            Textarea::make('Text', 'text')->sortable(),
         ];
     }
 

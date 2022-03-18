@@ -4,7 +4,9 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -47,15 +49,23 @@ class Customer extends Resource
             BelongsTo::make('USER ID', 'user', \App\Nova\User::class),
             Text::make('Firstname', 'firstname')->sortable(),
             Text::make('Lastname', 'lastname')->sortable(),
-            Text::make('Birthdate', 'birthdate')->sortable(),
+            Date::make('Birthdate', 'birthdate')->sortable(),
             Text::make('Phone Number', 'phone')->sortable(),
             Text::make('Country', 'country')->sortable(),
             Text::make('City', 'city')->sortable(),
             Text::make('Address', 'address1')->sortable(),
             Text::make('Address 2', 'address2')->sortable(),
             Text::make('Postal Code', 'postal')->sortable(),
-            Text::make('Terms', 'terms')->sortable(),
-            Text::make('Verified', 'verified')->sortable(),
+//            Text::make('Terms', 'terms')->sortable(),
+//            Text::make('Verified', 'verified')->sortable(),
+            Select::make('Terms', 'terms')->options([
+                1 => 'Yes',
+                0 => 'No',
+            ])->sortable(),
+            Select::make('Verified', 'verified')->options([
+                1 => 'Yes',
+                0 => 'No',
+            ])->sortable(),
 
         ];
     }

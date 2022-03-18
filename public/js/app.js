@@ -9683,6 +9683,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Header',
@@ -9704,7 +9706,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
-    userData: 'user/userData'
+    userData: 'user/userData',
+    userAvatar: 'user/userAvatar'
   })), {}, {
     selectedLanguage: function selectedLanguage() {
       var _this = this;
@@ -11277,7 +11280,7 @@ var mutations = {
     state.userData = Array.isArray(data) && data.length ? data[0] : data;
   },
   setUserAvatar: function setUserAvatar(state, data) {
-    state.userAvatar = data;
+    state.userAvatar = data.message && data.message === 'No Avatar' ? null : data;
   }
 };
 var actions = {
@@ -26256,13 +26259,21 @@ var render = function () {
                         on: { click: _vm.openUser },
                       },
                       [
-                        _c("img", {
-                          staticClass: "avatar",
-                          attrs: {
-                            src: "/images/placeholder-user-image.png",
-                            alt: "",
-                          },
-                        }),
+                        !_vm.userAvatar
+                          ? _c("img", {
+                              staticClass: "avatar",
+                              attrs: {
+                                src: "/images/user-default-icon-blue.png",
+                                alt: "",
+                              },
+                            })
+                          : _c("img", {
+                              staticClass: "avatar",
+                              attrs: {
+                                src: "/images/placeholder-user-image.png",
+                                alt: "",
+                              },
+                            }),
                         _vm._v(" "),
                         _c("span", [_vm._v(_vm._s(_vm.$t("ანგარიში")))]),
                         _vm._v(" "),
@@ -26280,12 +26291,19 @@ var render = function () {
                           [
                             _c("div", { staticClass: "avatar-grid" }, [
                               _c("div", { staticClass: "user-avatar" }, [
-                                _c("img", {
-                                  attrs: {
-                                    src: "/images/placeholder-user-image.png",
-                                    alt: "",
-                                  },
-                                }),
+                                !_vm.userAvatar
+                                  ? _c("img", {
+                                      attrs: {
+                                        src: "/images/user-default-icon-blue.png",
+                                        alt: "",
+                                      },
+                                    })
+                                  : _c("img", {
+                                      attrs: {
+                                        src: "/images/placeholder-user-image.png",
+                                        alt: "",
+                                      },
+                                    }),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "verify-icon" }, [
                                   _c("img", {

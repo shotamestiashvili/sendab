@@ -21,7 +21,7 @@ export const mutations = {
         state.userData = Array.isArray(data) && data.length ? data[0] : data
     },
     setUserAvatar(state, data) {
-        state.userAvatar = data
+        state.userAvatar = data.message && data.message === 'No Avatar' ? null : data
     }
 }
 

@@ -24,6 +24,8 @@ class Customer extends Model
         'verified',
     ];
 
+    protected $dates= ['birthdate'];
+
     public function user(){
         return $this->belongsTo( User::class);
     }

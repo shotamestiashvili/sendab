@@ -34,7 +34,7 @@ class EmailVerification extends Mailable
     public function build()
     {
         return $this
-            ->from('sendab@sendab.com')
+            ->from('no_reply@sendab.com')
             ->markdown('emails.EmailVerification')
             ->with(['email'=>$this->email, 'remember_token'=>$this->remember_token]);
     }

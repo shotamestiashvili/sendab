@@ -41,7 +41,7 @@ class Support extends Mailable
     public function build()
     {
         return $this
-            ->from('sendab@sendab.com')
+            ->from('no_reply@sendab.com')
             ->markdown('emails.Support')
             ->with([
                 'subject'=>$this->subject,

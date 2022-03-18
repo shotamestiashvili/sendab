@@ -31,7 +31,7 @@ class PasswordReset extends Mailable
     public function build()
     {
         return $this
-            ->from('sendab@sendab.com')
+            ->from('no_reply@sendab.com')
             ->markdown('emails.PasswordReset')
             ->with(['password'=>$this->password]);
     }

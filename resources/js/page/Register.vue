@@ -101,7 +101,11 @@ export default {
     methods: {
         register() {
             this.registrationData.name = `${this.registrationData.firstname} ${this.registrationData.lastname}`
-            this.$store.dispatch('login/register', this.registrationData)
+            this.$store.dispatch('login/register', this.registrationData).then(() => {
+                this.$store.dispatch('user/getUserData')
+                this.$store.dispatch('user/getUserAvatar')
+                this.$router.push({name: 'home'})
+            })
         }
     }
 }

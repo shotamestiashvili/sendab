@@ -8777,6 +8777,8 @@ __webpack_require__.r(__webpack_exports__);
     _store_urls__WEBPACK_IMPORTED_MODULE_0__.ajax.get(_store_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.sanctumToken)["catch"](function () {})["finally"](function () {
       if (_utils_tokens__WEBPACK_IMPORTED_MODULE_1__["default"].isAuthorized) {
         _this.$store.dispatch('user/getUserData');
+
+        _this.$store.dispatch('user/getUserAvatar');
       }
     });
     this.$i18n.locale = ['ge', 'en', 'de'].includes(localStorage.getItem('lang')) ? localStorage.getItem('lang') : 'ge';
@@ -9749,8 +9751,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     logout: function logout() {
-      this.$store.dispatch('login/logout');
-      this.$router.go();
+      this.$store.dispatch('login/logout').then(function () {
+        localStorage.removeItem('userToken');
+        location.reload();
+      });
     }
   }
 });
@@ -10287,7 +10291,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     login: function login() {
-      this.$store.dispatch('login/login', this.loginData);
+      var _this = this;
+
+      this.$store.dispatch('login/login', this.loginData).then(function () {
+        _this.$store.dispatch('user/getUserData');
+
+        _this.$store.dispatch('user/getUserAvatar');
+
+        _this.$router.push({
+          name: 'home'
+        });
+      });
     }
   }
 });
@@ -10406,8 +10420,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     register: function register() {
+      var _this = this;
+
       this.registrationData.name = "".concat(this.registrationData.firstname, " ").concat(this.registrationData.lastname);
-      this.$store.dispatch('login/register', this.registrationData);
+      this.$store.dispatch('login/register', this.registrationData).then(function () {
+        _this.$store.dispatch('user/getUserData');
+
+        _this.$store.dispatch('user/getUserAvatar');
+
+        _this.$router.push({
+          name: 'home'
+        });
+      });
     }
   }
 });
@@ -10941,7 +10965,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   routes: _routes__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 router.beforeEach(function (to, from, next) {
-  var loggedIn = localStorage.getItem('user');
+  var loggedIn = localStorage.getItem('userToken');
 
   if (to.matched.some(function (record) {
     return record.meta.requiresAuth;
@@ -11030,6 +11054,7 @@ __webpack_require__.r(__webpack_exports__);
       name: 'user-profile',
       component: _components_UserProfile_MyProfile__WEBPACK_IMPORTED_MODULE_8__["default"],
       meta: {
+        requiresAuth: true,
         headerColor: 'white'
       }
     }, {
@@ -11037,6 +11062,7 @@ __webpack_require__.r(__webpack_exports__);
       name: 'my-packages',
       component: _components_UserProfile_MyPackages__WEBPACK_IMPORTED_MODULE_9__["default"],
       meta: {
+        requiresAuth: true,
         headerColor: 'white'
       }
     }, {
@@ -11044,6 +11070,7 @@ __webpack_require__.r(__webpack_exports__);
       name: 'account-settings',
       component: _components_UserProfile_AccountSettings__WEBPACK_IMPORTED_MODULE_10__["default"],
       meta: {
+        requiresAuth: true,
         headerColor: 'white'
       }
     }, {
@@ -11051,6 +11078,7 @@ __webpack_require__.r(__webpack_exports__);
       name: 'billing-info',
       component: _components_UserProfile_BillingInfo__WEBPACK_IMPORTED_MODULE_11__["default"],
       meta: {
+        requiresAuth: true,
         headerColor: 'white'
       }
     }]
@@ -11127,7 +11155,6 @@ var actions = {
       verified: false
     }).then(function (response) {
       localStorage.setItem('userToken', response.data.token);
-      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Account Registered');
     })["catch"](function (e) {
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
         icon: 'error',
@@ -11143,16 +11170,11 @@ var actions = {
       password: data.password
     }).then(function (response) {
       localStorage.setItem('userToken', response.data.token);
-      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Login Sucessfully');
     })["catch"](function () {});
   },
   logout: function logout() {
     return (0,_urls__WEBPACK_IMPORTED_MODULE_0__.authAjax)().post(_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.logout, {
       token: _utils_tokens__WEBPACK_IMPORTED_MODULE_2__["default"].userToken
-    }).then(function () {
-      localStorage.removeItem('userToken');
-      console.log(localStorage);
-      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Logout');
     })["catch"](function () {});
   }
 };
@@ -11239,16 +11261,23 @@ __webpack_require__.r(__webpack_exports__);
 
 var namespaced = true;
 var state = {
-  userData: null
+  userData: null,
+  userAvatar: null
 };
 var getters = {
   userData: function userData(state) {
     return state.userData;
+  },
+  userAvatar: function userAvatar(state) {
+    return state.userAvatar;
   }
 };
 var mutations = {
   setUserData: function setUserData(state, data) {
     state.userData = Array.isArray(data) && data.length ? data[0] : data;
+  },
+  setUserAvatar: function setUserAvatar(state, data) {
+    state.userAvatar = data;
   }
 };
 var actions = {
@@ -11256,6 +11285,12 @@ var actions = {
     var commit = _ref.commit;
     return (0,_urls__WEBPACK_IMPORTED_MODULE_0__.authAjax)().get(_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.getUserData).then(function (response) {
       commit('setUserData', response.data.data);
+    })["catch"](function () {});
+  },
+  getUserAvatar: function getUserAvatar(_ref2) {
+    var commit = _ref2.commit;
+    return (0,_urls__WEBPACK_IMPORTED_MODULE_0__.authAjax)().get(_urls__WEBPACK_IMPORTED_MODULE_0__.apiUrls.getUserAvatar).then(function (response) {
+      commit('setUserAvatar', response.data.data);
     })["catch"](function () {});
   }
 };
@@ -11465,7 +11500,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".date-picker input {\n  height: 40px;\n  width: 100%;\n  background: #FAFDFE;\n  border: 1px solid #D1EAF1;\n  box-sizing: border-box;\n  box-shadow: 0 2px 1px rgba(209, 234, 241, 0.25);\n  border-radius: 40px;\n  margin: 0 0 10px;\n  padding: 2px 18px;\n  font-weight: 500;\n  font-size: 16px;\n  color: #889CB9;\n}\n.date-picker input:focus, .date-picker input:focus-visible {\n  border-color: #1D519A;\n  outline: none;\n}\n.date-picker .vdp-datepicker__calendar {\n  border: 5px solid #00D1FF;\n  box-sizing: border-box;\n  border-radius: 20px;\n  padding: 10px;\n  color: #1D519A;\n}\n.date-picker .vdp-datepicker__calendar header span {\n  border-bottom: 1px solid #DDEFF3 !important;\n  margin-bottom: 5px;\n}\n.date-picker .vdp-datepicker__calendar .prev:after {\n  content: \"\";\n  background-image: url(\"/images/date-picker-arrow-left.png\");\n  background-size: cover;\n  width: 34px;\n  height: 24px;\n  border: none;\n  border-left: 10px solid transparent;\n}\n.date-picker .vdp-datepicker__calendar .next:after {\n  content: \"\";\n  background-image: url(\"/images/date-picker-arrow-right.png\");\n  background-size: cover;\n  width: 34px;\n  height: 24px;\n  border: none;\n  border-right: 10px solid transparent;\n}\n.custom-location-input .ap-input-icon svg {\n  top: 42%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".date-picker input {\n  height: 40px;\n  width: 100%;\n  background: #FAFDFE;\n  border: 1px solid #D1EAF1;\n  box-sizing: border-box;\n  box-shadow: 0 2px 1px rgba(209, 234, 241, 0.25);\n  border-radius: 40px;\n  margin: 0 0 10px;\n  padding: 2px 18px;\n  font-weight: 500;\n  font-size: 16px;\n  color: #889CB9;\n}\n.date-picker input:focus, .date-picker input:focus-visible {\n  border-color: #1D519A;\n  outline: none;\n}\n.date-picker .vdp-datepicker__calendar {\n  border: 5px solid #00D1FF;\n  box-sizing: border-box;\n  border-radius: 20px;\n  padding: 10px;\n  color: #1D519A;\n}\n.date-picker .vdp-datepicker__calendar header span {\n  border-bottom: 1px solid #DDEFF3 !important;\n  margin-bottom: 5px;\n}\n.date-picker .vdp-datepicker__calendar .prev:after {\n  content: \"\";\n  background-image: url(\"/images/date-picker-arrow-left.png\");\n  background-size: cover;\n  width: 34px;\n  height: 24px;\n  border: none;\n  border-left: 10px solid transparent;\n}\n.date-picker .vdp-datepicker__calendar .next:after {\n  content: \"\";\n  background-image: url(\"/images/date-picker-arrow-right.png\");\n  background-size: cover;\n  width: 34px;\n  height: 24px;\n  border: none;\n  border-right: 10px solid transparent;\n}\n.custom-location-input input {\n  padding-right: 30px !important;\n}\n.custom-location-input .ap-input-icon svg {\n  top: 42%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11537,7 +11572,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".custom-location-input .ap-input-icon svg {\n  top: 42%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".custom-location-input input {\n  padding-right: 30px !important;\n}\n.custom-location-input .ap-input-icon svg {\n  top: 42%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11801,7 +11836,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".date-picker input {\n  height: 40px;\n  width: 100%;\n  background: #FAFDFE;\n  border: 1px solid #D1EAF1;\n  box-sizing: border-box;\n  box-shadow: 0 2px 1px rgba(209, 234, 241, 0.25);\n  border-radius: 40px;\n  margin: 0 0 10px;\n  padding: 2px 18px;\n  font-weight: 500;\n  font-size: 16px;\n  color: #889CB9;\n}\n.date-picker input:focus, .date-picker input:focus-visible {\n  border-color: #1D519A;\n  outline: none;\n}\n.date-picker .vdp-datepicker__calendar {\n  border: 5px solid #00D1FF;\n  box-sizing: border-box;\n  border-radius: 20px;\n  padding: 10px;\n  color: #1D519A;\n}\n.date-picker .vdp-datepicker__calendar header span {\n  border-bottom: 1px solid #DDEFF3 !important;\n  margin-bottom: 5px;\n}\n.date-picker .vdp-datepicker__calendar .prev:after {\n  content: \"\";\n  background-image: url(\"/images/date-picker-arrow-left.png\");\n  background-size: cover;\n  width: 34px;\n  height: 24px;\n  border: none;\n  border-left: 10px solid transparent;\n}\n.date-picker .vdp-datepicker__calendar .next:after {\n  content: \"\";\n  background-image: url(\"/images/date-picker-arrow-right.png\");\n  background-size: cover;\n  width: 34px;\n  height: 24px;\n  border: none;\n  border-right: 10px solid transparent;\n}\n.custom-location-input .ap-input-icon svg {\n  top: 42%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".date-picker input {\n  height: 40px;\n  width: 100%;\n  background: #FAFDFE;\n  border: 1px solid #D1EAF1;\n  box-sizing: border-box;\n  box-shadow: 0 2px 1px rgba(209, 234, 241, 0.25);\n  border-radius: 40px;\n  margin: 0 0 10px;\n  padding: 2px 18px;\n  font-weight: 500;\n  font-size: 16px;\n  color: #889CB9;\n}\n.date-picker input:focus, .date-picker input:focus-visible {\n  border-color: #1D519A;\n  outline: none;\n}\n.date-picker .vdp-datepicker__calendar {\n  border: 5px solid #00D1FF;\n  box-sizing: border-box;\n  border-radius: 20px;\n  padding: 10px;\n  color: #1D519A;\n}\n.date-picker .vdp-datepicker__calendar header span {\n  border-bottom: 1px solid #DDEFF3 !important;\n  margin-bottom: 5px;\n}\n.date-picker .vdp-datepicker__calendar .prev:after {\n  content: \"\";\n  background-image: url(\"/images/date-picker-arrow-left.png\");\n  background-size: cover;\n  width: 34px;\n  height: 24px;\n  border: none;\n  border-left: 10px solid transparent;\n}\n.date-picker .vdp-datepicker__calendar .next:after {\n  content: \"\";\n  background-image: url(\"/images/date-picker-arrow-right.png\");\n  background-size: cover;\n  width: 34px;\n  height: 24px;\n  border: none;\n  border-right: 10px solid transparent;\n}\n.custom-location-input input {\n  padding-right: 30px !important;\n}\n.custom-location-input .ap-input-icon svg {\n  top: 42%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

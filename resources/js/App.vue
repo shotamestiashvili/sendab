@@ -22,6 +22,7 @@ export default {
         ajax.get(apiUrls.sanctumToken).catch(() => {}).finally(() => {
             if (tokens.isAuthorized) {
                 this.$store.dispatch('user/getUserData')
+                this.$store.dispatch('user/getUserAvatar')
             }
         })
 

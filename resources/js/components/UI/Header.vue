@@ -179,8 +179,10 @@ export default {
             }
         },
         logout() {
-            this.$store.dispatch('login/logout')
-            this.$router.go()
+            this.$store.dispatch('login/logout').then(() => {
+                localStorage.removeItem('userToken');
+                location.reload();
+            })
         }
     }
 }

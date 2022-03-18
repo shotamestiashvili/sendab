@@ -95,6 +95,10 @@ export default {
 
 <style lang="scss">
 .custom-location-input {
+    input {
+        padding-right: 30px !important;
+    }
+
     .ap-input-icon svg {
         top: 42%
     }

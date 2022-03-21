@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main :style="{'background-color': $route.meta.backgroundColor}">
         <main-header :style="{'background-color': $route.meta.headerColor}"/>
         <router-view/>
         <main-footer/>

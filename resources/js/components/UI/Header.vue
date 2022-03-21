@@ -89,7 +89,7 @@
                             <img src="/images/billing-icon.png" alt="">{{ $t('ბალანსის მართვა') }}
                         </router-link>
                         <hr>
-                        <button>{{ $t('ახალი შეკვეთა') }}</button>
+                        <button @click="$router.push({name: 'create-offer'})">{{ $t('ახალი შეკვეთა') }}</button>
                         <button class="logout" @click="logout">{{ $t('ანგარიშიდან გამოსვლა') }}</button>
                     </div>
                 </div>
@@ -343,6 +343,7 @@ header {
                 position: relative;
 
                 .user-profile {
+                    border: 1px solid #DDEFF3;
                     background: #FFFFFF;
                     border-radius: 40px;
                     height: 50px;

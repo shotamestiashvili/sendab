@@ -10,6 +10,7 @@ import MyProfile from "../components/UserProfile/MyProfile";
 import MyPackages from "../components/UserProfile/MyPackages";
 import AccountSettings from "../components/UserProfile/AccountSettings";
 import BillingInfo from "../components/UserProfile/BillingInfo";
+import CreateOffer from "../page/CreateOffer";
 
 export default [
     {
@@ -90,6 +91,16 @@ export default [
                         }
                     }
                 ]
+            },
+            {
+                path: 'create-offer',
+                name: 'create-offer',
+                component: CreateOffer,
+                meta: {
+                    requiresAuth: true,
+                    backgroundColor: 'white',
+                    headerColor: 'white'
+                }
             }
         ]
     }

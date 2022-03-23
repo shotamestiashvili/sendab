@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Http\Controllers\Controller;use App\Mail\EmailVerification;use App\Models\Customer;use App\Models\User;use Illuminate\Http\Request;use Illuminate\Support\Facades\Hash;use Illuminate\Support\Facades\Validator;use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;use App\Mail\EmailVerification;
+use App\Models\Balance;
+use App\Models\Customer;use App\Models\User;use Illuminate\Http\Request;use Illuminate\Support\Facades\Hash;use Illuminate\Support\Facades\Validator;use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -44,6 +46,8 @@ class RegisterController extends Controller
                 'terms'=> $request->terms,
                 'verified'=> false,
             ]);
+
+
 
             $token = $user->createToken('Sendab')->plainTextToken;
 

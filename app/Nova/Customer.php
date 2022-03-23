@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
@@ -58,14 +59,17 @@ class Customer extends Resource
             Text::make('Postal Code', 'postal')->sortable(),
 //            Text::make('Terms', 'terms')->sortable(),
 //            Text::make('Verified', 'verified')->sortable(),
-            Select::make('Terms', 'terms')->options([
-                1 => 'Yes',
-                0 => 'No',
-            ])->sortable(),
-            Select::make('Verified', 'verified')->options([
-                1 => 'Yes',
-                0 => 'No',
-            ])->sortable(),
+//            Select::make('Terms', 'terms')->options([
+//                1 => 'Yes',
+//                0 => 'No',
+//            ])->sortable(),
+//            Select::make('Verified', 'verified')->options([
+//                1 => 'Yes',
+//                0 => 'No',
+//            ])->sortable(),
+            Boolean::make('Terms', 'terms')->sortable(),
+            Boolean::make('Verified', 'verified')->sortable(),
+
 
         ];
     }

@@ -18,7 +18,7 @@ class Route extends Model
         'route4',
         'route5',
         'route6',
-        'destination'
+        'destination',
     ];
 
     public function partnior(){

@@ -3,7 +3,9 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Offer extends Resource
@@ -41,6 +43,9 @@ class Offer extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Text::make('Partner', 'partnior_id', )->sortable(),
+            Text::make('User', 'user_id', )->sortable(),
+            Text::make('Status', 'status', )->sortable(),
         ];
     }
 

@@ -20,6 +20,7 @@ class CreateParcelsTable extends Migration
             $table->string('item2')->nullable();
             $table->string('item3')->nullable();
             $table->string('item4')->nullable();
+            $table->string('item5')->nullable();
             $table->string('item6')->nullable();
             $table->string('item7')->nullable();
             $table->string('item8')->nullable();

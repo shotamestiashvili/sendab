@@ -43,7 +43,7 @@ class Faq extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Textarea::make('Question', 'question')->sortable(),
+            Text::make('Question', 'question')->sortable(),
             Textarea::make('Answer', 'answer')->sortable(),
             Text::make('Language', 'language')->sortable(),
         ];

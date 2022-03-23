@@ -45,6 +45,8 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
-
+    public function PaypalOrder(){
+        return $this->hasMany(PaypalOrder::class);
+    }
 
 }

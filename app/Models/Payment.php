@@ -16,6 +16,8 @@ class Payment extends Model
         'status',
     ];
 
+
+
     public function balance(){
         return $this->belongsTo(Balance::class);
     }
@@ -23,4 +25,6 @@ class Payment extends Model
     public function order(){
         return $this->belongsTo(Order::class);
     }
+
+
 }

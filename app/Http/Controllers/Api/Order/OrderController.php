@@ -2,7 +2,16 @@
 
 namespace App\Http\Controllers\Api\Order;
 
-use App\Http\Controllers\Controller;use App\Http\Requests\OrderRequest;use App\Http\Resources\OrderResource;use App\Models\Insuarance;use App\Models\Order;use App\Models\Person;use App\Models\Pickup;use App\Models\Term;use Illuminate\Http\Request;use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
+use App\Http\Resources\OrderResource;
+use App\Models\Insuarance;
+use App\Models\Order;
+use App\Models\Person;
+use App\Models\Pickup;
+use App\Models\Term;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -47,6 +56,8 @@ class OrderController extends Controller
                 'order_id' => $order->id,
                 'term'=>$request->term,
             ]);
+
+
         }catch (\Exception $e){
             return $e;
         }

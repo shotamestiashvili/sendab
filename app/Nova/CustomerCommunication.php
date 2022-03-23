@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class CustomerCommunication extends Resource
@@ -45,7 +46,7 @@ class CustomerCommunication extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('Email', 'email')->sortable(),
             Text::make('Subject', 'subject')->sortable(),
-            Textarea::make('Text', 'text')->sortable(),
+            Trix::make('Text', 'text')->sortable(),
         ];
     }
 

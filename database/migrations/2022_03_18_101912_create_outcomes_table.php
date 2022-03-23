@@ -17,6 +17,7 @@ class CreateOutcomesTable extends Migration
             $table->id();
             $table->foreignId('balance_id')->constrained();
             $table->integer('outcome_amount');
+            $table->string('method');
             $table->string('status');
             $table->timestamps();
         });

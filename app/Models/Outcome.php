@@ -12,6 +12,7 @@ class Outcome extends Model
     protected $fillable = [
         'balance_id',
         'outcome_amount',
+        'method',
         'status',
     ];
 

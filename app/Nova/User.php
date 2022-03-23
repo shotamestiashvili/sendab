@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Downloadable;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Password;
@@ -80,6 +81,7 @@ class User extends Resource
             HasMany::make('Customer Info', 'customers', \App\Nova\Customer::class),
             HasMany::make('Partnior', 'partniors', \App\Nova\Partnior::class),
             HasMany::make('Order', 'orders', \App\Nova\Order::class),
+            HasOne::make('Balance', 'balance', \App\Nova\Balance::class),
         ];
     }
 

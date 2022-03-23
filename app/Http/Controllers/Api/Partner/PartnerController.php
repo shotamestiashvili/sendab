@@ -9,7 +9,7 @@ class PartnerController extends Controller
     public function becomePartner(Request $request){
 
 
-        $userId = Auth::user()->id;
+//        $userId = Auth::user()->id;
 
        $partner = Partner::create([
            'user_id' => $userId,

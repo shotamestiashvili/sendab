@@ -18,6 +18,7 @@ class CreateIncomesTable extends Migration
             $table->foreignId('balance_id')->constrained();
             $table->integer('income_amount');
             $table->string('status');
+            $table->string('method');
             $table->timestamps();
         });
     }

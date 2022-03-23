@@ -30,8 +30,9 @@ class DocumentController extends Controller
            $documentFront  = Document::where('user_id', Auth::user()->id)
                                      ->value('front');
            return base64_encode(Storage::get($documentFront));
+       }else{
+           return Response()->json(['message'=>'No Document']);
        }
-
    }
 
     public function getDocumentBack(){
@@ -39,6 +40,8 @@ class DocumentController extends Controller
             $documentBack  = Document::where('user_id', Auth::user()->id)
                                      ->value('back');
             return base64_encode(Storage::get($documentBack));
+        }else{
+            return Response()->json(['message'=>'No Document']);
         }
     }
 
@@ -47,6 +50,8 @@ class DocumentController extends Controller
             $documentSelfie  = Document::where('user_id', Auth::user()->id)
                                        ->value('selfie');
             return base64_encode(Storage::get($documentSelfie));
+        }else{
+            return Response()->json(['message'=>'No Document']);
         }
     }
 }

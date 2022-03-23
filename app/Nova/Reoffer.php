@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -44,7 +45,7 @@ class Reoffer extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make('Partner', 'partnior', \App\Nova\Partnior::class),
-            Text::make('Reoffer?', 'reoffer')->sortable(),
+            Boolean::make('Reoffer?', 'reoffer')->sortable(),
         ];
     }
 

@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -60,10 +61,11 @@ class Order extends Resource
                 'euro'=> 'Euro',
                 'gel' => 'GEL'
             ])->placeholder('Select your currency'),
-            Select::make('Status', 'status')->options([
-                 1 => 'Yes',
-                 0 => 'No',
-            ])
+//            Select::make('Status', 'status')->options([
+//                 1 => 'Yes',
+//                 0 => 'No',
+//            ])
+           Boolean::make('Status', 'status')->sortable(),
         ];
     }
 

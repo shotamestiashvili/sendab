@@ -43,6 +43,9 @@ class Partnior extends Model
         return $this->hasMany(Reoffer::class);
     }
 
+    public function offers(){
+        return $this->hasMany(Offer::class);
+    }
 
 
 }

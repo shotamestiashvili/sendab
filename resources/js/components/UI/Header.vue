@@ -24,14 +24,14 @@
                 </div>
             </div>
             <nav>
-                <router-link :to="{name: 'send-package'}">{{ $t('ამანათის გაგზავნა') }}</router-link>
+                <router-link to="#">{{ $t('ჩვენს შესახებ') }}</router-link>
                 <router-link :to="{name: 'help'}">{{ $t('დახმარება') }}</router-link>
                 <router-link :to="{name: 'sendab-offer'}">{{ $t('სენდაბის შემოთავაზება') }}</router-link>
             </nav>
             <div class="controls">
-                <div class="controls-button" @click="packageSearch = !packageSearch">
+                <div class="controls-button" @click="newOffer">
                     <img src="/images/package-icon.png" alt="">
-                    {{ $t('ამანათი') }}
+                    {{ $t('ახალი შეკვეთა') }}
                 </div>
                 <router-link v-if="!userData" :to="{name: 'login'}" class="controls-button login-button">
                     <img src="/images/user-default-icon.png" alt="">
@@ -89,7 +89,7 @@
                             <img src="/images/billing-icon.png" alt="">{{ $t('ბალანსის მართვა') }}
                         </router-link>
                         <hr>
-                        <button @click="$router.push({name: 'create-offer'})">{{ $t('ახალი შეკვეთა') }}</button>
+                        <!-- <button @click="$router.push({name: 'create-offer'})">{{ $t('ახალი შეკვეთა') }}</button> -->
                         <button class="logout" @click="logout">{{ $t('ანგარიშიდან გამოსვლა') }}</button>
                     </div>
                 </div>
@@ -186,6 +186,13 @@ export default {
                 localStorage.removeItem('userToken');
                 location.reload();
             })
+        },
+        newOffer() {
+            if (!this.userData) {
+                this.$router.push({name: 'login'})
+            } else {
+                this.$router.push({name: 'create-offer'})
+            }
         }
     }
 }

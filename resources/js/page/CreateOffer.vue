@@ -17,10 +17,11 @@
             </div>
             <component
                 :is="activeComponent"
+                :data="data"
+                @update:data="updateData"
             />
-            <button @click="goToNextStage">{{
-                    $t(stage < 3 ? 'განაგრძე' : 'გადაამოწმე და დაასრულე განაცხადი')
-                }}
+            <button @click="goToNextStage">
+                {{ $t(stage < 3 ? 'განაგრძე' : 'გადაამოწმე და დაასრულე განაცხადი') }}
                 <img src="/images/arrow-right-white.png" alt="">
             </button>
         </section>
@@ -32,6 +33,7 @@
 import CreateRoad from "../components/CreateOffer/CreateRoad";
 import CreateParcelType from "../components/CreateOffer/CreateParcelType";
 import CreateBilling from "../components/CreateOffer/CreateBilling";
+import {authAjax, apiUrls} from "../store/urls";
 
 export default {
     name: 'createOffer',
@@ -42,6 +44,30 @@ export default {
                 1: CreateRoad,
                 2: CreateParcelType,
                 3: CreateBilling
+            },
+            data: {
+                airplane: false,
+                car: false,
+                minibus: false,
+                railway: false,
+
+                weight: null,
+                width: null,
+                length: null,
+                height: null,
+                store: false,
+                hand: false,
+
+                price_sum: null,
+                price_kg: null,
+
+                destination: 'test',
+                item1: 'test',
+                source: 'test',
+                status: 'Active',
+
+                reoffer: false,
+                sendab_offer: false
             }
         }
     },
@@ -53,9 +79,23 @@ export default {
     methods: {
         goToNextStage() {
             if (this.stage > 2) {
-                return
+                this.submit()
+            } else {
+                this.stage += 1
             }
-            this.stage += 1
+        },
+        submit() {
+            return authAjax()
+                .post(apiUrls.createOffer, this.data)
+                .then(() => {
+
+                })
+                .catch(() => {
+
+                })
+        },
+        updateData(value) {
+            this.data = value
         }
     }
 }

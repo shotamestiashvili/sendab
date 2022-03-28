@@ -43,6 +43,9 @@ export const apiUrls = {
     getFAQ: '/api/faq/get',
     submitMail: '/api/support/save',
 
+    createOffer: 'api/offer/createOffer',
+    getMyAllOffers: 'api/offer/getMyAllOffers',
+
     getStatus: '/api/check',
     sanctumToken: '/sanctum/csrf-cookie',
 }

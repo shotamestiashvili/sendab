@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="submit">
+                    <div class="submit" @click="Search">
                         <span>{{ $t('ანგარიშის შექმნა  და შეკვეთა') }}</span>
                     </div>
                 </div>
@@ -83,6 +83,11 @@ export default {
                     }
                 }
             }
+        }
+    },
+    methods: {
+        Search() {
+            this.$router.push({name: 'send-package'})
         }
     }
 }

@@ -1,8 +1,8 @@
 <template>
-    <div class="titled-input" @click="$emit('input', value)">
+    <div class="titled-input">
         {{ $t(title) }}
         <slot>
-            <input :type="type" v-model="value" :placeholder="$t(placeholder)">
+            <input :type="type" @input="input" :value="value" :placeholder="$t(placeholder)">
         </slot>
     </div>
 
@@ -26,6 +26,11 @@ export default {
         placeholder: {
             type: String,
             default: 'მნიშვნელობა'
+        }
+    },
+    methods: {
+        input(e) {
+            this.$emit('input', e.target.value)
         }
     }
 }

@@ -20,6 +20,7 @@ export default {
         // document.head.appendChild(script);
 
         ajax.get(apiUrls.sanctumToken).catch(() => {}).finally(() => {
+            this.$store.commit('login/apiConnected')
             if (tokens.isAuthorized) {
                 this.$store.dispatch('user/getUserData')
                 this.$store.dispatch('user/getUserAvatar')

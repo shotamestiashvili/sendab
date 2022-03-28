@@ -1,20 +1,20 @@
 <template>
     <div class="create-billing">
         <CustomSection title="მიუთითე კილოგრამის საშუალო ღირებულება">
-            <TitledInput title="მიუთითე ფასი" type="number" />
-            <CustomInput v-model="price" :compVal="1" title="1 ლარი" />
-            <CustomInput v-model="price" :compVal="5" title="5 ლარი" />
-            <CustomInput v-model="price" :compVal="10" title="10 ლარი" />
+            <TitledInput @input="inputPriceSum" :value="data.price_sum" title="მიუთითე ფასი" type="number"/>
+            <CustomInput @input="inputPriceSum" :value="data.price_sum" compVal="1" title="1 ლარი"/>
+            <CustomInput @input="inputPriceSum" :value="data.price_sum" compVal="5" title="5 ლარი"/>
+            <CustomInput @input="inputPriceSum" :value="data.price_sum" compVal="10" title="10 ლარი"/>
         </CustomSection>
         <CustomSection title="შეკვეთის მიახლოებითი ფასი">
-            <TitledInput title="მიუთითე ფასი" type="number" />
-            <CustomInput v-model="weightPrice" :compVal="1" title="1 ლარი" />
-            <CustomInput v-model="weightPrice" :compVal="5" title="5 ლარი" />
-            <CustomInput v-model="weightPrice" :compVal="10" title="10 ლარი" />
+            <TitledInput @input="inputPriceKG" :value="data.price_kg" title="მიუთითე ფასი" type="number"/>
+            <CustomInput @input="inputPriceKG" :value="data.price_kg" compVal="1" title="1 ლარი"/>
+            <CustomInput @input="inputPriceKG" :value="data.price_kg" compVal="5" title="5 ლარი"/>
+            <CustomInput @input="inputPriceKG" :value="data.price_kg" compVal="10" title="10 ლარი"/>
         </CustomSection>
         <CustomSection title="გსურს თუ არა მომხმარებელთან ფასზე მორიგება?">
-            <CustomInput v-model="boarder" :compVal="1" title="დიახ" />
-            <CustomInput v-model="boarder" :compVal="2" title="არა" />
+            <CustomInput v-model="boarder" :compVal="1" title="დიახ"/>
+            <CustomInput v-model="boarder" :compVal="2" title="არა"/>
         </CustomSection>
     </div>
 
@@ -32,11 +32,28 @@ export default {
         CustomInput,
         TitledInput
     },
+    props: {
+        data: {
+            type: Object,
+            default() {
+                return {
+                    price_sum: null,
+                    price_kg: null
+                }
+            }
+        }
+    },
     data() {
         return {
-            price: 1,
-            weightPrice: 1,
             boarder: 1
+        }
+    },
+    methods: {
+        inputPriceSum(value) {
+            this.$emit('update:data', {...this.data, price_sum: value})
+        },
+        inputPriceKG(value) {
+            this.$emit('update:data', {...this.data, price_kg: value})
         }
     }
 }

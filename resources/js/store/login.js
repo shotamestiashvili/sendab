@@ -4,6 +4,22 @@ import tokens from '../utils/tokens'
 
 export const namespaced = true
 
+export const state = {
+    apiConnected: false,
+}
+
+export const getters = {
+    apiConnected(state) {
+        return state.apiConnected
+    }
+}
+
+export const mutations = {
+    apiConnected(state) {
+        state.apiConnected = true
+    }
+}
+
 export const actions = {
     register(_, data) {
         return ajax

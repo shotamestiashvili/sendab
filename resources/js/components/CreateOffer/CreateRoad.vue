@@ -4,14 +4,14 @@
 
         </CustomSection>
         <CustomSection title="აირჩიე სატრანსპორტო საშუალება">
-            <CustomInput v-model="transportType" :compVal="1" title="თვითმფრინავი" />
-            <CustomInput v-model="transportType" :compVal="2" title="ავტომობილი" />
-            <CustomInput v-model="transportType" :compVal="3" title="ფურგონი" />
-            <CustomInput v-model="transportType" :compVal="4" title="მატარებელი" />
+            <CustomInput @input="inputAirplane" :value="data.airplane" :compVal="true" title="თვითმფრინავი"/>
+            <CustomInput @input="inputCar" :value="data.car" :compVal="true" title="ავტომობილი"/>
+            <CustomInput @input="inputMinibus" :value="data.minibus" :compVal="true" title="ფურგონი"/>
+            <CustomInput @input="inputRailway" :value="data.railway" :compVal="true" title="მატარებელი"/>
         </CustomSection>
-        <CustomSection title="შეიყვანეთ ავტომობილის მონაცემები" v-if="transportType === 2">
-            <TitledInput title="სანომრე ნიშანი" />
-            <TitledInput title="მანქანის მოდელი" />
+        <CustomSection title="შეიყვანეთ ავტომობილის მონაცემები" v-if="data.car">
+            <TitledInput title="სანომრე ნიშანი"/>
+            <TitledInput title="მანქანის მოდელი"/>
         </CustomSection>
     </div>
 
@@ -29,9 +29,31 @@ export default {
         CustomInput,
         TitledInput
     },
-    data() {
-        return {
-            transportType: 1,
+    props: {
+        data: {
+            type: Object,
+            default() {
+                return {
+                    airplane: false,
+                    car: false,
+                    minibus: false,
+                    railway: false
+                }
+            }
+        }
+    },
+    methods: {
+        inputAirplane(value) {
+            this.$emit('update:data', {...this.data, airplane: value, car: false, minibus: false, railway: false})
+        },
+        inputCar(value) {
+            this.$emit('update:data', {...this.data, airplane: false, car: value, minibus: false, railway: false})
+        },
+        inputMinibus(value) {
+            this.$emit('update:data', {...this.data, airplane: false, car: false, minibus: value, railway: false})
+        },
+        inputRailway(value) {
+            this.$emit('update:data', {...this.data, airplane: false, car: false, minibus: false, railway: value})
         }
     }
 }

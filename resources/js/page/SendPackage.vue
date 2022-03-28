@@ -13,6 +13,8 @@
 <script>
 import FilterSection from "../components/SendPackage/FilterSection";
 import PackageCard from "../components/SendPackage/PackageCard";
+import {authAjax, apiUrls} from "../store/urls";
+import {mapGetters} from "vuex";
 
 export default {
     name: 'SendPackage',
@@ -102,6 +104,31 @@ export default {
                     ]
                 }
             ]
+        }
+    },
+    computed: {
+        ...mapGetters({apiConnected: 'login/apiConnected'})
+    },
+    watch: {
+        apiConnected() {
+            this.mount()
+        }
+    },
+    mounted() {
+        if (this.apiConnected) {
+            this.mount()
+        }
+    },
+    methods: {
+        mount() {
+            authAjax()
+                .get(apiUrls.getMyAllOffers)
+                .then(response => {
+                    this.searchResults = response.data.data
+                })
+                .catch(() => {
+
+                })
         }
     }
 }

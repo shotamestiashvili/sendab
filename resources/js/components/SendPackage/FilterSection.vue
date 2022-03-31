@@ -11,7 +11,7 @@
                 <div class="add-location" ref="locationForm">
                     <img src="/images/add-location.png" alt="" @click="openLocation">
                     <div class="location-form" v-if="openLocationForm">
-                        <div class="input-form custom-location-input">
+                        <div class="input-form filter-section-location-input">
                             <p>{{ $t('გამგზავნი ქვეყანა') }}</p>
                             <Places
                                 v-model="fromLocation.label"
@@ -19,7 +19,7 @@
                                 :placeholder="$t('აირჩიე ქვეყანა')"
                             />
                         </div>
-                        <div class="input-form custom-location-input">
+                        <div class="input-form filter-section-location-input">
                             <p>{{ $t('მიმღები ქვეყანა') }}</p>
                             <Places
                                 v-model="toLocation.label"
@@ -130,7 +130,7 @@ export default {
 </script>
 
 <style lang="scss">
-.custom-location-input {
+.filter-section-location-input {
     input {
         padding-right: 30px !important;
     }
@@ -277,7 +277,7 @@ section {
                 padding: 28px 0 22px;
                 margin: 0 0 0 36px;
                 cursor: pointer;
-                height: 82px;
+                height: 94px;
 
                 &:first-child {
                     margin: 0 0 0 6px;

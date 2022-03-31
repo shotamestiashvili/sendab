@@ -16,16 +16,19 @@ export default {
             data: [
                 {
                     name: 'პაროლის შეცვლა',
+                    key: '1',
                     component: '',
                     props: {}
                 },
                 {
                     name: 'ელ. ფოსტის შეტყობინებები',
+                    key: '2',
                     component: '',
                     props: {}
                 },
                 {
                     name: 'ანგარიშის დახურვა',
+                    key: '3',
                     component: '',
                     props: {}
                 }

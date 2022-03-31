@@ -12,7 +12,7 @@
         </div>
         <div class="filter-section">
             <div class="filters">
-                <div class="select-to custom-location-input">
+                <div class="select-to send-ab-offer-location-input">
                     <p>{{ $t('მიმღები ქვეყანა') }}</p>
                     <Places
                         :placeholder="$t('აირჩიე ქვეყანა')"
@@ -227,7 +227,7 @@ export default {
     }
 }
 
-.custom-location-input {
+.send-ab-offer-location-input {
     input {
         padding-right: 30px !important;
     }

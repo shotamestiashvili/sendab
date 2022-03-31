@@ -85,7 +85,7 @@ export default {
                 customPredictor(date) {
                     const nowDate = new Date();
                     const firstDay = new Date(nowDate.setDate(nowDate.getDate() - 1));
-                    const lastDay = new Date(nowDate.setDate(nowDate.getDate() + 14));
+                    const lastDay = new Date(nowDate.setDate(nowDate.getDate() + 90));
 
                     if (date < firstDay || date > lastDay) {
                         return true

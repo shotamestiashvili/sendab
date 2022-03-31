@@ -21,7 +21,7 @@ export const mutations = {
         state.userData = Array.isArray(data) && data.length ? data[0] : data
     },
     setUserAvatar(state, data) {
-        state.userAvatar = data.message && data.message === 'No Avatar' ? null : data
+        state.userAvatar = data
     }
 }
 
@@ -35,13 +35,38 @@ export const actions = {
             .catch(() => {
             });
     },
-    getUserAvatar({commit}) {
+    getUserAvatar({commit, dispatch}) {
         return authAjax()
             .get(apiUrls.getUserAvatar)
             .then((response) => {
-                commit('setUserAvatar', response.data.data)
+                if (response.data.data && response.data.data.message && response.data.data.message === 'No Avatar') {
+                    commit('setUserAvatar', null)
+                } else {
+                    dispatch('loadAvatar', response.data)
+                }
             })
             .catch(() => {
             });
     },
+    loadAvatar({commit}, data) {
+        const blob = new Blob([data], {type : 'image/*'});
+        const a = new FileReader();
+        a.onload = function (e) {
+            console.log(e.target.result)
+            commit('setUserAvatar', e.target.result);
+        };
+        a.readAsDataURL(blob);
+    },
+    updateUserData({commit}, data) {
+        return authAjax()
+            .post(apiUrls.updateUserData, data)
+            .catch(() => {
+            });
+    },
+    updateUserAvatar({commit}, data) {
+        return authAjax()
+            .post(apiUrls.saveUserAvatar, data)
+            .catch(() => {
+            });
+    }
 }

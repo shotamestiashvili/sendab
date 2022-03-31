@@ -16,11 +16,13 @@ export default {
             data: [
                 {
                     name: 'მიმდინარე შეკვეთები',
+                    key: '1',
                     component: '',
                     props: {}
                 },
                 {
                     name: 'შეკვეთების ისტორია',
+                    key: '2',
                     component: '',
                     props: {}
                 }

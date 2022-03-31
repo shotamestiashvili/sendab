@@ -37,11 +37,11 @@
             <div class="transport-filters">
                 <div class="filter-item"
                      v-for="(filter, i) in transportFilters" :key="`filter${i}`"
-                     :class="{'active': filter.id === selectedTransportFilter}"
-                     @click="selectedTransportFilter = filter.id"
+                     :class="{'active': filter.active}"
+                     @click="$emit('selectedTransportFilter', filter.id)"
                 >
                     <p>{{ $t(filter.name) }}</p>
-                    <span>{{ filter.count }}</span>
+                    <span v-if="filter.count">{{ filter.count }}</span>
                 </div>
             </div>
         </div>
@@ -57,22 +57,28 @@ export default {
     components: {
         Places
     },
+    props: {
+        transportFilters: {
+            type: Array,
+            default() {
+                return [
+                    {
+                        id: null, name: 'სატრასპორტო საშუალებები', count: 0, active: true
+                    },
+                    {
+                        id: 1, name: 'თვითმფრინავი', count: 0, active: false
+                    },
+                    {
+                        id: 2, name: 'ავტომობილი', count: 0, active: false
+                    }
+                ]
+            }
+        }
+    },
     data() {
         return {
             direction: null,
             openLocationForm: false,
-            transportFilters: [
-                {
-                    id: null, name: 'სატრასპორტო საშუალებები', count: 23
-                },
-                {
-                    id: 1, name: 'თვითმფრინავი', count: 19
-                },
-                {
-                    id: 2, name: 'ავტომობილი', count: 4
-                },
-            ],
-            selectedTransportFilter: null,
             fromLocation: {
                 label: null,
                 data: {},
@@ -271,6 +277,7 @@ section {
                 padding: 28px 0 22px;
                 margin: 0 0 0 36px;
                 cursor: pointer;
+                height: 82px;
 
                 &:first-child {
                     margin: 0 0 0 6px;

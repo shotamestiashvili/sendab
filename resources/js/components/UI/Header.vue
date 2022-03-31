@@ -1,11 +1,12 @@
 <template>
-    <header>
+    <header :class="headerStyle">
         <section>
             <div class="mobile-navigation">
                 <img src="/images/header-navigation.png" alt="">
             </div>
             <router-link class="main-logo" :to="{name: 'home'}">
-                <img src="/images/main-logo.png" alt="SendAb">
+                <img :src="headerStyle === 'dark-header' ? '/images/main-logo-light.png': '/images/main-logo.png'"
+                     alt="SendAb">
             </router-link>
             <div ref="languageSelector" class="language-selector" :class="{'open': openLanguageSelector}">
                 <h3 @click="openLanguage">{{ $t(selectedLanguage.name) }}
@@ -24,7 +25,7 @@
                 </div>
             </div>
             <nav>
-                <router-link to="#">{{ $t('ჩვენს შესახებ') }}</router-link>
+                <router-link :to="{name: 'about-us'}">{{ $t('ჩვენს შესახებ') }}</router-link>
                 <router-link :to="{name: 'help'}">{{ $t('დახმარება') }}</router-link>
                 <router-link :to="{name: 'sendab-offer'}">{{ $t('სენდაბის შემოთავაზება') }}</router-link>
             </nav>
@@ -117,6 +118,12 @@ import {mapGetters} from "vuex";
 
 export default {
     name: 'Header',
+    props: {
+        headerStyle: {
+            type: String,
+            default: null
+        }
+    },
     data() {
         return {
             langs: [
@@ -660,6 +667,21 @@ header {
     }
 }
 
+.light-header {
+    background-color: white;
+}
+
+.dark-header {
+    background-color: #04041A;
+
+    section nav a {
+        color: white;
+
+        &.router-link-exact-active {
+            border-bottom-color: white;
+        }
+    }
+}
 
 @media only screen and (max-width: 1000px) {
     header {

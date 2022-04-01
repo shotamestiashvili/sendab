@@ -130,6 +130,7 @@ export default {
                 height: null,
                 store: false,
                 hand: false,
+                hand_price: null,
 
                 price_sum: null,
                 price_kg: null,

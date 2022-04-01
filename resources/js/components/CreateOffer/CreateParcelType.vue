@@ -46,9 +46,6 @@
         <CustomSection title="აირჩიე, რომელი ფილიალებიდან შეგიძლია ბარგის აღება" v-if="data.store">
 
         </CustomSection>
-        <CustomSection title="აირჩიე ბარგის  მიტანის ადგილი" v-if="data.store">
-
-        </CustomSection>
         <CustomSection title="სად გირჩევნია შეხვედრა" v-if="data.hand">
             <CustomInput v-model="locType" :compVal="1" title="ადგილზე მისვლა"/>
             <CustomInput v-model="locType" :compVal="2" title="ლოკაციის შეთანხმება"/>
@@ -60,6 +57,15 @@
             <CustomInput v-model="location" :compVal="4" title="ქუთაისი"/>
             <CustomInput v-model="location" :compVal="5" title="რუსთავი"/>
             <CustomInput v-model="location" :compVal="6" title="+"/>
+        </CustomSection>
+        <CustomSection title="ღირებულება ადგილზე მისვლის შემთხვევაში" v-if="data.hand">
+            <TitledInput @input="inputHandPrice" :value="data.hand_price" title="მიუთითე ფასი" type="number"/>
+            <CustomInput @input="inputHandPrice" :value="data.hand_price" compVal="1" title="1 ლარი"/>
+            <CustomInput @input="inputHandPrice" :value="data.hand_price" compVal="5" title="5 ლარი"/>
+            <CustomInput @input="inputHandPrice" :value="data.hand_price" compVal="10" title="10 ლარი"/>
+        </CustomSection>
+        <CustomSection title="აირჩიე ბარგის  მიტანის ადგილი">
+
         </CustomSection>
     </div>
 
@@ -95,7 +101,8 @@ export default {
                     length: null,
                     height: null,
                     store: false,
-                    hand: false
+                    hand: false,
+                    hand_price: null
                 }
             }
         }
@@ -137,6 +144,9 @@ export default {
         },
         inputItem(value) {
             this.$emit('inputItem', value)
+        },
+        inputHandPrice(value) {
+            this.$emit('update:data', {...this.data, hand_price: value})
         }
     }
 }

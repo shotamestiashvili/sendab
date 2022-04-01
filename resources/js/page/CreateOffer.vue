@@ -48,6 +48,7 @@
                 :data="data"
                 @update:data="updateData"
                 @roadSelector="roadSelector = true"
+                @inputItem="inputItem"
             />
             <button @click="goToNextStage">
                 {{ $t(stage < 3 ? 'განაგრძე' : 'გადაამოწმე და დაასრულე განაცხადი') }}
@@ -102,19 +103,27 @@ export default {
                 minutes: null
             },
             data: {
-                road1: null,
-                road2: null,
-                road3: null,
-                road4: null,
-                road5: null,
-                road6: null,
-                road7: null,
-                road8: null,
+                source: null,
+                route1: null,
+                route2: null,
+                route3: null,
+                route4: null,
+                route5: null,
+                route6: null,
+                destination: null,
                 airplane: false,
                 car: false,
                 minibus: false,
                 railway: false,
 
+                item1: null,
+                item2: null,
+                item3: null,
+                item4: null,
+                item5: null,
+                item6: null,
+                item7: null,
+                item8: null,
                 weight: null,
                 width: null,
                 length: null,
@@ -124,13 +133,10 @@ export default {
 
                 price_sum: null,
                 price_kg: null,
+                reoffer: false,
 
-                destination: 'test',
-                item1: 'test',
-                source: 'test',
                 status: 'Active',
 
-                reoffer: false,
                 sendab_offer: false
             }
         }
@@ -138,6 +144,12 @@ export default {
     computed: {
         activeComponent() {
             return this.comp[this.stage]
+        },
+        items() {
+            return [
+                this.data.item1, this.data.item2, this.data.item3, this.data.item4,
+                this.data.item5, this.data.item6, this.data.item7, this.data.item8
+            ]
         }
     },
     methods: {
@@ -173,37 +185,59 @@ export default {
                 hours: null,
                 minutes: null
             }
-            if (!this.data.road1) {
-                this.data.road1 = roadPicker.country.data.city || roadPicker.country.data.name
+            if (!this.data.source) {
+                this.data.source = roadPicker.country.data.city || roadPicker.country.data.name
                 return
             }
-            if (!this.data.road2) {
-                this.data.road2 = roadPicker.country.data.city || roadPicker.country.data.name
+            if (!this.data.destination) {
+                this.data.destination = roadPicker.country.data.city || roadPicker.country.data.name
                 return
             }
-            if (!this.data.road3) {
-                this.data.road3 = roadPicker.country.data.city || roadPicker.country.data.name
+            if (!this.data.route1) {
+                this.data.route1 = this.data.destination
+                this.data.destination = roadPicker.country.data.city || roadPicker.country.data.name
                 return
             }
-            if (!this.data.road4) {
-                this.data.road4 = roadPicker.country.data.city || roadPicker.country.data.name
+            if (!this.data.route2) {
+                this.data.route2 = this.data.destination
+                this.data.destination = roadPicker.country.data.city || roadPicker.country.data.name
                 return
             }
-            if (!this.data.road5) {
-                this.data.road5 = roadPicker.country.data.city || roadPicker.country.data.name
+            if (!this.data.route3) {
+                this.data.route3 = this.data.destination
+                this.data.destination = roadPicker.country.data.city || roadPicker.country.data.name
                 return
             }
-            if (!this.data.road6) {
-                this.data.road6 = roadPicker.country.data.city || roadPicker.country.data.name
+            if (!this.data.route4) {
+                this.data.route4 = this.data.destination
+                this.data.destination = roadPicker.country.data.city || roadPicker.country.data.name
                 return
             }
-            if (!this.data.road7) {
-                this.data.road7 = roadPicker.country.data.city || roadPicker.country.data.name
+            if (!this.data.route5) {
+                this.data.route5 = this.data.destination
+                this.data.destination = roadPicker.country.data.city || roadPicker.country.data.name
                 return
             }
-            if (!this.data.road8) {
-                this.data.road8 = roadPicker.country.data.city || roadPicker.country.data.name
+            if (!this.data.route6) {
+                this.data.route6 = this.data.destination
+                this.data.destination = roadPicker.country.data.city || roadPicker.country.data.name
             }
+        },
+        inputItem(value) {
+            const items = [...this.items]
+            if (items.includes(value)) {
+                const itemIndex = items.indexOf(value)
+                items[itemIndex] = null
+            } else {
+                items.push(value)
+            }
+            const filteredItems = items.filter(val => val !== null)
+            items.forEach((item, index) => {
+                this.data[`item${index + 1}`] = null
+            })
+            filteredItems.forEach((item, index) => {
+                this.data[`item${index + 1}`] = item
+            })
         }
     }
 }

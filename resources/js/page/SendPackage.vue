@@ -142,7 +142,7 @@ export default {
     methods: {
         mount() {
             authAjax()
-                .get(apiUrls.getMyAllOffers)
+                .get(apiUrls.getAllOffers)
                 .then(response => {
                     this.searchResults = response.data.data
                 })

@@ -44,6 +44,7 @@ export const apiUrls = {
     submitMail: '/api/support/save',
 
     createOffer: 'api/offer/createOffer',
+    getAllOffers: 'api/offer/getAllOffers',
     getMyAllOffers: 'api/offer/getMyAllOffers',
 
     getStatus: '/api/check',

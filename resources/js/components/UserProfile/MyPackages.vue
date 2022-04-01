@@ -5,6 +5,8 @@
 
 <script>
 import DefaultGrid from "./DefaultGrid";
+import CurrentOffers from "./MyPackages/CurrentOffers";
+import OfferHistory from "./MyPackages/OfferHistory";
 
 export default {
     name: 'myPackages',
@@ -17,13 +19,13 @@ export default {
                 {
                     name: 'მიმდინარე შეკვეთები',
                     key: '1',
-                    component: '',
+                    component: CurrentOffers,
                     props: {}
                 },
                 {
                     name: 'შეკვეთების ისტორია',
                     key: '2',
-                    component: '',
+                    component: OfferHistory,
                     props: {}
                 }
             ]

@@ -1,14 +1,14 @@
 <template>
     <div class="create-road">
         <CustomSection title="მიუთითე მარშრუტი">
-            <DoubleInput v-if="data.road1" :title="data.road1" :body="data.road1"/>
-            <DoubleInput v-if="data.road2" :title="data.road2" :body="data.road2"/>
-            <DoubleInput v-if="data.road3" :title="data.road3" :body="data.road3"/>
-            <DoubleInput v-if="data.road4" :title="data.road4" :body="data.road4"/>
-            <DoubleInput v-if="data.road5" :title="data.road5" :body="data.road5"/>
-            <DoubleInput v-if="data.road6" :title="data.road6" :body="data.road6"/>
-            <DoubleInput v-if="data.road7" :title="data.road7" :body="data.road7"/>
-            <DoubleInput v-if="data.road8" :title="data.road8" :body="data.road8"/>
+            <DoubleInput v-if="data.source" :title="data.source" :body="data.source"/>
+            <DoubleInput v-if="data.route1" :title="data.route1" :body="data.route1"/>
+            <DoubleInput v-if="data.route2" :title="data.route2" :body="data.route2"/>
+            <DoubleInput v-if="data.route3" :title="data.route3" :body="data.route3"/>
+            <DoubleInput v-if="data.route4" :title="data.route4" :body="data.route4"/>
+            <DoubleInput v-if="data.route5" :title="data.route5" :body="data.route5"/>
+            <DoubleInput v-if="data.route6" :title="data.route6" :body="data.route6"/>
+            <DoubleInput v-if="data.destination" :title="data.destination" :body="data.destination"/>
             <div class="add-road" @click="addRoad"><p>+</p></div>
         </CustomSection>
         <CustomSection title="აირჩიე სატრანსპორტო საშუალება">
@@ -44,14 +44,14 @@ export default {
             type: Object,
             default() {
                 return {
-                    road1: null,
-                    road2: null,
-                    road3: null,
-                    road4: null,
-                    road5: null,
-                    road6: null,
-                    road7: null,
-                    road8: null,
+                    source: null,
+                    route1: null,
+                    route2: null,
+                    route3: null,
+                    route4: null,
+                    route5: null,
+                    route6: null,
+                    destination: null,
                     airplane: false,
                     car: false,
                     minibus: false,

@@ -13,8 +13,8 @@
             <CustomInput @input="inputPriceKG" :value="data.price_kg" compVal="10" title="10 ლარი"/>
         </CustomSection>
         <CustomSection title="გსურს თუ არა მომხმარებელთან ფასზე მორიგება?">
-            <CustomInput v-model="boarder" :compVal="1" title="დიახ"/>
-            <CustomInput v-model="boarder" :compVal="2" title="არა"/>
+            <CustomInput @input="inputReoffer" :value="data.reoffer" :compVal="true" title="დიახ"/>
+            <CustomInput @input="inputReoffer" :value="data.reoffer" :compVal="false" title="არა"/>
         </CustomSection>
     </div>
 
@@ -38,7 +38,8 @@ export default {
             default() {
                 return {
                     price_sum: null,
-                    price_kg: null
+                    price_kg: null,
+                    reoffer: false
                 }
             }
         }
@@ -54,6 +55,9 @@ export default {
         },
         inputPriceKG(value) {
             this.$emit('update:data', {...this.data, price_kg: value})
+        },
+        inputReoffer(value) {
+            this.$emit('update:data', {...this.data, reoffer: value})
         }
     }
 }

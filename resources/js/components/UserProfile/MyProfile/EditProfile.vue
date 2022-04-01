@@ -26,11 +26,11 @@
             </div>
             <div class="input-wrapper">
                 <p>{{ $t('ელ. ფოსტა') }}</p>
-                <input name="email" type="email" v-model="data.email">
+                <input name="email" type="email" v-model="userData.email" disabled>
             </div>
             <div class="input-wrapper">
                 <p>{{ $t('საკონტაქტო ნომერი') }}</p>
-                <input name="phone" type="number" v-model="data.phone">
+                <input name="phone" type="number" v-model="userData.phone" disabled>
             </div>
             <div class="input-wrapper edit-profile-location-input">
                 <p>{{ $t('ადგილმდებარეობა') }}</p>
@@ -303,6 +303,10 @@ export default {
             &::placeholder {
                 color: #889CB9;
                 font-size: 16px;
+            }
+
+            &:disabled {
+                cursor: not-allowed;
             }
         }
 

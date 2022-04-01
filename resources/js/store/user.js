@@ -39,7 +39,7 @@ export const actions = {
         return authAjax()
             .get(apiUrls.getUserAvatar)
             .then((response) => {
-                if (response.data.data && response.data.data.message && response.data.data.message === 'No Avatar') {
+                if (response.data && response.data.message && response.data.message === 'No Avatar') {
                     commit('setUserAvatar', null)
                 } else {
                     commit('setUserAvatar', "data:image/*;base64," + response.data);

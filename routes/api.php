@@ -89,7 +89,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('/password/change',
         [\App\Http\Controllers\Api\Auth\PasswordController::class, 'changePassword'])
-        ->middleware([config('fortify.auth_middleware', 'auth').':'.config('fortify.guard')])
+//        ->middleware([config('fortify.auth_middleware', 'auth').':'.config('fortify.guard')])
         ->name('changepassword');
 ##############  USER  END####################################################################################
 

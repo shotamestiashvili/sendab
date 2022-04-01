@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
@@ -14,6 +15,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Order extends Resource
 {
+
     /**
      * The model the resource corresponds to.
      *

@@ -5,6 +5,9 @@
 
 <script>
 import DefaultGrid from "./DefaultGrid";
+import ResetPassword from "./AccountSettings/ResetPassword";
+import EmailSubscription from "./AccountSettings/EmailSubscription";
+import DeleteAccount from "./AccountSettings/DeleteAccount";
 
 export default {
     name: 'accountSettings',
@@ -17,19 +20,19 @@ export default {
                 {
                     name: 'პაროლის შეცვლა',
                     key: '1',
-                    component: '',
+                    component: ResetPassword,
                     props: {}
                 },
                 {
                     name: 'ელ. ფოსტის შეტყობინებები',
                     key: '2',
-                    component: '',
+                    component: EmailSubscription,
                     props: {}
                 },
                 {
                     name: 'ანგარიშის დახურვა',
                     key: '3',
-                    component: '',
+                    component: DeleteAccount,
                     props: {}
                 }
             ]

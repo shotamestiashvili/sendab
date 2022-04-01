@@ -9,6 +9,7 @@ use App\Services\Avatar\SaveAvatar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use ParagonIE\ConstantTime\Base64;
 
 class AvatarController extends Controller
 {
@@ -27,7 +28,9 @@ class AvatarController extends Controller
 
         if( AvatarPhoto::where('uploaded_by', $userId)->exists()){
             $avatar_path =  AvatarPhoto::where('uploaded_by', Auth::user()->id)->value('file_url');
-            return Storage::get($avatar_path);
+            $image =  Storage::get($avatar_path);
+            return base64_encode($image);
+
         }else{
             return Response()->json(['message'=>'No Avatar']);
         }

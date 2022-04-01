@@ -27,7 +27,7 @@ class OrderRequest extends FormRequest
 
             'offer_id'=>'required|integer',
             'amount' => 'required|integer',
-            'status'=>'required|boolean',
+            'status'=> 'required|boolean',
             'pickup_type'=> 'required|string|max:255',
             'source_city'=>'required|string|max:255',
             'source_address1'=>  'required|string|max:255',

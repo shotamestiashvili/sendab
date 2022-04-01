@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\UserDownloadAction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Actions\Action;
@@ -127,7 +128,7 @@ class User extends Resource
     public function actions(Request $request)
     {
         return [
-
+            new UserDownloadAction,
         ];
     }
 }

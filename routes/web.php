@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/pe', [\App\Http\Controllers\TestController::class, 'pdfToEmail']);
+Route::get('/pdf', [\App\Http\Controllers\TestController::class, 'createPDF']);
+Route::get('/qr', [\App\Http\Controllers\TestController::class, 'qr']);
+
 Route::get('/image', function (){
 
     \App\Models\OutcomeRequest::create([

@@ -41,16 +41,20 @@
                 <div v-else class="user-component" ref="userProfile">
                     <div class="user-profile" :class="{'open': openUserProfile}"
                          @click="openUser">
-                        <img class="avatar" v-if="!userAvatar" src="/images/user-default-icon-blue.png" alt="">
-                        <img class="avatar" v-else src="/images/placeholder-user-image.png" alt="">
+                        <div
+                            class="avatar"
+                            :style="{'background-image': `url('${!userAvatar ? '/images/user-default-icon-blue.png' : userAvatar }')`}"
+                        />
                         <span>{{ $t('ანგარიში') }}</span>
                         <img class="arrow-up" src="/images/arrow-up.png" alt="">
                     </div>
                     <div class="user-profile-dropdown" v-if="openUserProfile">
                         <div class="avatar-grid">
                             <div class="user-avatar">
-                                <img v-if="!userAvatar" src="/images/user-default-icon-blue.png" alt="">
-                                <img v-else src="/images/placeholder-user-image.png" alt="">
+                                <div
+                                    class="avatar"
+                                    :style="{'background-image': `url('${!userAvatar ? '/images/user-default-icon-blue.png' : userAvatar }')`}"
+                                />
                                 <div class="verify-icon">
                                     <img src="/images/verify-icon.png" alt=""/>
                                 </div>
@@ -371,6 +375,9 @@ header {
                         height: 30px;
                         width: 30px;
                         border-radius: 50%;
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
                         margin: 0 10px 0 0;
                     }
 
@@ -425,10 +432,13 @@ header {
                             width: 60px;
                             height: 60px;
 
-                            & > img {
+                            .avatar {
                                 width: 60px;
                                 height: 60px;
                                 border-radius: 50%;
+                                background-size: cover;
+                                background-position: center;
+                                background-repeat: no-repeat;
                             }
 
                             .verify-icon {

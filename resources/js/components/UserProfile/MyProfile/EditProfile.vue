@@ -2,10 +2,10 @@
     <div class="edit-profile" v-if="data">
         <div class="user-avatar-edit">
             <div class="user-avatar-preview">
-                <div class="avatar">
-                    <img v-if="!userAvatar" src="/images/user-default-icon-blue.png" alt="">
-                    <img v-else :src="userAvatar" alt="">
-                </div>
+                <div
+                    class="avatar"
+                    :style="{'background-image': `url('${!userAvatar ? '/images/user-default-icon-blue.png' : userAvatar }')`}"
+                />
                 <h3>{{ $t('პროფილის ფოტოს განახლება') }}</h3>
                 <p>PNG, JPG or GIF, max. 3MB</p>
             </div>
@@ -208,11 +208,9 @@ export default {
                 width: 80px;
                 height: 80px;
                 border-radius: 50%;
-
-                img {
-                    height: 100%;
-                    width: 100%;
-                }
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
             }
 
             h3 {

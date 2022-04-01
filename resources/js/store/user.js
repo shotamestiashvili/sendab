@@ -35,27 +35,18 @@ export const actions = {
             .catch(() => {
             });
     },
-    getUserAvatar({commit, dispatch}) {
+    getUserAvatar({commit}) {
         return authAjax()
             .get(apiUrls.getUserAvatar)
             .then((response) => {
                 if (response.data.data && response.data.data.message && response.data.data.message === 'No Avatar') {
                     commit('setUserAvatar', null)
                 } else {
-                    dispatch('loadAvatar', response.data)
+                    commit('setUserAvatar', "data:image/*;base64," + response.data);
                 }
             })
             .catch(() => {
             });
-    },
-    loadAvatar({commit}, data) {
-        const blob = new Blob([data], {type : 'image/*'});
-        const a = new FileReader();
-        a.onload = function (e) {
-            console.log(e.target.result)
-            commit('setUserAvatar', e.target.result);
-        };
-        a.readAsDataURL(blob);
     },
     updateUserData({commit}, data) {
         return authAjax()

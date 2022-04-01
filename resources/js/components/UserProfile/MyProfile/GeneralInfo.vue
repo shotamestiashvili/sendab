@@ -1,8 +1,10 @@
 <template>
     <div class="general-info" v-if="userData">
         <div class="user-image">
-            <img v-if="!userAvatar" src="/images/user-default-icon-blue.png" alt="">
-            <img v-else src="/images/placeholder-user-image.png" alt="">
+            <div
+                class="avatar"
+                :style="{'background-image': `url('${!userAvatar ? '/images/user-default-icon-blue.png' : userAvatar }')`}"
+            />
             <div class="verify-icon">
                 <img src="/images/verify-icon.png" alt=""/>
             </div>
@@ -69,11 +71,14 @@ export default {
         height: 90px;
         position: relative;
         margin: 0 auto;
-        border-radius: 50%;
 
-        & > img {
-            width: 100%;
-            height: 100%;
+        .avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         .verify-icon {

@@ -14,6 +14,7 @@ use App\Models\PickupType;
 use App\Models\Reoffer;
 use App\Models\Transport;
 use App\Models\Route;
+use App\Models\TransportInfo;
 use Illuminate\Support\Facades\Auth;
 
 class CreatePartnior implements CreatePartniorInterface
@@ -49,6 +50,15 @@ class CreatePartnior implements CreatePartniorInterface
             'minibus'=>$request->minibus,
             'railway'=>$request->railway,
             'other'=> $request->other,
+        ]);
+
+        TransportInfo::create([
+
+            'transport_id'  => $transport->id,
+            'plate_number'  => $request->plate_number,
+            'flight_number' => $request->flight_number,
+            'ticket_number' => $request->ticket_number,
+            'comment'       => $request->comment,
         ]);
 
 

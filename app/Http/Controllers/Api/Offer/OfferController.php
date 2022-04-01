@@ -35,7 +35,8 @@ class OfferController extends Controller
 //    }
 
     public function getAllOffers(Request $request){
-        $partniors =   Offer::with(['partnior.routes',
+        $partniors =   Offer::with([
+                'partnior.routes',
                 'partnior.transports',
                 'partnior.parcels',
                 'partnior.pickupTypes',

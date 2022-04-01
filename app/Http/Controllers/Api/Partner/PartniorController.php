@@ -24,7 +24,7 @@ class PartniorController extends Controller
 
     public function getMyPartnersOffers(Request $request) {
 
-        $partners = Partnior::with(['routes', 'transports', 'parcels', 'pickupTypes', 'partniorPrices', 'reoffers'])
+        $partners = Partnior::with(['routes', 'transports',  'transports.transportInfos', 'parcels', 'pickupTypes', 'partniorPrices', 'reoffers'])
             ->where('user_id', Auth::user()->id)
             ->get();
 
@@ -35,7 +35,7 @@ class PartniorController extends Controller
 
     public function getPartnersOffersByUserId(Request $request) {
 
-        $partners = Partnior::with(['routes', 'transports', 'parcels', 'pickupTypes', 'partniorPrices', 'reoffers'])
+        $partners = Partnior::with(['routes', 'transports',  'transports.transportInfos', 'parcels', 'pickupTypes', 'partniorPrices', 'reoffers'])
             ->where('user_id', $request->user_id)
             ->get();
 
@@ -45,7 +45,7 @@ class PartniorController extends Controller
 
     public function getAllPartnersOffers() {
 
-        $partners = Partnior::with(['routes', 'transports', 'parcels', 'pickupTypes', 'partniorPrices', 'reoffers'])
+        $partners = Partnior::with(['routes', 'transports',  'transports.transportInfos', 'parcels', 'pickupTypes', 'partniorPrices', 'reoffers'])
             ->get();
 
            return  PartniorResource::collection($partners);

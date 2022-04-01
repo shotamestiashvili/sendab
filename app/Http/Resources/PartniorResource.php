@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Customer;
 use App\Models\Offer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,10 +17,12 @@ class PartniorResource extends JsonResource
     public function toArray($request)
     {
 
-
-
-
         return [
+
+            'firstname' => Customer::where('id', $this->user_id)->value('firstname'),
+            'lastname' => Customer::where('id', $this->user_id)->value('lastname'),
+            'feedback' => 4,
+
             'offer_id' => Offer::where('user_id', $this->user_id)->value('id'),
             'user_id' => $this->user_id,
             'status' =>$this->status,
@@ -65,7 +68,30 @@ class PartniorResource extends JsonResource
             'other'=>$this->transports->map(function($other){
                 return $other->other;
             }),
-//
+
+
+            'plate_number' => $this->transports->map(function($transport){
+                 return $transport->transportInfos->map(function ($info){
+                     return $info->plate_number;
+                 });
+            }),
+              'flight_number' => $this->transports->map(function($transport){
+                  return $transport->transportInfos->map(function ($info){
+                      return $info->flight_number;
+                  });
+              }),
+              'ticket_number' => $this->transports->map(function($transport){
+                  return $transport->transportInfos->map(function ($info){
+                      return $info->ticket_number;
+                  });
+              }),
+              'comment' => $this->transports->map(function($transport){
+                  return $transport->transportInfos->map(function ($info){
+                      return $info->comment;
+                  });
+              }),
+
+
             'item1' =>$this->parcels->map(function($item1){
                 return $item1->item1;
             }),

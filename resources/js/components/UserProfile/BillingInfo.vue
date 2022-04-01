@@ -1,5 +1,5 @@
 <template>
-    <DefaultGrid :data="data"/>
+    <DefaultGrid :data="data" v-model="active" @input="changeSlide"/>
 
 </template>
 
@@ -17,6 +17,7 @@ export default {
     },
     data() {
         return {
+            active: null,
             data: [
                 {
                     name: 'ჩემი ბალანსი',
@@ -43,6 +44,14 @@ export default {
                     props: {}
                 }
             ]
+        }
+    },
+    mounted() {
+        this.active = this.$route.query.active || '1'
+    },
+    methods: {
+        changeSlide(key) {
+            this.$router.replace({query: {...this.$route.query, active: key}})
         }
     }
 }

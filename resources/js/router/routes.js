@@ -54,9 +54,13 @@ export default [
             {
                 path: 'profile',
                 component: UserProfile,
+                meta: {
+                    requiresAuth: true,
+                    headerStyle: 'light-header'
+                },
                 children: [
                     {
-                        path: '',
+                        path: 'user',
                         name: 'user-profile',
                         component: MyProfile,
                         meta: {

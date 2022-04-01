@@ -58,7 +58,7 @@ export default {
             margin: 0 0 0 30px;
         }
 
-        &.router-link-exact-active {
+        &.router-link-active {
             border-bottom-color: #1D519A;
         }
     }

@@ -32,6 +32,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function(){
 
 
+    Route::get('charge', [\App\Http\Controllers\TestController::class, 'charge']);
+
+
 ##############  Partnior  ####################################################################################
     Route::post('/becomePartner', [\App\Http\Controllers\Api\Partner\PartniorController::class, 'becomePartner'])
         ->name('bocomePartner');
@@ -110,8 +113,8 @@ Route::middleware('auth:sanctum')->group(function(){
 ##############  Upload EMD ####################################################################################
 
 ##############  Order  ####################################################################################
-    Route::post('/order/create',  [\App\Http\Controllers\Api\Order\OrderController::class, 'createORder']);
-    Route::get('/order/get',  [\App\Http\Controllers\Api\Order\OrderController::class, 'getOrder']);
+    Route::post('/order/createMyOrder',  [\App\Http\Controllers\Api\Order\OrderController::class, 'createORder']);
+    Route::get('/order/getMyOrder',  [\App\Http\Controllers\Api\Order\OrderController::class, 'getOrder']);
 ##############  Order END ####################################################################################
 
 ##############  Paypal ####################################################################################

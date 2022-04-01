@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +14,7 @@ class Payment extends Model
         'balance_id',
         'order_id',
         'payment_amount',
+        'sendab_percentage',
         'status',
     ];
 
@@ -24,6 +26,10 @@ class Payment extends Model
 
     public function order(){
         return $this->belongsTo(Order::class);
+    }
+
+    public function temporaryPayment(){
+        return $this->hasOne(TemporaryPayment::class);
     }
 
 

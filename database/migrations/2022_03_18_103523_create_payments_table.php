@@ -17,7 +17,8 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->foreignId('balance_id')->constrained();
             $table->foreignId('order_id')->constrained();
-            $table->integer('payment_amount');
+            $table->decimal('payment_amount', 4);
+            $table->decimal('sendab_percentage', 4);
             $table->string('status');
             $table->timestamps();
         });

@@ -15,9 +15,9 @@ class FeedbackResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'user_id' => $this->user_id,
+            'user_id'  => $this->user_id,
             'feedback' => $this->feedback,
-            'comment' => $this->comment,
+            'comment'  => $this->comment,
         ];
     }
 }

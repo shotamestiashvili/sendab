@@ -137,4 +137,12 @@ Route::middleware('auth:sanctum')->group(function(){
 
 ##############  Currency END####################################################################################
 
+
+##############  Currency ####################################################################################
+
+    Route::get('/feedback/getFeedback',[ \App\Http\Controllers\Api\Feedback\FeedbackController::class, 'getFeedback'])->name('getFeedback');
+    Route::post('/feedback/setFeedback',[ \App\Http\Controllers\Api\Feedback\FeedbackController::class, 'setFeedback'])->name('setFeedback');
+
+##############  Currency END####################################################################################
+
 });

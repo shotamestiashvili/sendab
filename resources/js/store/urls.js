@@ -47,6 +47,8 @@ export const apiUrls = {
     getAllOffers: 'api/offer/getAllOffers',
     getMyAllOffers: 'api/offer/getMyAllOffers',
 
+    getAvatarById: (id) => `/upload/avatar/get/${id}/`,
+
     getStatus: '/api/check',
     sanctumToken: '/sanctum/csrf-cookie',
 }

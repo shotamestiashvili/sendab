@@ -45,13 +45,13 @@ export default {
                     id: 'airplane',
                     name: 'თვითმფრინავი',
                     count: this.searchResults.filter(offer => offer.airplane[0]).length,
-                    active: this.selectedTransport === 1
+                    active: this.selectedTransport === 'airplane'
                 },
                 {
                     id: 'car',
                     name: 'ავტომობილი',
                     count: this.searchResults.filter(offer => offer.car[0]).length,
-                    active: this.selectedTransport === 2
+                    active: this.selectedTransport === 'car'
                 },
             ]
         }

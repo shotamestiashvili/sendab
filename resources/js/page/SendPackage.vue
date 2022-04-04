@@ -25,92 +25,13 @@ export default {
     data() {
         return {
             selectedTransport: null,
-            searchResults: [
-                {
-                    user: {
-                        name: 'ირაკლი კურტანიძე',
-                        stars: 4
-                    },
-                    price: {
-                        value: '14,59',
-                        type: 'lari'
-                    },
-                    road: [
-                        {name: 'თბილისი', type: 'start'},
-                        {name: 'ქუთაისი', type: 'start'},
-                        {name: 'ბუდაპეშტი'},
-                        {name: 'დუსელდორფი'}
-                    ],
-                    tags: [
-                        {type: 1, name: 'თვითმფრინავი'},
-                        {type: 2, name: '1,5 კილოგრამი'},
-                        {type: 3, name: 'მოცულობა'}
-                    ]
-                },
-                {
-                    user: {
-                        name: 'ჯუბა კამკამიძე',
-                        stars: 4
-                    },
-                    price: {
-                        value: '14,59',
-                        type: 'lari'
-                    },
-                    road: [
-                        {name: 'ქუთაისი', type: 'start'},
-                        {name: 'დუსელდორფი'}
-                    ],
-                    tags: [
-                        {type: 1, name: 'თვითმფრინავი'},
-                        {type: 3, name: 'ჩემოდნის წაღება'}
-                    ]
-                },
-                {
-                    user: {
-                        name: 'ჯუბა კამკამიძე',
-                        stars: 4
-                    },
-                    price: {
-                        value: '14,59',
-                        type: 'dollar'
-                    },
-                    road: [
-                        {name: 'ქუთაისი', type: 'start'},
-                        {name: 'ტალინი'},
-                        {name: 'ვარშავა'}
-                    ],
-                    tags: [
-                        {type: 1, name: 'თვითმფრინავი'},
-                        {type: 2, name: '3,5 კილოგრამი'}
-                    ]
-                },
-                {
-                    user: {
-                        name: 'ირაკლი კურტანიძე',
-                        stars: 4
-                    },
-                    price: {
-                        value: '14,59',
-                        type: 'lari'
-                    },
-                    road: [
-                        {name: 'თბილისი', type: 'start'},
-                        {name: 'ქუთაისი', type: 'start'},
-                        {name: 'ბუდაპეშტი'},
-                        {name: 'დუსელდორფი'}
-                    ],
-                    tags: [
-                        {type: 1, name: 'თვითმფრინავი'},
-                        {type: 2, name: '3,5 კილოგრამი'}
-                    ]
-                }
-            ]
+            searchResults: []
         }
     },
     computed: {
         ...mapGetters({apiConnected: 'login/apiConnected'}),
         filteredList() {
-            return this.searchResults
+            return this.selectedTransport ? this.searchResults.filter(offer => offer[this.selectedTransport][0]) : this.searchResults
         },
         transportFilters() {
             return [
@@ -121,10 +42,16 @@ export default {
                     active: this.selectedTransport === null
                 },
                 {
-                    id: 1, name: 'თვითმფრინავი', count: 0, active: this.selectedTransport === 1
+                    id: 'airplane',
+                    name: 'თვითმფრინავი',
+                    count: this.searchResults.filter(offer => offer.airplane[0]).length,
+                    active: this.selectedTransport === 1
                 },
                 {
-                    id: 2, name: 'ავტომობილი', count: 0, active: this.selectedTransport === 2
+                    id: 'car',
+                    name: 'ავტომობილი',
+                    count: this.searchResults.filter(offer => offer.car[0]).length,
+                    active: this.selectedTransport === 2
                 },
             ]
         }

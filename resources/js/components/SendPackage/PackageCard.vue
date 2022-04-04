@@ -5,15 +5,15 @@
                 <div class="avatar">
                     <img src="/images/placeholder-user-image.png" alt="">
                 </div>
-                <p>{{ data.user.name }}</p>
+                <p>{{ data.firstname }} {{ data.lastname }}</p>
                 <div class="rating">
-                    <img v-for="star in data.user.stars" src="/images/star-icon.png" alt="">
-                    <img v-for="star in 5 - data.user.stars" src="/images/star-icon-inactive.png" alt="">
+                    <img v-for="star in data.feedback" src="/images/star-icon.png" alt="">
+                    <img v-for="star in 5 - data.feedback" src="/images/star-icon-inactive.png" alt="">
                 </div>
             </div>
             <div class="price-info">
                 <div class="price-switch">
-                    <div class="icon" :class="{'active': data.price.type === 'lari'}">
+                    <div @click="priceType = 'lari'" class="icon" :class="{'active': priceType === 'lari'}">
                         <svg width="12" height="15" viewBox="0 0 12 15" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -21,7 +21,7 @@
                                 fill="#FFFFFF"/>
                         </svg>
                     </div>
-                    <div class="icon" :class="{'active': data.price.type === 'dollar'}">
+                    <div @click="priceType = 'dollar'" class="icon" :class="{'active': priceType === 'dollar'}">
                         <svg width="10" height="16" viewBox="0 0 10 16" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -31,15 +31,15 @@
                     </div>
                 </div>
                 <p>
-                    {{ data.price.value }}
-                    <svg v-if="data.price.type === 'lari'" width="12" height="15" viewBox="0 0 12 15"
+                    {{ price }}
+                    <svg v-if="priceType === 'lari'" width="12" height="15" viewBox="0 0 12 15"
                          fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M3.204 8.006C3.204 8.774 3.366 9.458 3.69 10.058C4.026 10.646 4.488 11.108 5.076 11.444C5.664 11.768 6.33 11.93 7.074 11.93H10.782V14H3.402C2.718 14 2.082 14.03 1.494 14.09V12.056L2.826 11.984V11.93C2.082 11.474 1.53 10.88 1.17 10.148C0.81 9.404 0.63 8.606 0.63 7.754C0.63 6.506 0.972 5.402 1.656 4.442C2.352 3.482 3.3 2.84 4.5 2.516V0.877999H5.724V2.318C5.82 2.306 5.964 2.3 6.156 2.3C6.36 2.3 6.51 2.306 6.606 2.318V0.877999H7.83V2.516C9.054 2.864 10.002 3.548 10.674 4.568C11.358 5.588 11.7 6.776 11.7 8.132H9.126C9.126 7.16 9.018 6.386 8.802 5.81C8.586 5.234 8.262 4.82 7.83 4.568V8.132H6.606V4.208C6.51 4.196 6.36 4.19 6.156 4.19C5.964 4.19 5.82 4.196 5.724 4.208V8.132H4.5V4.568C4.068 4.82 3.744 5.228 3.528 5.792C3.312 6.344 3.204 7.082 3.204 8.006Z"
                             fill="#1EAA56"/>
                     </svg>
-                    <svg v-if="data.price.type === 'dollar'" width="10" height="16" viewBox="0 0 10 16"
+                    <svg v-if="priceType === 'dollar'" width="10" height="16" viewBox="0 0 10 16"
                          fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -50,21 +50,62 @@
             </div>
         </div>
         <div class="package-road">
-            <template v-for="(city, index) in data.road">
-                <p :class="{'start': city.type === 'start'}">{{ city.name }}</p>
-                <img v-if="index !== data.road.length - 1" src="/images/arrow-right-lightblue.png" alt="">
+            <template v-if="data.source[0].source">
+                <p class="start">{{ data.source[0].source }}</p>
+                <img src="/images/arrow-right-lightblue.png" alt="">
+            </template>
+            <template v-for="i in 6" v-if="data.source[0][`route${i+1}`]">
+                <p class="start">{{ data.source[0][`route${i+1}`] }}</p>
+                <img src="/images/arrow-right-lightblue.png" alt="">
+            </template>
+            <template v-if="data.source[0].destination">
+                <p>{{ data.source[0].destination }}</p>
             </template>
         </div>
         <div class="package-tags">
-            <div class="tag-item" v-for="tag in data.tags">
-                <img :src="tag.type === 1 ? '/images/plane-icon.png' : '/images/box-icon.png'" alt="">
-                <span>{{ tag.name }}</span>
+            <div class="tag-item" v-if="data.airplane[0]">
+                <img src="/images/plane-icon.png" alt="">
+                <span>{{ $t('თვითმფრინავი') }}</span>
+            </div>
+            <div class="tag-item" v-if="data.car[0]">
+                <span>{{ $t('ავტომობილი') }}</span>
+            </div>
+            <div class="tag-item" v-if="data.minibus[0]">
+                <span>{{ $t('ფურგონი') }}</span>
+            </div>
+<!--            <div class="tag-item" v-if="data.railway[0]">-->
+<!--                <span>{{ $t('მატარებელი') }}</span>-->
+<!--            </div>-->
+            <div class="tag-item" v-if="data.ship[0]">
+                <img src="/images/plane-icon.png" alt="">
+                <span>{{ $t('გემი') }}</span>
+            </div>
+            <div class="tag-item" v-if="data.motorcycle[0]">
+                <span>{{ $t('მოტოციკლეტი') }}</span>
+            </div>
+            <div class="tag-item" v-if="data.bicycle[0]">
+                <span>{{ $t('ველოსიპედი') }}</span>
+            </div>
+            <div class="tag-item" v-if="data.bus[0]">
+                <span>{{ $t('ავტობუსი') }}</span>
+            </div>
+            <div class="tag-item" v-if="data.taxi[0]">
+                <span>{{ $t('ტაქსი') }}</span>
+            </div>
+            <div class="tag-item" v-if="data.truck[0]">
+                <span>{{ $t('ტრაილერი') }}</span>
+            </div>
+            <div class="tag-item" v-if="data.weight[0]">
+                <img src="/images/box-icon.png" alt="">
+                <span>{{data.weight[0]}} {{ $t('კილოგრამი') }}</span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import {ajax, apiUrls} from "../../store/urls";
+
 export default {
     name: 'PackageCard',
     props: {
@@ -74,6 +115,24 @@ export default {
                 return {}
             }
         }
+    },
+    data() {
+        return {
+            priceType: 'dollar'
+        }
+    },
+    computed: {
+        price() {
+            return this.priceType === 'dollar' ? this.data.price_sum[0] : this.data.price_sum[0]
+        }
+    },
+    methods: {
+        getAvatar() {
+            ajax.get(apiUrls.getAvatarById(this.data.user_id))
+        }
+    },
+    mounted() {
+        this.getAvatar()
     }
 }
 </script>

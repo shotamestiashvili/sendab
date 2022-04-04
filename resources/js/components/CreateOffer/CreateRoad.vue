@@ -16,10 +16,16 @@
             <CustomInput @input="inputCar" :value="data.car" :compVal="true" title="ავტომობილი"/>
             <CustomInput @input="inputMinibus" :value="data.minibus" :compVal="true" title="ფურგონი"/>
             <CustomInput @input="inputRailway" :value="data.railway" :compVal="true" title="მატარებელი"/>
+            <CustomInput @input="inputShip" :value="data.ship" :compVal="true" title="გემი"/>
+            <CustomInput @input="inputMotorcycle" :value="data.motorcycle" :compVal="true" title="მოტოციკლეტი"/>
+            <CustomInput @input="inputBicycle" :value="data.bicycle" :compVal="true" title="ველოსიპედი"/>
+            <CustomInput @input="inputBus" :value="data.bus" :compVal="true" title="ავტობუსი"/>
+            <CustomInput @input="inputTaxi" :value="data.taxi" :compVal="true" title="ტაქსი"/>
+            <CustomInput @input="inputTruck" :value="data.truck" :compVal="true" title="ტრაილერი"/>
         </CustomSection>
         <CustomSection title="შეიყვანეთ ავტომობილის მონაცემები" v-if="data.car">
-            <TitledInput title="სანომრე ნიშანი"/>
-            <TitledInput title="მანქანის მოდელი"/>
+            <TitledInput @input="inputPlateNumber" :value="data.plate_number" title="სანომრე ნიშანი"/>
+            <TitledInput @input="inputComment" :value="data.comment" title="მანქანის მოდელი"/>
         </CustomSection>
     </div>
 
@@ -55,26 +61,98 @@ export default {
                     airplane: false,
                     car: false,
                     minibus: false,
-                    railway: false
+                    railway: false,
+                    ship: false,
+                    motorcycle: false,
+                    bicycle: false,
+                    bus: false,
+                    taxi: false,
+                    truck: false,
+                    plate_number: null,
+                    comment: null
                 }
             }
         }
     },
     methods: {
         inputAirplane(value) {
-            this.$emit('update:data', {...this.data, airplane: value, car: false, minibus: false, railway: false})
+            this.$emit('update:data', {
+                ...this.data,
+                airplane: value, car: false, minibus: false, railway: false, ship: false,
+                motorcycle: false, bicycle: false, bus: false, taxi: false, truck: false
+            })
         },
         inputCar(value) {
-            this.$emit('update:data', {...this.data, airplane: false, car: value, minibus: false, railway: false})
+            this.$emit('update:data', {
+                ...this.data,
+                airplane: false, car: value, minibus: false, railway: false, ship: false,
+                motorcycle: false, bicycle: false, bus: false, taxi: false, truck: false
+            })
         },
         inputMinibus(value) {
-            this.$emit('update:data', {...this.data, airplane: false, car: false, minibus: value, railway: false})
+            this.$emit('update:data', {
+                ...this.data,
+                airplane: false, car: false, minibus: value, railway: false, ship: false,
+                motorcycle: false, bicycle: false, bus: false, taxi: false, truck: false
+            })
         },
         inputRailway(value) {
-            this.$emit('update:data', {...this.data, airplane: false, car: false, minibus: false, railway: value})
+            this.$emit('update:data', {
+                ...this.data,
+                airplane: false, car: false, minibus: false, railway: value, ship: false,
+                motorcycle: false, bicycle: false, bus: false, taxi: false, truck: false
+            })
+        },
+        inputShip(value) {
+            this.$emit('update:data', {
+                ...this.data,
+                airplane: false, car: false, minibus: false, railway: false, ship: value,
+                motorcycle: false, bicycle: false, bus: false, taxi: false, truck: false
+            })
+        },
+        inputMotorcycle(value) {
+            this.$emit('update:data', {
+                ...this.data,
+                airplane: false, car: false, minibus: false, railway: false, ship: false,
+                motorcycle: value, bicycle: false, bus: false, taxi: false, truck: false
+            })
+        },
+        inputBicycle(value) {
+            this.$emit('update:data', {
+                ...this.data,
+                airplane: false, car: false, minibus: false, railway: false, ship: false,
+                motorcycle: false, bicycle: value, bus: false, taxi: false, truck: false
+            })
+        },
+        inputBus(value) {
+            this.$emit('update:data', {
+                ...this.data,
+                airplane: false, car: false, minibus: false, railway: false, ship: false,
+                motorcycle: false, bicycle: false, bus: value, taxi: false, truck: false
+            })
+        },
+        inputTaxi(value) {
+            this.$emit('update:data', {
+                ...this.data,
+                airplane: false, car: false, minibus: false, railway: false, ship: false,
+                motorcycle: false, bicycle: false, bus: false, taxi: value, truck: false
+            })
+        },
+        inputTruck(value) {
+            this.$emit('update:data', {
+                ...this.data,
+                airplane: false, car: false, minibus: false, railway: false, ship: false,
+                motorcycle: false, bicycle: false, bus: false, taxi: false, truck: value
+            })
         },
         addRoad() {
             this.$emit('roadSelector')
+        },
+        inputPlateNumber(value) {
+            this.$emit('update:data', {...this.data, plate_number: value})
+        },
+        inputComment(value) {
+            this.$emit('update:data', {...this.data, comment: value})
         }
     }
 }

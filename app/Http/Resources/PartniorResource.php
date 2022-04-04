@@ -21,12 +21,16 @@ class PartniorResource extends JsonResource
 
             'firstname' => Customer::where('id', $this->user_id)->value('firstname'),
             'lastname' => Customer::where('id', $this->user_id)->value('lastname'),
-            'feedback' => 4,
+
+            'feedback' => $this->feedback,
+            'feedback_comment' => $this->feedback_comment,
+
 
             'offer_id' => Offer::where('user_id', $this->user_id)->value('id'),
             'user_id' => $this->user_id,
             'status' =>$this->status,
             'sendab_offer' =>$this->sendab_offer,
+
 
             'source'  => $this->routes->map(function($routes){
                 return $routes;

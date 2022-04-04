@@ -41,7 +41,8 @@ class OfferController extends Controller
                 'partnior.parcels',
                 'partnior.pickupTypes',
                 'partnior.partniorPrices',
-                'partnior.reoffers'])
+                'partnior.reoffers',
+                'user.feedbacks',])
             ->get()
             ->map(function($offer){
                 return $offer->partnior;
@@ -57,7 +58,8 @@ class OfferController extends Controller
                               'partnior.parcels',
                               'partnior.pickupTypes',
                               'partnior.partniorPrices',
-                              'partnior.reoffers'])
+                              'partnior.reoffers',
+                               'user.feedbacks',])
                           ->get()
                           ->map(function($offer){
                               return $offer->partnior;
@@ -74,7 +76,8 @@ class OfferController extends Controller
                 'partnior.parcels',
                 'partnior.pickupTypes',
                 'partnior.partniorPrices',
-                'partnior.reoffers'])
+                'partnior.reoffers',
+                'user.feedbacks'])
             ->get()
             ->map(function($offer){
                 return $offer->partnior;
@@ -92,7 +95,8 @@ class OfferController extends Controller
                 'partnior.parcels',
                 'partnior.pickupTypes',
                 'partnior.partniorPrices',
-                'partnior.reoffers'])
+                'partnior.reoffers',
+                'user.feedbacks'])
             ->get()
             ->map(function($offer){
                 return $offer->partnior;
@@ -111,7 +115,8 @@ class OfferController extends Controller
                 'partnior.parcels',
                 'partnior.pickupTypes',
                 'partnior.partniorPrices',
-                'partnior.reoffers'])
+                'partnior.reoffers',
+                'user.feedbacks'])
             ->get()
             ->map(function($offer){
                 return $offer->partnior;

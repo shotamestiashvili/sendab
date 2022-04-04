@@ -124,5 +124,25 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('cancel-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'cancel'])->name('cancel');
 ##############  Paypal  End####################################################################################
 
+##############  POCKETSHOP####################################################################################
+
+    Route::get('/poketshop/get',[ \App\Http\Controllers\Api\Poketshop\PoketshopController::class, 'get'])->name('poketshop');
+
+##############  POCKETSHOP END####################################################################################
+
+
+##############  Currency ####################################################################################
+
+    Route::get('/currency/getUsd',[ \App\Http\Controllers\Api\Poketshop\PoketshopController::class, 'getUsd'])->name('pocketshop');
+
+##############  Currency END####################################################################################
+
+
+##############  Currency ####################################################################################
+
+    Route::get('/feedback/getFeedback',[ \App\Http\Controllers\Api\Feedback\FeedbackController::class, 'getFeedback'])->name('getFeedback');
+    Route::post('/feedback/setFeedback',[ \App\Http\Controllers\Api\Feedback\FeedbackController::class, 'setFeedback'])->name('setFeedback');
+
+##############  Currency END####################################################################################
 
 });

@@ -1,11 +1,12 @@
 <template>
-    <header>
+    <header :class="headerStyle">
         <section>
             <div class="mobile-navigation">
                 <img src="/images/header-navigation.png" alt="">
             </div>
             <router-link class="main-logo" :to="{name: 'home'}">
-                <img src="/images/main-logo.png" alt="SendAb">
+                <img :src="headerStyle === 'dark-header' ? '/images/main-logo-light.png': '/images/main-logo.png'"
+                     alt="SendAb">
             </router-link>
             <div ref="languageSelector" class="language-selector" :class="{'open': openLanguageSelector}">
                 <h3 @click="openLanguage">{{ $t(selectedLanguage.name) }}
@@ -24,7 +25,7 @@
                 </div>
             </div>
             <nav>
-                <router-link to="#">{{ $t('ჩვენს შესახებ') }}</router-link>
+                <router-link :to="{name: 'about-us'}">{{ $t('ჩვენს შესახებ') }}</router-link>
                 <router-link :to="{name: 'help'}">{{ $t('დახმარება') }}</router-link>
                 <router-link :to="{name: 'sendab-offer'}">{{ $t('სენდაბის შემოთავაზება') }}</router-link>
             </nav>
@@ -40,16 +41,20 @@
                 <div v-else class="user-component" ref="userProfile">
                     <div class="user-profile" :class="{'open': openUserProfile}"
                          @click="openUser">
-                        <img class="avatar" v-if="!userAvatar" src="/images/user-default-icon-blue.png" alt="">
-                        <img class="avatar" v-else src="/images/placeholder-user-image.png" alt="">
+                        <div
+                            class="avatar"
+                            :style="{'background-image': `url('${!userAvatar ? '/images/user-default-icon-blue.png' : userAvatar }')`}"
+                        />
                         <span>{{ $t('ანგარიში') }}</span>
                         <img class="arrow-up" src="/images/arrow-up.png" alt="">
                     </div>
                     <div class="user-profile-dropdown" v-if="openUserProfile">
                         <div class="avatar-grid">
                             <div class="user-avatar">
-                                <img v-if="!userAvatar" src="/images/user-default-icon-blue.png" alt="">
-                                <img v-else src="/images/placeholder-user-image.png" alt="">
+                                <div
+                                    class="avatar"
+                                    :style="{'background-image': `url('${!userAvatar ? '/images/user-default-icon-blue.png' : userAvatar }')`}"
+                                />
                                 <div class="verify-icon">
                                     <img src="/images/verify-icon.png" alt=""/>
                                 </div>
@@ -117,6 +122,12 @@ import {mapGetters} from "vuex";
 
 export default {
     name: 'Header',
+    props: {
+        headerStyle: {
+            type: String,
+            default: null
+        }
+    },
     data() {
         return {
             langs: [
@@ -364,6 +375,9 @@ header {
                         height: 30px;
                         width: 30px;
                         border-radius: 50%;
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
                         margin: 0 10px 0 0;
                     }
 
@@ -418,10 +432,13 @@ header {
                             width: 60px;
                             height: 60px;
 
-                            & > img {
+                            .avatar {
                                 width: 60px;
                                 height: 60px;
                                 border-radius: 50%;
+                                background-size: cover;
+                                background-position: center;
+                                background-repeat: no-repeat;
                             }
 
                             .verify-icon {
@@ -660,6 +677,21 @@ header {
     }
 }
 
+.light-header {
+    background-color: white;
+}
+
+.dark-header {
+    background-color: #04041A;
+
+    section nav a {
+        color: white;
+
+        &.router-link-exact-active {
+            border-bottom-color: white;
+        }
+    }
+}
 
 @media only screen and (max-width: 1000px) {
     header {

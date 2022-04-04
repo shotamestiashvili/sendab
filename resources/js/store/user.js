@@ -21,7 +21,7 @@ export const mutations = {
         state.userData = Array.isArray(data) && data.length ? data[0] : data
     },
     setUserAvatar(state, data) {
-        state.userAvatar = data.message && data.message === 'No Avatar' ? null : data
+        state.userAvatar = data
     }
 }
 
@@ -39,9 +39,25 @@ export const actions = {
         return authAjax()
             .get(apiUrls.getUserAvatar)
             .then((response) => {
-                commit('setUserAvatar', response.data.data)
+                if (response.data && response.data.message && response.data.message === 'No Avatar') {
+                    commit('setUserAvatar', null)
+                } else {
+                    commit('setUserAvatar', "data:image/*;base64," + response.data);
+                }
             })
             .catch(() => {
             });
     },
+    updateUserData({commit}, data) {
+        return authAjax()
+            .post(apiUrls.updateUserData, data)
+            .catch(() => {
+            });
+    },
+    updateUserAvatar({commit}, data) {
+        return authAjax()
+            .post(apiUrls.saveUserAvatar, data)
+            .catch(() => {
+            });
+    }
 }

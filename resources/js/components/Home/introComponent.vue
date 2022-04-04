@@ -4,13 +4,13 @@
             <h1>{{ $t('გააგზავნეთ ამანათი მსოფლიოს ნებისმიერ წერტილში, დროულად მიტანის სერვისით') }}</h1>
             <div class="package-from">
                 <div class="form-inputs">
-                    <div class="select-from custom-location-input">
+                    <div class="select-from intro-component-location-input">
                         <p>{{ $t('გამგზავნი ქვეყანა') }}</p>
                         <Places
                             :placeholder="$t('აირჩიე ქვეყანა')"
                         />
                     </div>
-                    <div class="select-to custom-location-input">
+                    <div class="select-to intro-component-location-input">
                         <p>{{ $t('მიმღები ქვეყანა') }}</p>
                         <Places
                             :placeholder="$t('აირჩიე ქვეყანა')"
@@ -153,7 +153,7 @@ export default {
     }
 }
 
-.custom-location-input {
+.intro-component-location-input {
     input {
         padding-right: 30px !important;
     }

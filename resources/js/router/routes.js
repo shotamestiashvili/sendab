@@ -11,6 +11,7 @@ import MyPackages from "../components/UserProfile/MyPackages";
 import AccountSettings from "../components/UserProfile/AccountSettings";
 import BillingInfo from "../components/UserProfile/BillingInfo";
 import CreateOffer from "../page/CreateOffer";
+import AboutUs from "../page/AboutUs";
 
 export default [
     {
@@ -27,7 +28,7 @@ export default [
                 name: 'send-package',
                 component: SendPackage,
                 meta: {
-                    headerColor: 'white'
+                    headerStyle: 'light-header'
                 }
             },
             {
@@ -53,14 +54,18 @@ export default [
             {
                 path: 'profile',
                 component: UserProfile,
+                meta: {
+                    requiresAuth: true,
+                    headerStyle: 'light-header'
+                },
                 children: [
                     {
-                        path: '',
+                        path: 'user',
                         name: 'user-profile',
                         component: MyProfile,
                         meta: {
                             requiresAuth: true,
-                            headerColor: 'white'
+                            headerStyle: 'light-header'
                         }
                     },
                     {
@@ -69,7 +74,7 @@ export default [
                         component: MyPackages,
                         meta: {
                             requiresAuth: true,
-                            headerColor: 'white'
+                            headerStyle: 'light-header'
                         }
                     },
                     {
@@ -78,7 +83,7 @@ export default [
                         component: AccountSettings,
                         meta: {
                             requiresAuth: true,
-                            headerColor: 'white'
+                            headerStyle: 'light-header'
                         }
                     },
                     {
@@ -87,7 +92,7 @@ export default [
                         component: BillingInfo,
                         meta: {
                             requiresAuth: true,
-                            headerColor: 'white'
+                            headerStyle: 'light-header'
                         }
                     }
                 ]
@@ -99,7 +104,15 @@ export default [
                 meta: {
                     requiresAuth: true,
                     backgroundColor: 'white',
-                    headerColor: 'white'
+                    headerStyle: 'light-header'
+                }
+            },
+            {
+                path: 'about-us',
+                name: 'about-us',
+                component: AboutUs,
+                meta: {
+                    headerStyle: 'dark-header'
                 }
             }
         ]

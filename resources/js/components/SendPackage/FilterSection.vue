@@ -2,7 +2,7 @@
     <section>
         <div class="filter-section">
             <div class="location-select">
-                <img class="location" src="/images/location-icon.png" alt="">
+                <img v-if="direction" class="location" src="/images/location-icon.png" alt="">
                 <template v-if="direction">
                     <p class="start">{{ direction.start }}</p>
                     <img class="arrow-right" src="/images/arrow-right-lightblue.png" alt="">
@@ -11,19 +11,23 @@
                 <div class="add-location" ref="locationForm">
                     <img src="/images/add-location.png" alt="" @click="openLocation">
                     <div class="location-form" v-if="openLocationForm">
-                        <div class="input-form custom-location-input">
+                        <div class="input-form filter-section-location-input">
                             <p>{{ $t('გამგზავნი ქვეყანა') }}</p>
                             <Places
+                                v-model="fromLocation.label"
+                                @change="val => { fromLocation.data = val }"
                                 :placeholder="$t('აირჩიე ქვეყანა')"
                             />
                         </div>
-                        <div class="input-form custom-location-input">
+                        <div class="input-form filter-section-location-input">
                             <p>{{ $t('მიმღები ქვეყანა') }}</p>
                             <Places
+                                v-model="toLocation.label"
+                                @change="val => { toLocation.data = val }"
                                 :placeholder="$t('აირჩიე ქვეყანა')"
                             />
                         </div>
-                        <div class="submit">
+                        <div class="submit" @click="setFilters">
                             <span>{{ $t('მონაცემების განახლება') }}</span>
                         </div>
                     </div>
@@ -33,11 +37,11 @@
             <div class="transport-filters">
                 <div class="filter-item"
                      v-for="(filter, i) in transportFilters" :key="`filter${i}`"
-                     :class="{'active': filter.id === selectedTransportFilter}"
-                     @click="selectedTransportFilter = filter.id"
+                     :class="{'active': filter.active}"
+                     @click="$emit('selectedTransportFilter', filter.id)"
                 >
                     <p>{{ $t(filter.name) }}</p>
-                    <span>{{ filter.count }}</span>
+                    <span v-if="filter.count">{{ filter.count }}</span>
                 </div>
             </div>
         </div>
@@ -53,25 +57,36 @@ export default {
     components: {
         Places
     },
+    props: {
+        transportFilters: {
+            type: Array,
+            default() {
+                return [
+                    {
+                        id: null, name: 'სატრასპორტო საშუალებები', count: 0, active: true
+                    },
+                    {
+                        id: 1, name: 'თვითმფრინავი', count: 0, active: false
+                    },
+                    {
+                        id: 2, name: 'ავტომობილი', count: 0, active: false
+                    }
+                ]
+            }
+        }
+    },
     data() {
         return {
-            direction: {
-                start: 'თბილისი',
-                end: 'დუსელდორფი'
-            },
+            direction: null,
             openLocationForm: false,
-            transportFilters: [
-                {
-                    id: null, name: 'სატრასპორტო საშუალებები', count: 23
-                },
-                {
-                    id: 1, name: 'თვითმფრინავი', count: 19
-                },
-                {
-                    id: 2, name: 'ავტომობილი', count: 4
-                },
-            ],
-            selectedTransportFilter: null,
+            fromLocation: {
+                label: null,
+                data: {},
+            },
+            toLocation: {
+                label: null,
+                data: {},
+            }
         }
     },
     methods: {
@@ -88,13 +103,34 @@ export default {
                 this.openLocationForm = false
                 window.removeEventListener('click', this.closeLocation)
             }
+        },
+        setFilters() {
+            if (!(this.fromLocation.data.city || this.fromLocation.data.name) && !(this.toLocation.data.city || this.toLocation.data.name)) {
+                this.openLocationForm = false
+                window.removeEventListener('click', this.closeLocation)
+                return
+            }
+            this.direction = {
+                start: this.fromLocation.data.city || this.fromLocation.data.name,
+                end: this.toLocation.data.city || this.toLocation.data.name
+            }
+            this.fromLocation = {
+                label: null,
+                data: {}
+            }
+            this.toLocation = {
+                label: null,
+                data: {}
+            }
+            this.openLocationForm = false
+            window.removeEventListener('click', this.closeLocation)
         }
     }
 }
 </script>
 
 <style lang="scss">
-.custom-location-input {
+.filter-section-location-input {
     input {
         padding-right: 30px !important;
     }
@@ -241,6 +277,7 @@ section {
                 padding: 28px 0 22px;
                 margin: 0 0 0 36px;
                 cursor: pointer;
+                height: 94px;
 
                 &:first-child {
                     margin: 0 0 0 6px;

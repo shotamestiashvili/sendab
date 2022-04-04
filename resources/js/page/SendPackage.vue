@@ -1,9 +1,9 @@
 <template>
     <div class="send-package">
-        <FilterSection></FilterSection>
+        <FilterSection :transportFilters="transportFilters" @selectedTransportFilter="selectedTransportFilter"/>
         <section class="results-section">
             <div class="results-list">
-                <PackageCard v-for="(result, i) in searchResults" :data="result" :key="`result${i}`"/>
+                <PackageCard v-for="(result, i) in filteredList" :data="result" :key="`result${i}`"/>
             </div>
         </section>
     </div>
@@ -24,6 +24,7 @@ export default {
     },
     data() {
         return {
+            selectedTransport: null,
             searchResults: [
                 {
                     user: {
@@ -107,7 +108,26 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({apiConnected: 'login/apiConnected'})
+        ...mapGetters({apiConnected: 'login/apiConnected'}),
+        filteredList() {
+            return this.searchResults
+        },
+        transportFilters() {
+            return [
+                {
+                    id: null,
+                    name: 'სატრასპორტო საშუალებები',
+                    count: this.searchResults.length,
+                    active: this.selectedTransport === null
+                },
+                {
+                    id: 1, name: 'თვითმფრინავი', count: 0, active: this.selectedTransport === 1
+                },
+                {
+                    id: 2, name: 'ავტომობილი', count: 0, active: this.selectedTransport === 2
+                },
+            ]
+        }
     },
     watch: {
         apiConnected() {
@@ -122,13 +142,16 @@ export default {
     methods: {
         mount() {
             authAjax()
-                .get(apiUrls.getMyAllOffers)
+                .get(apiUrls.getAllOffers)
                 .then(response => {
                     this.searchResults = response.data.data
                 })
                 .catch(() => {
 
                 })
+        },
+        selectedTransportFilter(id) {
+            this.selectedTransport = id
         }
     }
 }

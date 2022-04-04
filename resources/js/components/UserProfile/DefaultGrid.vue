@@ -3,8 +3,8 @@
         <div class="grid-navigation">
             <div class="navigation-item"
                  v-for="item in data" :key="item.name"
-                 @click="localActive = item.name"
-                 :class="{'active': localActive === item.name}"
+                 @click="activate(item.key)"
+                 :class="{'active': active === item.key}"
             >
                 <p>{{ $t(item.name) }}</p>
                 <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,32 +31,40 @@ export default {
                 return []
             }
         },
-        active: {
+        value: {
             type: String,
             default: null
         }
     },
     data() {
         return {
-            localActive: null
+            active: null
         }
     },
     computed: {
         activeComponent() {
-            return this.data.find(el => el.name === this.localActive) || {component: '', props: {}}
-        }
-    },
-    mounted() {
-        this.localActive = this.active
-        if (!this.localActive && this.data.length) {
-            this.localActive = this.data[0].name
+            return this.data.find(el => el.key === this.active) || {component: '', props: {}}
         }
     },
     watch: {
-        active(value) {
+        value(value) {
             if (value) {
-                this.localActive = value
+                this.active = value
             }
+        }
+    },
+    mounted() {
+        this.active = this.value
+        if (!this.active && this.data.length) {
+            this.active = this.data[0].key
+        }
+    },
+    methods: {
+        activate(key) {
+            if (this.active === key) return
+
+            this.active = key
+            this.$emit('input', key)
         }
     }
 }

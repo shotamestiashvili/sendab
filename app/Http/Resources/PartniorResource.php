@@ -62,13 +62,29 @@ class PartniorResource extends JsonResource
             'minibus'=>$this->transports->map(function($minibus){
                 return $minibus->minibus;
             }),
-            'railway'=>$this->transports->map(function($railway){
-                return $railway->railway;
+
+            'ship'=>$this->transports->map(function($ship){
+                return $ship->ship;
             }),
+            'motorcycle'=>$this->transports->map(function($motorcycle){
+                return $motorcycle->motorcycle;
+            }),
+            'bicycle'=>$this->transports->map(function($bicycle){
+                return $bicycle->bicycle;
+            }),
+            'bus'=>$this->transports->map(function($bus){
+                return $bus->bus;
+            }),
+            'taxi'=>$this->transports->map(function($taxi){
+                return $taxi->taxi;
+            }),
+            'truck'=>$this->transports->map(function($truck){
+                return $truck->truck;
+            }),
+
             'other'=>$this->transports->map(function($other){
                 return $other->other;
             }),
-
 
             'plate_number' => $this->transports->map(function($transport){
                  return $transport->transportInfos->map(function ($info){

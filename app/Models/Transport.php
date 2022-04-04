@@ -16,6 +16,12 @@ class Transport extends Model
         'minibus',
         'railway',
         'other',
+        'ship',
+        'motorcycle',
+        'bicycle',
+        'bus',
+        'taxi',
+        'truck',
     ];
 
     public function partnior(){

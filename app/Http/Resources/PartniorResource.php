@@ -25,7 +25,6 @@ class PartniorResource extends JsonResource
             'feedback' => $this->feedback,
             'feedback_comment' => $this->feedback_comment,
 
-
             'offer_id' => Offer::where('user_id', $this->user_id)->value('id'),
             'user_id' => $this->user_id,
             'status' =>$this->status,
@@ -33,7 +32,7 @@ class PartniorResource extends JsonResource
 
 
             'source'  => $this->routes->map(function($routes){
-                return $routes;
+                return $routes->source;
             }),
             'route1'  => $this->routes->map(function($routes){
                 return $routes->route1;
@@ -55,6 +54,32 @@ class PartniorResource extends JsonResource
             }),
             'destination' => $this->routes->map(function($routes){
                 return $routes->destination;
+            }),
+
+
+            'source_time'  => $this->routes->map(function($routes){
+                return $routes->source_time;
+            }),
+            'route1_time'  => $this->routes->map(function($routes){
+                return $routes->route1_time;
+            }),
+            'route2_time' => $this->routes->map(function($routes){
+                return $routes->route2_time;
+            }),
+            'route3_time' => $this->routes->map(function($routes){
+                return $routes->route3_time;
+            }),
+            'route4_time' => $this->routes->map(function($routes){
+                return $routes->route4_time;
+            }),
+            'route5_time' => $this->routes->map(function($routes){
+                return $routes->route5_time;
+            }),
+            'route6_time' => $this->routes->map(function($routes){
+                return $routes->route6_time;
+            }),
+            'destination_time' => $this->routes->map(function($routes){
+                return $routes->destination_time;
             }),
 //
             'airplane'=>$this->transports->map(function($airplane){

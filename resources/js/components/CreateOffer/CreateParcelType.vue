@@ -1,6 +1,7 @@
 <template>
     <div class="create-parcel-type">
         <CustomSection title="მონიშნე ბარგის სახეობა, რომლის წაღებაც შეგიძლია">
+            <TitledInput @input="inputItem8" :value="data.item8" title="ბარგის სახეობა"/>
             <CustomInput
                 @input="inputItem($t('არ აქვს მნიშვნელობა'))"
                 :value="items.includes($t('არ აქვს მნიშვნელობა'))"
@@ -35,9 +36,9 @@
             <CustomInput @input="inputWeight" :value="data.weight" compVal="20" title="20კგ"/>
         </CustomSection>
         <CustomSection title="მიუთითე სავარაუდო სივრცე, რისი შეთავაზებაც შეგიძლია">
-            <TitledInput @input="inputWidth" :value="data.width" title="სიგრძე"/>
-            <TitledInput @input="inputLength" :value="data.length" title="სიგანე"/>
-            <TitledInput @input="inputHeight" :value="data.height" title="სიმაღლე"/>
+            <TitledInput @input="inputWidth" :value="data.width" title="სიგრძე" placeholder="სანტიმეტრი"/>
+            <TitledInput @input="inputLength" :value="data.length" title="სიგანე" placeholder="სანტიმეტრი"/>
+            <TitledInput @input="inputHeight" :value="data.height" title="სიმაღლე" placeholder="სანტიმეტრი"/>
         </CustomSection>
         <CustomSection title="აირჩიეთ ბარგის მიღების ფორმა">
             <CustomInput @input="inputStore" :value="data.store" :compVal="true" title="საწყობიდან გატანა"/>
@@ -88,7 +89,7 @@ export default {
             type: Object,
             default() {
                 return {
-                    item1: null,
+                    item1: this.$t('არ აქვს მნიშვნელობა'),
                     item2: null,
                     item3: null,
                     item4: null,
@@ -141,6 +142,9 @@ export default {
         },
         inputHand(value) {
             this.$emit('update:data', {...this.data, store: false, hand: value})
+        },
+        inputItem8(value) {
+            this.$emit('update:data', {...this.data, item8: value})
         },
         inputItem(value) {
             this.$emit('inputItem', value)

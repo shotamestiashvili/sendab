@@ -124,7 +124,7 @@ export default {
                 plate_number: null,
                 comment: null,
 
-                item1: null,
+                item1: this.$t('არ აქვს მნიშვნელობა'),
                 item2: null,
                 item3: null,
                 item4: null,
@@ -157,7 +157,7 @@ export default {
         items() {
             return [
                 this.data.item1, this.data.item2, this.data.item3, this.data.item4,
-                this.data.item5, this.data.item6, this.data.item7, this.data.item8
+                this.data.item5, this.data.item6, this.data.item7
             ]
         }
     },

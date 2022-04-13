@@ -19,6 +19,15 @@ class Route extends Model
         'route5',
         'route6',
         'destination',
+        'source_time',
+        'route1_time',
+        'route2_time',
+        'route3_time',
+        'route4_time',
+        'route5_time',
+        'route6_time',
+        'destination_time',
+
     ];
 
     public function partnior(){

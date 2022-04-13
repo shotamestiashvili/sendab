@@ -15,7 +15,16 @@ class SupportController extends Controller
            'parcel_code' => $request->parcel_code,
            'comment' => $request->comment,
        ]);
-        Mail::to('shotamestiashvili@gmail.com')->send(new \App\Mail\Support($support));
+
+       if($request->language === 'en'){
+           Mail::to('askeng@sendab.com')->send(new \App\Mail\Support($support));
+       }elseif ($request->language === 'de'){
+           Mail::to('askde@sendab.com')->send(new \App\Mail\Support($support));
+       }else{
+           Mail::to('askge@sendab.com')->send(new \App\Mail\Support($support));
+       }
+
+
     }
     public function get(Request $request){
 

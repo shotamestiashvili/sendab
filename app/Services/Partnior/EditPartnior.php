@@ -27,6 +27,14 @@ class EditPartnior implements EditPartniorInterface
             'route5' => $request->route5,
             'route6' => $request->route6,
             'destination' => $request->destination,
+            'source_time' => $request->source_time,
+            'route1_time' => $request->route1_time,
+            'route2_time' => $request->route2_time,
+            'route3_time' => $request->route3_time,
+            'route4_time' => $request->route4_time,
+            'route5_time' => $request->route5_time,
+            'route6_time' => $request->route6_time,
+            'destination_time' => $request->destination_time,
         ]);
 
 

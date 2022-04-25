@@ -20,6 +20,7 @@ class CreatePickupTable extends Migration
             $table->string('source_city');
             $table->string('source_address1');
             $table->string('source_address2');
+            $table->string('comment');
             $table->timestamps();
         });
     }

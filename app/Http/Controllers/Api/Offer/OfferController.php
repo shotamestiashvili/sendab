@@ -28,11 +28,6 @@ class OfferController extends Controller
          return Response()->json(['message'=>'created']);
     }
 
-//    public function __construct()
-//    {
-//        $this->middleware('auth:sanctum');
-//        $this->user =  Auth::user();
-//    }
 
     public function getAllOffers(Request $request){
         $partniors =   Offer::with([

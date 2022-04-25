@@ -29,4 +29,5 @@ class IncomeObserver
         Balance::where('id', $income->balance_id)->increment('balance_amount', $income->income_amount);
     }
 
+
 }

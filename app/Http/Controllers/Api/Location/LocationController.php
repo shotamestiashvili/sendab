@@ -9,7 +9,6 @@ class LocationController extends Controller
 
     public function location (Request $request){
 
-
         $country = Country::with(['cities'])
                   ->when($request->country != '', function () use ($request){
             return $request->where('country', 'LIKE', '%' . request('search') . '%');

@@ -44,37 +44,20 @@ Route::get('testroute', function (\Illuminate\Http\Request $request){
 })->name('testroute');
 
 
-Route::post('/income', [\App\Http\Controllers\Api\Balance\IncomeController::class, 'income']);
-Route::post('/income', [\App\Http\Controllers\Api\Balance\OutcomeController::class, 'outcome']);
-
-Route::post('/balanceIn', [\App\Http\Controllers\Api\Balance\BalanceController::class, 'balanceIn']);
-Route::post('/balanceOut', [\App\Http\Controllers\Api\Balance\BalanceController::class, 'balanceOut']);
-
-//Route::get('/payment/token', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'token']);
-//Route::post('/payment/pay', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'pay']);
-//Route::get('/payment/approval', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'approval'])->name('approval');
-//Route::get('/payment/cancelled', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'cancelled'])->name('cancelled');
-//
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('/showPayout', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'showPayout']);
+//Route::get('/showOrder', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'showOrder']);
 //
-//Route::get('/client', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'processTransaction']);
-//Route::get('/payout', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'payout']);
+//Route::get('create-paypal', [ \App\Http\Controllers\Api\Payment\PaymentController::class, 'createPaypal'])->name('createPaypal');
 //
-Route::get('/showPayout', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'showPayout']);
-Route::get('/showOrder', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'showOrder']);
-
-
-
-Route::get('create-paypal', [ \App\Http\Controllers\Api\Payment\PaymentController::class, 'createPaypal'])->name('createPaypal');
-
-Route::get('create-transaction',[ \App\Http\Controllers\Api\Payment\PaymentController::class, 'create'])->name('create');
-//Route::get('process-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'process'])->name('process');
-Route::get('success-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'process'])->name('process');
-Route::get('cancel-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'cancel'])->name('cancel');
-
+//Route::get('create-transaction',[ \App\Http\Controllers\Api\Payment\PaymentController::class, 'create'])->name('create');
+////Route::get('process-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'process'])->name('process');
+//Route::get('success-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'process'])->name('process');
+//Route::get('cancel-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'cancel'])->name('cancel');
+//
 
 
 $limiter = config('fortify.limiters.login');

@@ -14,21 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//Route::post('/upload/avatar/save',  [\App\Http\Controllers\Api\Upload\AvatarController::class, 'save']);
-//Route::get( '/upload/avatar/get',    [\App\Http\Controllers\Api\Upload\AvatarController::class, 'getAvatar']);
-//Route::post('/upload/document/save',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'save']);
-//Route::get('/upload/document/front',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentFront']);
-//Route::get('/upload/document/back',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentBack']);
-//Route::get('/upload/document/selfie',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentSelfie']);
-//##############  FAQ  ####################################################################################
-//Route::get('/faq/get', [\App\Http\Controllers\Api\FAQ\FaqController::class, 'getFaq']);
-//##############  FAQ  END####################################################################################
-//##############  FAQ  ####################################################################################
-//Route::post('/support/save', [\App\Http\Controllers\Api\Suppport\SupportController::class, 'save']);
-////Route::get('/support/get', [\App\Http\Controllers\Api\Suppport\SupportController::class, 'get']);
-//##############  FAQ  END####################################################################################
-
-
 Route::middleware('auth:sanctum')->group(function(){
 
 
@@ -59,23 +44,23 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('offer/getAllOffers', [\App\Http\Controllers\Api\Offer\OfferController::class, 'getAllOffers'])->
         name('getAllOffers');
 
-    Route::get('offer/getMyAllOffers', [\App\Http\Controllers\Api\Offer\OfferController::class, 'getMyAllOffers'])->
-    name('getMyAllOffers');
+    Route::get('offer/getMyAllOffers', [\App\Http\Controllers\Api\Offer\OfferController::class, 'getMyAllOffers'])
+        ->name('getMyAllOffers');
 
-    Route::get('offer/getMyOffersBasedStatus', [\App\Http\Controllers\Api\Offer\OfferController::class, 'getMyOffersBasedStatus'])->
-    name('getMyOffersBasedStatus');
+    Route::get('offer/getMyOffersBasedStatus', [\App\Http\Controllers\Api\Offer\OfferController::class, 'getMyOffersBasedStatus'])
+        ->name('getMyOffersBasedStatus');
 
-    Route::get('offer/getOffersByUserId', [\App\Http\Controllers\Api\Offer\OfferController::class, 'getOffersByUserId'])->
-    name('getOffersByUserId');
+    Route::get('offer/getOffersByUserId', [\App\Http\Controllers\Api\Offer\OfferController::class, 'getOffersByUserId'])
+        ->name('getOffersByUserId');
 
-    Route::get('offer/getOffersByUserIdandStatus', [\App\Http\Controllers\Api\Offer\OfferController::class, 'getOffersByUserIdandStatus'])->
-    name('getOffersByUserIdandStatus');
+    Route::get('offer/getOffersByUserIdandStatus', [\App\Http\Controllers\Api\Offer\OfferController::class, 'getOffersByUserIdandStatus'])
+        ->name('getOffersByUserIdandStatus');
 
-    Route::post('offer/editMyOffer', [\App\Http\Controllers\Api\Offer\OfferController::class, 'editMyOffer'])->
-    name('editMyOffer');
+    Route::post('offer/editMyOffer', [\App\Http\Controllers\Api\Offer\OfferController::class, 'editMyOffer'])
+        ->name('editMyOffer');
 
-    Route::get('offer/editOfferByUserId', [\App\Http\Controllers\Api\Offer\OfferController::class, 'editOfferByUserId'])->
-    name('editOfferByUserId');
+    Route::get('offer/editOfferByUserId', [\App\Http\Controllers\Api\Offer\OfferController::class, 'editOfferByUserId'])
+        ->name('editOfferByUserId');
 
 
 ##############  Offer End  ####################################################################################
@@ -104,44 +89,53 @@ Route::middleware('auth:sanctum')->group(function(){
 
 
 ##############  Upload  ####################################################################################
-    Route::post('/upload/avatar/save',  [\App\Http\Controllers\Api\Upload\AvatarController::class, 'save']);
-    Route::get( '/upload/avatar/get',    [\App\Http\Controllers\Api\Upload\AvatarController::class, 'getAvatar']);
-    Route::post('/upload/document/save',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'save']);
-    Route::get('/upload/document/front',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentFront']);
-    Route::get('/upload/document/back',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentBack']);
+    Route::post('/upload/avatar/save',     [\App\Http\Controllers\Api\Upload\AvatarController::class, 'save']);
+    Route::get( '/upload/avatar/get',      [\App\Http\Controllers\Api\Upload\AvatarController::class, 'getAvatar']);
+    Route::post('/upload/document/save',   [\App\Http\Controllers\Api\Upload\DocumentController::class, 'save']);
+    Route::get('/upload/document/front',   [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentFront']);
+    Route::get('/upload/document/back',    [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentBack']);
     Route::get('/upload/document/selfie',  [\App\Http\Controllers\Api\Upload\DocumentController::class, 'getDocumentSelfie']);
 ##############  Upload EMD ####################################################################################
 
+
 ##############  Order  ####################################################################################
     Route::post('/order/createMyOrder',  [\App\Http\Controllers\Api\Order\OrderController::class, 'createORder']);
-    Route::get('/order/getMyOrder',  [\App\Http\Controllers\Api\Order\OrderController::class, 'getOrder']);
+    Route::get('/order/getMyOrder',      [\App\Http\Controllers\Api\Order\OrderController::class, 'getOrder']);
 ##############  Order END ####################################################################################
 
+
 ##############  Paypal ####################################################################################
-    Route::get('create-transaction',[ \App\Http\Controllers\Api\Payment\PaymentController::class, 'create'])->name('create');
+    Route::get('create-transaction',  [ \App\Http\Controllers\Api\Payment\PaymentController::class, 'create'])
+        ->name('create');
     //Route::get('process-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'process'])->name('process');
-    Route::get('success-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'process'])->name('process');
-    Route::get('cancel-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'cancel'])->name('cancel');
+    Route::get('success-transaction', [\App\Http\Controllers\Api\Payment\PaymentController::class, 'process'])
+        ->name('process');
+    Route::get('cancel-transaction',  [\App\Http\Controllers\Api\Payment\PaymentController::class, 'cancel'])
+        ->name('cancel');
 ##############  Paypal  End####################################################################################
 
 ##############  POCKETSHOP####################################################################################
 
-    Route::get('/poketshop/get',[ \App\Http\Controllers\Api\Poketshop\PoketshopController::class, 'get'])->name('poketshop');
+    Route::get('/poketshop/get',[ \App\Http\Controllers\Api\Poketshop\PoketshopController::class, 'get'])
+        ->name('poketshop');
 
 ##############  POCKETSHOP END####################################################################################
 
 
 ##############  Currency ####################################################################################
 
-    Route::get('/currency/getUsd',[ \App\Http\Controllers\Api\Poketshop\PoketshopController::class, 'getUsd'])->name('pocketshop');
+    Route::get('/currency/getUsd',[ \App\Http\Controllers\Api\Poketshop\PoketshopController::class, 'getUsd'])
+        ->name('pocketshop');
 
 ##############  Currency END####################################################################################
 
 
 ##############  Currency ####################################################################################
 
-    Route::get('/feedback/getFeedback',[ \App\Http\Controllers\Api\Feedback\FeedbackController::class, 'getFeedback'])->name('getFeedback');
-    Route::post('/feedback/setFeedback',[ \App\Http\Controllers\Api\Feedback\FeedbackController::class, 'setFeedback'])->name('setFeedback');
+    Route::get('/feedback/getFeedback',[ \App\Http\Controllers\Api\Feedback\FeedbackController::class, 'getFeedback'])
+        ->name('getFeedback');
+    Route::post('/feedback/setFeedback',[ \App\Http\Controllers\Api\Feedback\FeedbackController::class, 'setFeedback'])
+        ->name('setFeedback');
 
 ##############  Currency END####################################################################################
 

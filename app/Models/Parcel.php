@@ -23,6 +23,7 @@ class Parcel extends Model
         'length',
         'height',
         'width',
+        'comment'
     ];
 
     public function partnior(){

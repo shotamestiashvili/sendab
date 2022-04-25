@@ -28,6 +28,7 @@ class CreateParcelsTable extends Migration
             $table->integer('length');
             $table->integer('height');
             $table->integer('width');
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }

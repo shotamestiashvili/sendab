@@ -16,7 +16,7 @@ class FeedbackController extends Controller
                 'feedback' => $request->feedback
             ]);
 
-            if(!$request->feedback_comment){
+            if($request->feedback_comment){
                 Feedback::where('id', $request->user_id)->update([
                     'comment' => $request->feedback_comment
                 ]);

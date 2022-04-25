@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -56,7 +57,8 @@ class Parcel extends Resource
             Text::make('length', 'length')->sortable(),
             Text::make('height', 'height')->sortable(),
             Text::make('width', 'width')->sortable(),
-
+            Text::make('Comment', 'text')->sortable(),
+//            Boolean::make('Status', 'status')->sortable(),
         ];
     }
 

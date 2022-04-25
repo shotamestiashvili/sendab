@@ -45,6 +45,7 @@ class Income extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make('Balance', 'balance')->sortable(),
             Text::make('Income Amount', 'income_amount')->sortable(),
+            Text::make('Method', 'method')->sortable(),
             Text::make('Status', 'status')->sortable(),
 
         ];

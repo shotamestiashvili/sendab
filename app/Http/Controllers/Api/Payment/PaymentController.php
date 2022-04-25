@@ -3,14 +3,7 @@
 namespace App\Http\Controllers\Api\Payment;
 
 use App\Http\Controllers\Controller;
-//use App\Services\Payment\PaypalService;
 use App\Services\Income\Income;
-use App\Models\Payment;
-use App\Models\PaypalIncomeProcess;
-use App\Models\PaypalIncomeRequest;
-use App\Models\PaypalOrder;
-use App\Models\PaypalPayment;
-use App\Nova\Outcome;
 use App\Services\Income\IncomeFacade;
 use App\Services\Outcome\OutcomeFilter;
 use App\Services\Payment\Method\Paypal\PaypalIncomeCreateRequest;
@@ -19,12 +12,9 @@ use App\Services\Payment\Method\Paypal\PaypalIncomeOperation;
 use App\Services\Payment\Method\Paypal\PaypalIncomeProcessFacade;
 use App\Services\Payment\Method\Paypal\PaypalIncomeProcessRequest;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use function config;
-use function dd;
 use function redirect;
 
 class PaymentController extends Controller

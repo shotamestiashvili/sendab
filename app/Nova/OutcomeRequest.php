@@ -49,7 +49,7 @@ class OutcomeRequest extends Resource
             Text::make('Email', 'paypal_email')->sortable(),
             Number::make('Amount', 'requested_amount')->sortable(),
             Number::make('Balance', 'balance_amount')->sortable(),
-            Number::make('Accept'),
+            Boolean::make('Accept'),
         ];
     }
 

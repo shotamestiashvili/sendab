@@ -15,13 +15,4 @@ class BalanceController extends Controller
        return BalanceResource::collection($balance);
    }
 
-   public function balanceIn(Request $request){
-
-   }
-
-    public function balanceOut(Request $request){
-
-    }
-
-
 }

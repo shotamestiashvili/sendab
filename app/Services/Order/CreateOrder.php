@@ -22,10 +22,10 @@ class CreateOrder implements CreateOrderInterface
     public function create($request)
     {
         try {
-            DB::transaction(function() use($request){
+            DB::transaction(function () use ($request) {
                 $userId = Auth::user()->id;
-                $order  = Order::create([
-                    'order' => $userId.$request->offer_id,
+                $order = Order::create([
+                    'order' => $userId . $request->offer_id,
                     'user_id' => $userId,
                     'offer_id' => $request->offer_id,
                     'amount' => $request->amount,
@@ -33,34 +33,35 @@ class CreateOrder implements CreateOrderInterface
                 ]);
                 $pickUp = Pickup::create([
                     'order_id' => $order->id,
-                    'pickup_type'=>$request->pickup_type,
-                    'source_city'=>$request->source_city,
-                    'source_address1'=>$request->source_address1,
-                    'source_address2'=>$request->source_address2,
-                    'comment' =>$request->comment,
+                    'pickup_type' => $request->pickup_type,
+                    'source_city' => $request->source_city,
+                    'source_address1' => $request->source_address1,
+                    'source_address2' => $request->source_address2,
+                    'comment' => $request->comment,
                 ]);
                 $person = Person::create([
                     'order_id' => $order->id,
-                    'firstname'=>$request->firstname,
-                    'lastname'=>$request->lastname,
-                    'phone'=>$request->phone,
-                    'email'=>$request->email,
-                    'company_name'=>$request->company_name,
-                    'country'=>$request->country,
-                    'city'=>$request->city,
-                    'address1'=>$request->address1,
-                    'address2'=>$request->address2,
-                    'postal'=>$request->postal,
-                    'comment'=>$request->comment,
+                    'firstname' => $request->firstname,
+                    'lastname' => $request->lastname,
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'company_name' => $request->company_name,
+                    'country' => $request->country,
+                    'city' => $request->city,
+                    'address1' => $request->address1,
+                    'address2' => $request->address2,
+                    'postal' => $request->postal,
+                    'comment' => $request->comment,
                 ]);
                 $insuarence = Insuarance::create([
                     'order_id' => $order->id,
-                    'order_value'=>$request->order_value,
-                    'content'=> $request->contents,
+                    'order_value' => $request->order_value,
+                    'content' => $request->contents,
                 ]);
+
                 $term = Term::create([
                     'order_id' => $order->id,
-                    'term'=>$request->term,
+                    'term' => $request->term,
                 ]);
 
                 $fullAmount = $request->order_value + $request->amount;
@@ -73,7 +74,7 @@ class CreateOrder implements CreateOrderInterface
                 $payment = Payment::create([
                     'balance_id' => Balance::where('user_id', Auth::user()->id)->value('id'),
                     'order_id' => $order->id,
-                    'payment_amount' =>   $charge->calculate(),
+                    'payment_amount' => $charge->calculate(),
                     'sendab_percentage' => $charge->getPercentage(),
                     'status' => 'unpaid',
                 ]);
@@ -81,16 +82,18 @@ class CreateOrder implements CreateOrderInterface
                 //Here should be run job to outcome money at payer
 
                 TemporaryPayment::create([
-                    'payment_id'      => $payment->id,
-                    'payer_id'        => $userId,
-                    'receiver_id'     => $payment_receiver,
-                    'full_amount'     => $charge->calculate(),
+                    'payment_id' => $payment->id,
+                    'payer_id' => $userId,
+                    'receiver_id' => $payment_receiver,
+                    'full_amount' => $charge->calculate(),
                     'receiver_amount' => $fullAmount,
-                    'sendab_amount'   => $sendabAmount
+                    'sendab_amount' => $sendabAmount
                 ]);
 
                 DB::commit();
+
                 $send = new SendOrderDetails();
+
                 $send->send($order->toArray(),
                     $pickUp->toArray(),
                     $person->toArray(),
@@ -98,10 +101,10 @@ class CreateOrder implements CreateOrderInterface
                     $term->toArray());
             });
 
-            //Here should be run job to complete after 24 hour
 
+            // Here should be run job to complete after 24 hour
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             DB::rollback();
             return Response()->json(['message' => 'Order could not created']);
         }

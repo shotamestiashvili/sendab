@@ -123,8 +123,8 @@ class OfferController extends Controller
     public function editMyOffer(EditOfferRequest $request){
 
         $status = Offer::where('user_id',  Auth::user()->id)
-                       ->where('id', 1)
-                       ->value('status');
+                       ->where('id', $request->id)
+                       ->value('');
 
         if($status == 'Active' || $status == 'Passive'){
 

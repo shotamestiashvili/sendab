@@ -12,6 +12,7 @@ class FeedbackController extends Controller
 {
     public function setFeedback(Request $request){
         try {
+
             Feedback::where('id', $request->user_id)->update([
                 'feedback' => $request->feedback
             ]);
@@ -26,8 +27,6 @@ class FeedbackController extends Controller
         }catch (\Exception $e){
             return Response()->json(['message' => $e]);
         }
-
-
     }
 
     public function getFeedback(Request $request){

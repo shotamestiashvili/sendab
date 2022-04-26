@@ -15,6 +15,7 @@ class LoginController extends Controller
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6',
         ]);
+
         if ($validator->fails())
         {
             return response(['errors'=>$validator->errors()->all()], 422);

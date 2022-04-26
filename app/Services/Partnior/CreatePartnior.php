@@ -28,7 +28,7 @@ class CreatePartnior implements CreatePartniorInterface
 
             $partner = Partnior::create([
                 'user_id' => Auth::user()->id,
-                'status' => 'Active',
+                'status' => $request->status,
                 'sendab_offer' => 0,
             ]);
 
@@ -42,14 +42,15 @@ class CreatePartnior implements CreatePartniorInterface
                 'route5' => $request->route5,
                 'route6' => $request->route6,
                 'destination' => $request->destination,
-                'source_time' => $request->source_time,
-                'route1_time' => $request->route1_time,
-                'route2_time' => $request->route2_time,
-                'route3_time' => $request->route3_time,
-                'route4_time' => $request->route4_time,
-                'route5_time' => $request->route5_time,
-                'route6_time' => $request->route6_time,
-                'destination_time' => $request->destination_time,
+
+                    'source_time' => $request->source_time,
+                    'route1_time' => $request->route1_time,
+                    'route2_time' => $request->route2_time,
+                    'route3_time' => $request->route3_time,
+                    'route4_time' => $request->route4_time,
+                    'route5_time' => $request->route5_time,
+                    'route6_time' => $request->route6_time,
+                    'destination_time' => $request->destination_time,
             ]);
 
 
@@ -69,11 +70,14 @@ class CreatePartnior implements CreatePartniorInterface
                 'flight_number' => $request->flight_number,
                 'ticket_number' => $request->ticket_number,
                 'comment'       => $request->comment,
+
             ]);
 
 
             $parcel = Parcel::create([
+
                 'partnior_id' => $partner->id,
+
                 'item1' =>$request->item1,
                 'item2'=> $request->item2,
                 'item3'=>$request->item3,
@@ -82,30 +86,33 @@ class CreatePartnior implements CreatePartniorInterface
                 'item6'=> $request->item6,
                 'item7'=>$request->item7,
                 'item8'=> $request->item8,
-                'weight' => $request->weight,
-                'length'=>$request->length,
-                'height'=>$request->height,
-                'width'=>$request->width,
+
+                'weight'  => $request->weight,
+                'length'  => $request->length,
+                'height'  => $request->height,
+                'width'   => $request->width,
+
             ]);
 
 
             $pickupType = PickupType::create([
                 'partnior_id' => $partner->id,
-                'store' =>$request->store,
-                'hand '=>$request->hand,
+                'store'       => $request->store,
+                'hand'       => $request->hand,
             ]);
 
 
             $prices = PartniorPrice::create([
                 'partnior_id' => $partner->id,
                 'price_kg' =>$request->price_kg,
+
                 'price_sum' =>$request->price_sum,
             ]);
 
 
             $reoffer = Reoffer::create([
                 'partnior_id' => $partner->id,
-                'reoffer'=>$request->reoffer,
+                'reoffer'     =>$request->reoffer,
             ]);
 
             $offer = Offer::create([
@@ -114,12 +121,16 @@ class CreatePartnior implements CreatePartniorInterface
                 'sendab_offer' => 0,
                 'status' => 'Active',
             ]);
+
+            //Timing functional.
+            //Sendab should accept offer to be sent to front end.
+
             DB::commit();
+
         }catch (\Exception $exception){
             DB::rollBack();
             return $exception;
         }
-
 
         if($partner){
             return Response()->json(['message'=>'created']);
@@ -127,4 +138,5 @@ class CreatePartnior implements CreatePartniorInterface
             return Response()->json(['message'=>'error']);;
         }
     }
+
 }

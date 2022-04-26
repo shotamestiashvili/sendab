@@ -2,9 +2,7 @@
 
 namespace App\Services\Outcome;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class Payout

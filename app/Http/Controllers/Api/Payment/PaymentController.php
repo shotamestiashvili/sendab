@@ -35,8 +35,8 @@ class PaymentController extends Controller
             "purchase_units" => [
                 0 => [
                     "amount" => [
-                        "currency_code" => "USD",
-                        "value" => 23,
+                        "currency_code" =>  $request->currency,
+                        "value" => $request->value,
                     ]
                 ]
             ]
